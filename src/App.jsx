@@ -1,9 +1,12 @@
+import { Navbar } from "./components/Navbar";
+import { Hero } from "./components/Hero";
+
+
 function App() {
   return (
     <>
-      <div>
-        <h1 className="text-4xl font-bold underline">Hello world!</h1>
-      </div>
+      <Navbar/>
+      <Hero/>
     </>
   );
 }
