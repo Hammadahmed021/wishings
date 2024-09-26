@@ -22,7 +22,7 @@ export default {
       },
       fontSize: {
         h1: [
-          "clamp(2.5rem, 3vw + 1rem, 3.75rem)",
+          "clamp(2.65rem, 3vw + 1rem, 3.75rem)",
           {
             lineHeight: "clamp(2.75rem, 4vw + 1rem, 4rem)",
             letterSpacing: "-0.01em",

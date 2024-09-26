@@ -8,7 +8,7 @@ import { CgClose } from "react-icons/cg";
 
 export const Navbar = () => {
   return (
-    <header className="">
+    <header >
       <div  className="offer px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10%  via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
         <div className="flex flex-col md:flex-row gap-3 py-4 items-center justify-center font-roboto font-semibold text-small leading-normal">
           <p className="text-white text-center">
@@ -60,7 +60,7 @@ export const Navbar = () => {
 
       <div className=" border-b-2"></div>
 
-      <div className="xl:container xl:mx-auto nav-links flex items-center justify-between py-4 px-4 md:px-10 bg-primary">
+      <div className="xl:container xl:mx-auto nav-links flex items-center justify-between py-4 px-4 md:px-10">
         <div className="logo">
           <img src={logo} alt="logo" className="h-14 md:h-20" />
         </div>
