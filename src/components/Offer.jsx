@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick"; // Import the React Slick component
-import * as icon from "../assets/icons/offerIcon.js";
-import "slick-carousel/slick/slick.css"; // Import Slick CSS
-import "slick-carousel/slick/slick-theme.css"; // Import Slick theme CSS
 import { offers } from "../utils/localDb.js";
 
 
@@ -37,11 +34,6 @@ const OfferSlider = () => {
     slidesToScroll: 1,
     adaptiveHeight: true,
     slidesPerRow: 3,
-    customPaging: function (i) {
-      return (
-        <button className="bg-primary h-4"></button>
-      );
-    },
     responsive: [
       {
         breakpoint: 1024,
