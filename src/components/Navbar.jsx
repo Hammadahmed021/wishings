@@ -1,5 +1,5 @@
 import React from "react";
-import * as icons from "../assets/icons/index.js";
+import * as icons from "../assets/icons/navIcon.js";
 import logo from "../assets/logo.png";
 import DarkModeToggler from "./DarkModeToggler";
 import { FaBars } from "react-icons/fa6";

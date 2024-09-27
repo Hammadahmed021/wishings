@@ -1,0 +1,6 @@
+export {default as fastforward} from './fastforward.svg'
+export {default as home} from './home.svg'
+export {default as loudspeaker} from './loudspeaker.svg'
+export {default as people} from './people.svg'
+export {default as filmtape} from './filmtape.svg'
+export {default as videoplayer} from './videoplayer.svg'
