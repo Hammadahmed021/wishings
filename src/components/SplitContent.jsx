@@ -5,10 +5,10 @@ import ourstory from "../assets/ourstory.png"
 
 export const SplitContent = () => {
   return (
-    <section className="my-10 md:my-20">
+    <section className="mt-10 mb-20 md:mt-20 md:mb-12 lg:mb-16 xl:mb-0">
       <div className="flex flex-col-reverse md:flex-row xl:container xl:mx-auto p-6 gap-10 md:gap-20">
         <div className="flex basis-1/2 xl:basis-7/12 flex-col gap-6 md:gap-4 lg:gap-8 xl:gap-10">
-          <h2 className="text-h2">
+          <h2 className="text-h2 font-roboto">
             Success in Every Click Welcome to Wishing{" "}
           </h2>
           <p className="text-small text-muted ">
@@ -40,8 +40,8 @@ export const SplitContent = () => {
             <Button link="#" x={10} text="Find more about us" />
           </div>
         </div>
-        <div className="basis-1/2 xl:basis-5/12">
-            <img src={ourstory} alt="ourstory" className="max-h-full lg:max-h-[500px] xl:max-h-[85%] 2xl:max-h-[70%] "/>
+        <div className="basis-1/2 xl:basis-5/12 ">
+            <img src={ourstory} alt="ourstory" className="max-h-full lg:max-h-[500px] xl:max-h-[85%] 2xl:max-h-[70%]"/>
         </div>
       </div>
     </section>

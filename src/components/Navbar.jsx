@@ -49,7 +49,7 @@ export const Navbar = () => {
               </li>
             </ul>
             <div className="dark-mode">
-              {/* <DarkModeToggler /> */}
+              <DarkModeToggler />
             </div>
           </div>
           <div className="right flex items-center">

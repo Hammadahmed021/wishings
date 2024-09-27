@@ -27,6 +27,7 @@ export default {
             lineHeight: "clamp(2.75rem, 4vw + 1rem, 4rem)",
             letterSpacing: "-0.01em",
             fontWeight: "700",
+            
           },
         ],
         h2: [
@@ -35,6 +36,7 @@ export default {
             lineHeight: "clamp(2.75rem, 4vw + 1rem, 4rem)",
             letterSpacing: "-0.02em",
             fontWeight: "700",
+            
           },
         ],
         h3: [
@@ -43,6 +45,7 @@ export default {
             lineHeight: "clamp(2.125rem, 4vw + 1rem, 3.375rem)",
             letterSpacing: "-0.02em",
             fontWeight: "700",
+            
           },
         ],
         "small": [

@@ -1,205 +1,110 @@
-import React, { useState } from "react";
-import { useSwipeable } from "react-swipeable"; // Import the swipeable hook
+import React, { useState, useEffect } from "react";
+import Slider from "react-slick"; // Import the React Slick component
 import * as icon from "../assets/icons/offerIcon.js";
+import "slick-carousel/slick/slick.css"; // Import Slick CSS
+import "slick-carousel/slick/slick-theme.css"; // Import Slick theme CSS
+import { offers } from "../utils/localDb.js";
 
-const offers = [
-  {
-    id: 1,
-    icon: icon.fastforward,
-    title: "Offer 1",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 2,
-    icon: icon.fastforward,
-    title: "Offer 2",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 3,
-    icon: icon.fastforward,
-    title: "Offer 3",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 4,
-    icon: icon.fastforward,
-    title: "Offer 4",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 5,
-    icon: icon.fastforward,
-    title: "Offer 5",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 6,
-    icon: icon.fastforward,
-    title: "Offer 6",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 7,
-    icon: icon.fastforward,
-    title: "Offer 7",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 8,
-    icon: icon.fastforward,
-    title: "Offer 8",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 9,
-    icon: icon.fastforward,
-    title: "Offer 9",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 10,
-    icon: icon.fastforward,
-    title: "Offer 10",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 11,
-    icon: icon.fastforward,
-    title: "Offer 11",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 12,
-    icon: icon.fastforward,
-    title: "Offer 12",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 13,
-    icon: icon.fastforward,
-    title: "Offer 13",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 14,
-    icon: icon.fastforward,
-    title: "Offer 14",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-];
+
 
 const OfferSlider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [sliding, setSliding] = useState(false);
-  const [slideDirection, setSlideDirection] = useState(""); // 'left' or 'right'
+  // State to manage the number of items per group
+  const [itemsPerGroup, setItemsPerGroup] = useState(2);
 
-  // Split the offers into groups of 6
+  // Function to update the group size based on screen width
+  const updateItemsPerGroup = () => {
+    if (window.innerWidth < 768) {
+      setItemsPerGroup(3); // Set group size to 1 on screens smaller than the 'sm' breakpoint (640px)
+    } 
+    else {
+      setItemsPerGroup(2); // Set group size to 6 for larger screens
+    }
+  };
+
+  // Use effect to watch for screen resize
+  useEffect(() => {
+    updateItemsPerGroup(); // Initial check on component mount
+    window.addEventListener("resize", updateItemsPerGroup); // Add event listener for resize
+    return () => window.removeEventListener("resize", updateItemsPerGroup); // Clean up on unmount
+  }, []);
+
+  // Slider settings
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    slidesPerRow: 3,
+    customPaging: function (i) {
+      return (
+        <button className="bg-primary h-4"></button>
+      );
+    },
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesPerRow: 1,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesPerRow: 1,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesPerRow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    
+  };
+
+  // Split the offers into groups based on the itemsPerGroup value
   const offerGroups = [];
-  for (let i = 0; i < offers.length; i += 6) {
-    const group = offers.slice(i, i + 6);
+  for (let i = 0; i < offers.length; i += itemsPerGroup) {
+    const group = offers.slice(i, i + itemsPerGroup);
     if (group.length > 0) {
       offerGroups.push(group);
     }
   }
 
-  // Handle swiping
-  const handleSwipeLeft = () => {
-    if (currentIndex < offerGroups.length - 1) {
-      setSliding(true);
-      setSlideDirection("right");
-      setTimeout(() => {
-        setCurrentIndex(currentIndex + 1);
-        setSliding(false);
-      }, 300);
-    }
-  };
-
-  const handleSwipeRight = () => {
-    if (currentIndex > 0) {
-      setSliding(true);
-      setSlideDirection("left");
-      setTimeout(() => {
-        setCurrentIndex(currentIndex - 1);
-        setSliding(false);
-      }, 300);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: handleSwipeLeft,
-    onSwipedRight: handleSwipeRight,
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true, // Enables swipe on mouse events as well
-  });
-
-  const handleDotClick = (index) => {
-    if (index !== currentIndex) {
-      setSliding(true);
-      setSlideDirection(index > currentIndex ? "right" : "left"); // Determine the direction of the slide
-      setTimeout(() => {
-        setCurrentIndex(index);
-        setSliding(false);
-      }, 300); // Duration of the slide animation
-    }
-  };
-
   return (
     <section>
-      <div className="container mx-auto overflow-hidden" {...swipeHandlers}>
-        <div className="relative overflow-hidden px-8 pt-20">
+      <div className="container mx-auto px-0 lg:px-10 xl:px-20 2xl:px-36">
+        <div className="relative px-8 pt-20">
           <p className="text-small text-center">Our Services</p>
-          <h2 className="text-h2 text-center pt-3">What We Are Offering</h2>
-          <div
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:min-h-[400px] md:min-h-[650px]	 gap-6 md:gap-12 my-10 md:mt-16 md:mb-10 mx-0 md:mx-4 xl:mx-32 transition-transform duration-300 transform ${
-              sliding
-                ? slideDirection === "right"
-                  ? "-translate-x-full" // Slide out to the left
-                  : "translate-x-full" // Slide out to the right (if moving backward)
-                : "translate-x-0"
-            }`}
-          >
-            {offerGroups[currentIndex].map((offer) => (
-              <div key={offer.id} className="p-4">
-                <img src={offer.icon} alt="icon" />
-                <h6 className="py-4 font-roboto font-extrabold text-xl text-[#001F3F]">
-                  {offer.title}
-                </h6>
-                <p className="font-poppins text-[#5C6671] text-base">
-                  {offer.description}
-                </p>
+          <h2 className="text-h2 text-center pt-3 font-roboto">What We Are Offering</h2>
+
+          {/* Slick Slider */}
+          <Slider {...settings}>
+            {offerGroups.map((group, groupIndex) => (
+              <div key={groupIndex}>
+                {group.map((offer) => (
+                  <div key={offer.id} className="px-2 pt-10 md:px-6 md:py-8">
+                    <img src={offer.icon} alt="icon" />
+                    <h6 className="py-4 font-roboto font-extrabold text-xl text-[#001F3F]">
+                      {offer.title}
+                    </h6>
+                    <p className="font-poppins text-[#5C6671] text-base">
+                      {offer.description}
+                    </p>
+                  </div>
+                ))}
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Dots Indicator as Navigation */}
-        <div className="flex justify-center mt-4">
-          {offerGroups.map((_, index) => (
-            <div
-              key={index}
-              onClick={() => handleDotClick(index)}
-              className={`h-2 w-2  rounded-full mx-2 cursor-pointer transition-colors duration-300 ${
-                index === currentIndex
-                  ? "bg-primary border-1 border-background outline outline-1	outline-offset-2	outline-primary"
-                  : "bg-gray-400 hover:bg-blue-300"
-              }`}
-            />
-          ))}
+          </Slider>
         </div>
       </div>
     </section>
