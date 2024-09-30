@@ -86,3 +86,17 @@ export const offers = [
       description: "Identify relevant and high-impact keywords for your industry.",
     },
   ];
+
+
+  export const templates = {
+    'Category 1': ['https://www.w3schools.com/html/mov_bbb.mp4', 'https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4',],
+    'Category 2': ['https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4',],
+    'Category 3': ['https://www.w3schools.com/html/mov_bbb.mp4', 'https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4',],
+    'Category 4': ['https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4',],
+    'Category 5': ['https://www.w3schools.com/html/mov_bbb.mp4', 'https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4',],
+    'Category 6': ['https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4',],
+    'Category 7': ['https://www.w3schools.com/html/mov_bbb.mp4', 'https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4',],
+    'Category 8': ['https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4',],
+
+    // Add videos for other categories...
+  };
