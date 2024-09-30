@@ -6,6 +6,8 @@ import { Rating } from "./components/Rating";
 import OfferSlider from "./components/Offer";
 import { SplitContent } from "./components/SplitContent";
 import TemplateSlider from "./components/Template";
+import { TwoColumnLayout } from "./components/TwoColumnLayout";
+import { Testimonial } from "./components/Testimonial";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <OfferSlider/>
       <SplitContent/>
       <TemplateSlider/>
+      <TwoColumnLayout/>
+      <Testimonial/>
     </>
   );
 }

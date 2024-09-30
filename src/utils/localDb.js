@@ -98,5 +98,5 @@ export const offers = [
     'Category 7': ['https://www.w3schools.com/html/mov_bbb.mp4', 'https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4','https://www.w3schools.com/html/mov_bbb.mp4',],
     'Category 8': ['https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4','https://www.w3schools.com/html/movie.mp4',],
 
-    // Add videos for other categories...
+    // A d d v i d e o s f o r o t h e r c a t e g o r i e s. . .
   };
