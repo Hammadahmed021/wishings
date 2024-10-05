@@ -4,12 +4,12 @@ import logo from "../assets/logo.png";
 import DarkModeToggler from "./DarkModeToggler";
 import { FaBars } from "react-icons/fa6";
 import { CgClose } from "react-icons/cg";
-
+import { NavMenu } from "./NavMenu.jsx";
 
 export const Navbar = () => {
   return (
-    <header >
-      <div  className="offer px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10%  via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
+    <header>
+      <div className="offer px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10%  via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
         <div className="flex flex-col md:flex-row gap-3 py-4 items-center justify-center font-roboto font-semibold text-small leading-normal">
           <p className="text-white text-center">
             Back-to-School for Education: 40% OFF + 700 Extra FREE AI Credits
@@ -60,19 +60,20 @@ export const Navbar = () => {
 
       <div className=" border-b-2"></div>
 
-      <div className="xl:container xl:mx-auto nav-links flex items-center justify-between py-4 px-4 md:px-10">
-        <div className="logo">
-          <img src={logo} alt="logo" className="h-14 md:h-20" />
-        </div>
-        <nav className="links hidden lg:flex">
+      <div className="relative xl:container xl:mx-auto nav-links block lg:flex lg:items-center lg:justify-between py-4 px-4 md:px-10">
+        <img src={logo} alt="logo" className="h-14 md:h-20 inline align-middle	lg:block" />
 
-        </nav>
+        <nav className="links inline float-right  lg:block"><NavMenu/></nav>
         <div className="cta-btns hidden lg:flex items-center gap-6">
-            
-            <a href="#" className="cursor-pointer capitalize">login</a>
-            <a href="#" className="cursor-pointer py-2 px-5 text-white rounded-full capitalize bg-[#FEA500]">sign up</a>
-            
-            
+          <a href="#" className="cursor-pointer capitalize">
+            login
+          </a>
+          <a
+            href="#"
+            className="cursor-pointer py-2 px-5 text-white rounded-full capitalize bg-[#FEA500]"
+          >
+            sign up
+          </a>
         </div>
       </div>
     </header>

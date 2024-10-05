@@ -8,6 +8,8 @@ import { SplitContent } from "./components/SplitContent";
 import TemplateSlider from "./components/Template";
 import { TwoColumnLayout } from "./components/TwoColumnLayout";
 import { Testimonial } from "./components/Testimonial";
+import { CallToAction } from "./components/CallToAction";
+
 
 function App() {
   return (
@@ -17,9 +19,10 @@ function App() {
       <Rating/>
       <OfferSlider/>
       <SplitContent/>
-      <TemplateSlider/>
+      {/* <TemplateSlider/> */}
       <TwoColumnLayout/>
       <Testimonial/>
+      <CallToAction/>
     </>
   );
 }
