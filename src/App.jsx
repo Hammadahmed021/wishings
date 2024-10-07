@@ -19,7 +19,7 @@ function App() {
       <Rating/>
       <OfferSlider/>
       <SplitContent/>
-      {/* <TemplateSlider/> */}
+      <TemplateSlider/>
       <TwoColumnLayout/>
       <Testimonial/>
       <CallToAction/>
