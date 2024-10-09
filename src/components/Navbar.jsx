@@ -4,7 +4,8 @@ import * as icons from "../assets/icons/navIcon.js";
 import logo from "../assets/logo.png";
 import DarkModeToggler from "./DarkModeToggler";
 import { navLinks } from "../utils/localDb.js";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
+import { MdExpandMore } from "react-icons/md";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -111,7 +112,7 @@ export const Navbar = () => {
         {/* Hamburger Menu for Mobile View */}
         <div className="lg:hidden ml-auto">
           <button onClick={toggleMenu} className="text-2xl">
-            {isMenuOpen ? <FaTimes /> : <FaBars />}
+            {isMenuOpen ? <HiOutlineXMark /> : <HiOutlineBars3 />}
           </button>
         </div>
 
@@ -127,31 +128,21 @@ export const Navbar = () => {
                 onMouseEnter={() => handleMouseEnter(index)} // Add hover functionality
                 onMouseLeave={handleMouseLeave} // Remove hover functionality
               >
-                <button
-                  className="flex items-center justify-between text-small font-medium py-2 text-left hover:text-[#FEA500]"
-                >
+                <button className="flex items-center justify-between text-small font-medium py-2 text-left hover:text-[#FEA500]">
                   {section.title}
-                  <svg
-                    className={`w-5 h-5 ml-2 transition-transform ${
+                  <MdExpandMore
+                    className={`w-5 h-5 ml-1 transition-transform duration-300 ${
                       activeDropdown === index ? "rotate-180" : "rotate-0"
                     }`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.707a1 1 0 011.414 0L10 10.586l3.293-2.879a1 1 0 011.414 1.414l-4 3.5a1 1 0 01-1.414 0l-4-3.5a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  />
                 </button>
 
                 {/* Dropdown Menu */}
                 <div
                   className={`${
-                    activeDropdown === index ? "max-h-auto opacity-100" : "max-h-0 opacity-0"
+                    activeDropdown === index
+                      ? "max-h-auto opacity-100"
+                      : "max-h-0 opacity-0"
                   } lg:absolute left-0 w-48 p-2 top-12 bg-white shadow-lg rounded-xl transition-all duration-500 ease-in-out overflow-hidden`}
                 >
                   {section.links.map((link, subIndex) => (
@@ -189,9 +180,7 @@ export const Navbar = () => {
       {/* Mobile Navigation Menu */}
       <div
         className={`lg:hidden ${
-          isMenuOpen
-            ? "max-h-screen opacity-100"
-            : "max-h-0 opacity-0"
+          isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50`}
       >
         {/* Nav Links */}
@@ -207,27 +196,19 @@ export const Navbar = () => {
                 className="flex justify-between items-center w-full py-2 text-gray-700 hover:text-[#FEA500]"
               >
                 {section.title}
-                <svg
-                  className={`w-6 h-6 ml-1 transition-transform ${
+                <MdExpandMore
+                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${
                     activeDropdown === index ? "rotate-180" : "rotate-0"
                   }`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.707a1 1 0 011.414 0L10 10.586l3.293-2.879a1 1 0 011.414 1.414l-4 3.5a1 1 0 01-1.414 0l-4-3.5a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                />
               </button>
 
               {/* Dropdown Menu */}
               <div
                 className={`${
-                  activeDropdown === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                  activeDropdown === index
+                    ? "max-h-40 opacity-100"
+                    : "max-h-0 opacity-0"
                 } overflow-hidden transition-all duration-300 ease-in-out`}
               >
                 {section.links.map((link, subIndex) => (
@@ -238,7 +219,7 @@ export const Navbar = () => {
                     onClick={() => {
                       setActiveDropdown(null); // Close dropdown on link click
                       setIsMenuOpen(false); // Close mobile menu
-                    }} 
+                    }}
                   >
                     {link.name}
                   </a>
@@ -248,22 +229,53 @@ export const Navbar = () => {
           ))}
         </nav>
 
-        {/* Call to Action Buttons */}
-        <div className="flex flex-col gap-6 mt-6">
-          <a
-            href="#"
-            className="cursor-pointer capitalize text-small font-medium"
-            onClick={() => setIsMenuOpen(false)} // Close mobile menu on click
-          >
-            login
-          </a>
-          <a
-            href="#"
-            className="cursor-pointer py-2 px-5 text-small font-medium text-white rounded-full capitalize bg-[#FEA500]"
-            onClick={() => setIsMenuOpen(false)} // Close mobile menu on click
-          >
-            sign up
-          </a>
+        {/* Second Row Content in Mobile */}
+        <div className="flex flex-col gap-6 mt-4">
+          <div className="flex gap-3">
+            <img src={icons.mail} alt="mail icon" />
+            <span className="text-[#5C6671] text-sm font-normal">
+              contact@nextpro.com
+            </span>
+          </div>
+          <ul className="flex justify-start gap-10">
+            <li className="cursor-pointer">
+              <img src={icons.fb} alt="Facebook" />
+            </li>
+            <li className="cursor-pointer">
+              <img src={icons.yt} alt="YouTube" />
+            </li>
+            <li className="cursor-pointer">
+              <img src={icons.X} alt="X" />
+            </li>
+            <li className="cursor-pointer">
+              <img src={icons.insta} alt="Instagram" />
+            </li>
+            <li className="cursor-pointer">
+              <img src={icons.linkedin} alt="LinkedIn" />
+            </li>
+          </ul>
+          <div className="flex gap-4 max-w-96">
+            <a
+              href="#"
+              className="cursor-pointer capitalize text-center py-2 px-4 border border-gray-300 rounded-md basis-1/2"
+            >
+              login
+            </a>
+            <a
+              href="#"
+              className="cursor-pointer py-2 px-4 text-white bg-[#FEA500] text-center rounded-md capitalize basis-1/2"
+            >
+              Sign up
+            </a>
+          </div>
+          <div className="flex justify-between text-center">
+            <div className="dark-mode">
+              <DarkModeToggler />
+            </div>
+            <div className="right flex items-center">
+              <img src={icons.globe} alt="globe icon" />
+            </div>
+          </div>
         </div>
       </div>
     </header>
