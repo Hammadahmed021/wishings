@@ -9,6 +9,10 @@ import TemplateSlider from "./components/Template";
 import { TwoColumnLayout } from "./components/TwoColumnLayout";
 import { Testimonial } from "./components/Testimonial";
 import { CallToAction } from "./components/CallToAction";
+import {FAQ} from "./components/FAQ";
+import { Blogs } from "./components/Blogs";
+import { NewsletterSubscribe } from "./components/NewsletterSubscribe ";
+import { Footer } from "./components/Footer";
 
 
 function App() {
@@ -19,10 +23,15 @@ function App() {
       <Rating/>
       <OfferSlider/>
       <SplitContent/>
-      {/* <TemplateSlider/> */}
+      <TemplateSlider/>
       <TwoColumnLayout/>
       <Testimonial/>
       <CallToAction/>
+      <FAQ/>
+      <Blogs/>
+      <NewsletterSubscribe/>
+      <div className="xl:container m-auto border w-full border-muted opacity-20"></div>
+      <Footer/>
     </>
   );
 }

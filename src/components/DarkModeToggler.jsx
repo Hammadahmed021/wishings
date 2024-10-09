@@ -10,7 +10,7 @@ const DarkModeToggler = () => {
   };
 
   return (
-    <div className={`flex items-center justify-center  duration-300`}>
+    <div className={`flex items-center justify-left  duration-300`}>
       {/* Toggler Container */}
       <div className="relative w-16 h-8 rounded-full bg-gray-300 dark:bg-gray-600 transition duration-300 ease-in-out">
         {/* White Circle (Moving in the background) */}

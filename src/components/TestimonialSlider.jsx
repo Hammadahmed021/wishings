@@ -76,11 +76,11 @@ export const VerticalSlider = () => {
       <Slider ref={sliderRef} {...settings}>
         {slides.map((slide) => (
           <div key={slide.id} className="relative h-max">
-            <div className="h-fit w-11/12 sm:w-10/12	my-6 lg:w-9/12	 xl:w-7/12 m-auto p-5 sm:p-10 grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-5  justify-items-left sm:justify-items-center items-stretch	 bg-white  rounded-xl shadow-lg">
+            <div className="h-fit w-11/12 sm:w-10/12	my-6 lg:w-9/12	 xl:w-7/12 m-auto p-5 sm:p-10 grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-5  justify-items-center sm:justify-items-center items-stretch	 bg-white  rounded-xl shadow-xl">
               <img
                 src={testimonialperson}
                 alt="User"
-                className="w-full max-w-44 h-auto sm:col-span-1 "
+                className="w-full max-w-40 h-auto max-h-48 sm:col-span-1 hidden"
               />
               <div className="flex flex-col justify-evenly sm:gap-2 lg:gap-0 lg:justify-between sm:col-span-2">
                 <div className="pb-5 sm:hidden">
