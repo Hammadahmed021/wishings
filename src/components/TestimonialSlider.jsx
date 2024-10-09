@@ -48,6 +48,8 @@ export const VerticalSlider = () => {
         settings: {
           dots: true,
           infinite: false,
+          vertical: false,
+        verticalSwiping: false,
         },
       },
       
@@ -71,7 +73,7 @@ export const VerticalSlider = () => {
   };
 
   return (
-    <div className="xl:container mx-auto my-10 relative">
+    <div className="xl:container mx-auto my-10 relative overflow-hidden">
       {/* Position the buttons relative to the slider container */}
       <Slider ref={sliderRef} {...settings}>
         {slides.map((slide) => (

@@ -21,23 +21,20 @@ const categories = [
 const VideoSlider = ({ videos, direction }) => {
   const settings = {
     infinite: true,
-    speed: 3000,
+    speed: 1500,
     slidesToShow: 3, // You can adjust the number of visible slides here
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     autoplay: true,
-    autoplaySpeed: 4000,
+    cssEase: "ease",
+    dots: false,
+    autoplaySpeed: 5000,
     rtl: direction === "right", // Reverse direction for the second slider
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
-          speed: 3000,
-          autoplaySpeed: 4000,
-
-          cssEase: "ease",
-          dots: false,
+          slidesToScroll: 2,
         },
       },
       {
@@ -45,11 +42,6 @@ const VideoSlider = ({ videos, direction }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          speed: 3000,
-          autoplaySpeed: 4000,
-
-          cssEase: "ease",
-          dots: false,
         },
       },
     ],
@@ -58,10 +50,10 @@ const VideoSlider = ({ videos, direction }) => {
   return (
     <Slider {...settings}>
       {videos.map((video, index) => (
-        <div key={index} className="p-2">
+        <div key={index} className="p-2 ">
           <video
             src={video}
-            className="w-full h-full object-cover rounded-3xl min-h-80	hover:cursor-pointer	"
+            className="w-full h-full object-cover rounded-xl min-h-44	hover:cursor-pointer	"
             autoPlay
             loop
             muted
@@ -131,8 +123,8 @@ const TemplateSlider = () => {
       />
 
       {/* Sliders */}
-      <div className="space-y-6">
-        <div className="w-full ">
+      <div className="overflow-hidden">
+        <div className="w-full">
           <VideoSlider videos={templates[selectedCategory]} direction="left" />
         </div>
         <div className="w-full">
