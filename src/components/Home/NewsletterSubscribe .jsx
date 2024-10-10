@@ -1,8 +1,8 @@
 import React from "react";
 import { MdArrowOutward } from "react-icons/md";
-import message from '../assets/message.svg'
+import message from '../../assets/message.svg'
 
-export const NewsletterSubscribe = () => {
+ const NewsletterSubscribe = () => {
   return (
     <section className="xl:container mx-auto">
       <div className="bg-primary rounded-lg xl:rounded-3xl mt-28 px-4 py-12 md:p-12 lg:p-16">
@@ -45,3 +45,5 @@ export const NewsletterSubscribe = () => {
     </section>
   );
 };
+
+export default NewsletterSubscribe;

@@ -1,8 +1,8 @@
 import React from "react";
-import heroImage from '../assets/heroImage.png'
-import { Button } from "./Button";
+import heroImage from '../../assets/heroImage.png'
+import { Button } from "../common/Button";
 
-export const Hero = () => {
+ const Hero = () => {
   return (
     <section className="bg-gradient-to-b from-accent from-10% to-background"> 
       <div className="flex lg:container mx-auto flex-col items-center text-center py-10 px-6 md:pt-24 md:pb-16 font-roboto">
@@ -18,3 +18,5 @@ export const Hero = () => {
     </section>
   );
 };
+
+export default Hero;

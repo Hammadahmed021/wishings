@@ -2,7 +2,7 @@ import React from "react";
 import { VerticalSlider } from "./TestimonialSlider";
 
 
-export const Testimonial = () => {
+ const Testimonial = () => {
   return (
     <section>
       <div className="container mx-auto py-10">
@@ -19,3 +19,5 @@ export const Testimonial = () => {
     </section>
   );
 };
+
+export default Testimonial;

@@ -1,7 +1,7 @@
 import React from "react";
-import * as image from "../assets/images/index.js";
+import * as image from "../../assets/images/index.js";
 
-export const Rating = () => {
+ const Rating = () => {
   return (
     <section>
       <div className="xl:container xl:mx-auto flex flex-col lg:basis-1/3 gap-10 lg:gap-2 lg:flex-row p-6 md:p-8 bg-accent xl:rounded-2xl">
@@ -96,3 +96,5 @@ export const Rating = () => {
     </section>
   );
 };
+
+export default Rating;

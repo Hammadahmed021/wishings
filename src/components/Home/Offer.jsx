@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick"; // Import the React Slick component
-import { offers } from "../utils/localDb.js";
+import { offers } from "../../utils/localDb.js";
 
 
 

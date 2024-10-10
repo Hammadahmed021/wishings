@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import testimonialperson from "../assets/testimonialperson.png";
-import trustpilot from "../assets/trustpilot.png";
+import testimonialperson from "../../assets/testimonialperson.png";
+import trustpilot from "../../assets/trustpilot.png";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export const VerticalSlider = () => {
+ export const VerticalSlider = () => {
   const slides = [
     {
       id: 1,
@@ -148,3 +148,5 @@ export const VerticalSlider = () => {
     </div>
   );
 };
+
+export default VerticalSlider;

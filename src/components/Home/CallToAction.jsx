@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-export const CallToAction = () => {
+ const CallToAction = () => {
   return (
     <section className="bg-primary">
       <div className="xl:container xl:m-auto  flex flex-col lg:flex-row py-6 gap-8 lg:py-20">
@@ -42,7 +42,7 @@ export const CallToAction = () => {
         </div>
         <div
           className="flex flex-col lg:w-1/2 gap-6 rounded-3xl m-1 p-7 lg:p-0 "
-          Style="box-shadow: -10px -10px 15px -16px rgba(0, 0, 0, 0.3);"
+          style={{boxShadow: '-10px -10px 15px -16px rgba(0, 0, 0, 0.3)'}}
         >
           <div className="py-6 px-0 lg:py-14 lg:px-10">
             <h3 className="text-h3 font-roboto text-background">
@@ -59,3 +59,5 @@ export const CallToAction = () => {
     </section>
   );
 };
+
+export default CallToAction;

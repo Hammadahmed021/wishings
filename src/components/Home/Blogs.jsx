@@ -1,9 +1,9 @@
 import React from "react";
-import { BlogCard } from "./BlogCard";
-import { blogPosts } from "../utils/localDb";
-import { Button } from "./Button";
+import { BlogCard } from "../Home/BlogCard.jsx";
+import { blogPosts } from "../../utils/localDb";
+import { Button } from "../common/Button";
 
-export const Blogs = () => {
+ const Blogs = () => {
   return (
     <section>
       <div className="container mx-auto pt-5">
@@ -34,3 +34,5 @@ export const Blogs = () => {
     </section>
   );
 };
+
+export default Blogs;

@@ -1,5 +1,4 @@
 import React from "react";
-import { blog1 } from "../assets/images/blogImages/blogImages";
 
 export const BlogCard = ({image, category, title, author, date}) => {
   return (
@@ -25,3 +24,4 @@ export const BlogCard = ({image, category, title, author, date}) => {
     </div>
   );
 };
+

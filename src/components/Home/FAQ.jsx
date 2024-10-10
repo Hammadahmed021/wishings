@@ -1,8 +1,8 @@
-import { faqs } from "../utils/localDb";
+import { faqs } from "../../utils/localDb.js";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
-export const FAQ = () => {
+ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
@@ -66,3 +66,5 @@ export const FAQ = () => {
     </section>
   );
 };
+
+export default FAQ;

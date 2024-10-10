@@ -1,11 +1,11 @@
 import React from "react";
-import { LanguageDropdown } from "./LanguageDropdown";
-import WishingsLogo from "../assets/WishingsLogo.svg";
-import SplitArts from "../assets/SplitArts.png";
-import * as footerIcon from "../assets/icons/footerIcons/footerIcons.js";
-import { footerLinks } from "../utils/localDb.js";
+import { LanguageDropdown } from "../Footer/LanguageDropdown.jsx";
+import WishingsLogo from "../../../assets/WishingsLogo.svg";
+import SplitArts from "../../../assets/SplitArts.png";
+import * as footerIcon from "../../../assets/icons/footerIcons/footerIcons.js";
+import { footerLinks } from "../../../utils/localDb.js";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className="py-12">
     <div className="container mx-auto px-4 md:px-10 lg:px-20">
@@ -107,3 +107,4 @@ export const Footer = () => {
   );
 };
 
+export default Footer;

@@ -1,9 +1,9 @@
 import React from "react";
-import feature1 from "../assets/feature1.png";
-import feature2 from "../assets/feature2.png";
-import { Button } from "./Button";
+import feature1 from "../../assets/feature1.png";
+import feature2 from "../../assets/feature2.png";
+import { Button } from "../common/Button";
 
-export const TwoColumnLayout = () => {
+ const TwoColumnLayout = () => {
   return (
     <section>
       <div className="xl:container xl:mx-auto max-w-6xl mx-auto p-6 space-y-6 font-roboto my-8 lg:my-20 flex flex-col lg:gap-8 2xl:gap-0">
@@ -66,3 +66,6 @@ export const TwoColumnLayout = () => {
     </section>
   );
 };
+
+
+export default TwoColumnLayout;

@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import * as icons from "../assets/icons/navIcon.js";
-import logo from "../assets/logo.png";
-import DarkModeToggler from "./DarkModeToggler";
-import { navLinks } from "../utils/localDb.js";
+import * as icons from "../../../assets/icons/navIcon.js";
+import logo from "../../../assets/logo.png"
+import DarkModeToggler from "../DarkModeToggler.jsx";
+import { navLinks } from "../../../utils/localDb.js";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { MdExpandMore } from "react-icons/md";
 
-export const Navbar = () => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownRef = useRef([]);
@@ -46,7 +46,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header>
+    <header className="dark:bg-slate-600 dark:text-white">
       {/* First Row: Offer Banner */}
       <div className="offer first-row px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10% via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
         <div className="flex flex-col md:flex-row gap-3 py-4 items-center justify-center font-roboto font-semibold text-small leading-normal">
@@ -63,37 +63,37 @@ export const Navbar = () => {
       </div>
 
       {/* Second Row: Hidden on Mobile */}
-      <div className="second-row hidden xl:container xl:mx-auto lg:flex font-poppins bg-background justify-between py-4 items-center px-10">
-        <div className="left flex gap-3">
-          <img src={icons.mail} alt="mail icon" />
-          <span className="text-[#5C6671] text-sm font-normal">
+      <div className="second-row hidden xl:container xl:mx-auto lg:flex font-poppins bg-background justify-between py-4 items-center px-10 dark:bg-slate-600 ">
+        <div className="left flex gap-3 ">
+          <img src={icons.mail} alt="mail icon" className="dark:filter dark:brightness-0 dark:invert"/>
+          <p className="text-[#5C6671] text-sm font-normal dark:text-white">
             contact@nextpro.com
-          </span>
+          </p>
         </div>
-        <div className="right flex gap-10">
-          <div className="left flex items-center gap-8">
-            <ul className="flex items-center gap-3">
+        <div className="right flex gap-10 ">
+          <div className="left flex items-center gap-8 ">
+            <ul className="flex items-center gap-3 ">
               <li className="cursor-pointer">
-                <img src={icons.fb} alt="Facebook" />
+                <img src={icons.fb} alt="Facebook" className="dark:filter dark:brightness-0 dark:invert"/>
               </li>
               <li className="cursor-pointer">
-                <img src={icons.yt} alt="YouTube" />
+                <img src={icons.yt} alt="YouTube" className="dark:filter dark:brightness-0 dark:invert"/>
               </li>
               <li className="cursor-pointer">
-                <img src={icons.X} alt="X" />
+                <img src={icons.X} alt="X" className="dark:filter dark:brightness-0 dark:invert"/>
               </li>
               <li className="cursor-pointer">
-                <img src={icons.insta} alt="Instagram" />
+                <img src={icons.insta} alt="Instagram" className="dark:filter dark:brightness-0 dark:invert"/>
               </li>
               <li className="cursor-pointer">
-                <img src={icons.linkedin} alt="LinkedIn" />
+                <img src={icons.linkedin} alt="LinkedIn" className="dark:filter dark:brightness-0 dark:invert"/>
               </li>
             </ul>
             <div className="dark-mode">
               <DarkModeToggler />
             </div>
             <div className="right flex items-center">
-              <img src={icons.globe} alt="globe icon" />
+              <img src={icons.globe} alt="globe icon" className="dark:filter dark:brightness-0 dark:invert"/>
             </div>
           </div>
         </div>
@@ -281,3 +281,6 @@ export const Navbar = () => {
     </header>
   );
 };
+
+
+export default Header;

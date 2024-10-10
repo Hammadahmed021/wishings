@@ -1,9 +1,9 @@
 import React from "react";
-import checkicon from "../assets/checkicon.svg";
-import { Button } from "./Button";
-import ourstory from "../assets/ourstory.png"
+import checkicon from "../../assets/checkicon.svg";
+import { Button } from "../common/Button";
+import ourstory from "../../assets/ourstory.png"
 
-export const SplitContent = () => {
+ const SplitContent = () => {
   return (
     <section className="mt-10 mb-20 md:mt-20 md:mb-12 lg:mb-16 xl:mb-0">
       <div className="flex flex-col-reverse md:flex-row xl:container xl:mx-auto p-6 gap-10 md:gap-20">
@@ -47,3 +47,5 @@ export const SplitContent = () => {
     </section>
   );
 };
+
+export default SplitContent;
