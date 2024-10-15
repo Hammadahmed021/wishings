@@ -1,27 +1,10 @@
-import React, { useState, useEffect } from "react";
-import sun from "../../assets/icons/sun.svg"; 
-import moon from "../../assets/icons/moon.svg"; 
+import React from "react";
+import sun from "../../assets/icons/sun.svg";
+import moon from "../../assets/icons/moon.svg";
 
-const DarkModeToggler = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Toggle dark mode and add/remove the dark class to the <html> element
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
-
- 
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
-
+const DarkModeToggler = ({ isDarkMode, toggleDarkMode }) => {
   return (
-    <div className="flex items-center justify-left duration-300 ">
+    <div className="flex items-center justify-left duration-300">
       {/* Toggler Container */}
       <div className="relative w-16 h-[31px] rounded-full bg-gray-300 dark:bg-gray-600 transition duration-200 ease-in-out dark:shadow-sm dark:shadow-primary">
         {/* White Circle (Moving in the background) */}
@@ -42,24 +25,29 @@ const DarkModeToggler = () => {
 
         {/* Icons (Foreground) */}
         <div
-          className="flex justify-between gap-3 px-[7px] top-[7px] text-gray-600  relative"
+          className="flex justify-between gap-3 px-[7px] top-[7px] text-gray-600 relative"
           style={{ zIndex: 2 }}
         >
           <img
             src={sun}
             alt="Sun Icon"
-            className={` h-[18px]  ${isDarkMode ? "opacity-50  dark:filter dark:brightness-0 dark:invert" : "opacity-100"}`}
+            className={`h-[18px] ${
+              isDarkMode
+                ? "opacity-50 dark:filter dark:brightness-0 dark:invert"
+                : "opacity-100"
+            }`}
           />
           <img
             src={moon}
             alt="Moon Icon"
-            className={`h-[16px] ${isDarkMode ? "opacity-100" : "opacity-50"}`}
+            className={`h-[16px] ${
+              isDarkMode ? "opacity-100" : "opacity-50"
+            }`}
           />
         </div>
       </div>
     </div>
   );
 };
-
 
 export default DarkModeToggler;

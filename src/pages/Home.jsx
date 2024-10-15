@@ -7,7 +7,6 @@ import React from "react";
 const Home = () => {
   return (
     <>
-      <Header />
       <Hero/>
       <Rating/>
       <Offer/>
@@ -19,7 +18,6 @@ const Home = () => {
       <FAQ/>
       <Blogs/>
       <NewsletterSubscribe/>
-      <Footer />
     </>
   );
 };

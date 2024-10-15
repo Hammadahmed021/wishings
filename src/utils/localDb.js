@@ -4,6 +4,7 @@ import * as blogImages from "../assets/images/blogImages/blogImages.js";
 export const navLinks = [
   {
     title: "Home",
+    path: "/Wishing",
     links: [
       { name: "AI Text to Speech", url: "#" },
       { name: "AI Auto Subtitle", url: "#" },
@@ -14,6 +15,7 @@ export const navLinks = [
   },
   {
     title: "Pages",
+    path: "/Wishing/pages",
     links: [
       { name: "Our Story", url: "#" },
       { name: "Team", url: "#" },
@@ -22,6 +24,7 @@ export const navLinks = [
   },
   {
     title: "Services",
+    path: "/Wishing/services",
     links: [
       { name: "Consulting", url: "#" },
       { name: "Support", url: "#" },
@@ -30,6 +33,7 @@ export const navLinks = [
   },
   {
     title: "Portfolio",
+    path: "/Wishing/portfolio",
     links: [
       { name: "Latest Posts", url: "#" },
       { name: "Categories", url: "#" },
@@ -38,6 +42,7 @@ export const navLinks = [
   },
   {
     title: "Blog",
+    path: "/Wishing/blog",
     links: [
       { name: "Support", url: "#" },
       { name: "Sales", url: "#" },

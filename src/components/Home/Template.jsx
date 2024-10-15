@@ -18,16 +18,17 @@ const categories = [
   "Category 8",
 ];
 
-const VideoSlider = ({ videos, direction }) => {
+const VideoSlider = ({ videos, direction, isPaused, onHover }) => {
   const settings = {
     infinite: true,
     speed: 1500,
-    slidesToShow: 3, // You can adjust the number of visible slides here
+    lazyLoad: true,
+    slidesToShow: 3,
     slidesToScroll: 3,
-    autoplay: true,
+    autoplay: true, // Control autoplay based on pause state
     cssEase: "ease",
     dots: false,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     rtl: direction === "right", // Reverse direction for the second slider
     responsive: [
       {
@@ -48,19 +49,24 @@ const VideoSlider = ({ videos, direction }) => {
   };
 
   return (
-    <Slider {...settings}>
-      {videos.map((video, index) => (
-        <div key={index} className="p-2 ">
-          <video
-            src={video}
-            className="w-full h-full object-cover rounded-xl min-h-44	hover:cursor-pointer	"
-            autoPlay
-            loop
-            muted
-          ></video>
-        </div>
-      ))}
-    </Slider>
+    <div
+      onMouseEnter={() => onHover(true)} // Pause both sliders on hover
+      onMouseLeave={() => onHover(false)} // Resume both sliders on mouse leave
+    >
+      <Slider {...settings}>
+        {videos.map((video, index) => (
+          <div key={index} className="p-2">
+            <video
+              src={video}
+              className="w-full h-full object-cover rounded-xl min-h-44 hover:cursor-pointer"
+              autoPlay
+              loop
+              muted
+            ></video>
+          </div>
+        ))}
+      </Slider>
+    </div>
   );
 };
 
@@ -85,7 +91,7 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
   return (
     <div
       {...handlers}
-      className="overflow-x-auto whitespace-nowrap flex lg:justify-center space-x-4 mb-6 "
+      className="overflow-x-auto whitespace-nowrap flex lg:justify-center space-x-4 mb-6"
     >
       {categories.map((category, index) => (
         <button
@@ -93,7 +99,7 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
           className={`px-4 py-2 text-small ${
             selectedCategory === category
               ? "first:text-primary first:border-primary text-primary border border-primary rounded-full"
-              : "text-black font-medium	"
+              : "text-black font-medium"
           }`}
           onClick={() => onSelectCategory(category)}
         >
@@ -106,9 +112,17 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
 
 const TemplateSlider = () => {
   const [selectedCategory, setSelectedCategory] = useState("Category 1");
+  const [isPaused, setIsPaused] = useState(false); // State to track pause
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  // Function to pause/resume sliders
+  const handleHover = (pause) => {
+    setIsPaused(pause);
+    console.log("Hover");
+    
   };
 
   return (
@@ -123,19 +137,25 @@ const TemplateSlider = () => {
       />
 
       {/* Sliders */}
-      <div className="overflow-hidden">
+      <div className={`overflow-hidden`}>
         <div className="w-full">
-          <VideoSlider videos={templates[selectedCategory]} direction="left" />
+          <VideoSlider
+            videos={templates[selectedCategory]} // Ensure templates is defined
+            direction="left"
+            isPaused={isPaused}
+            onHover={handleHover} // Pass hover handler
+          />
         </div>
         <div className="w-full">
-          <VideoSlider videos={templates[selectedCategory]} direction="right" />
+          <VideoSlider
+            videos={templates[selectedCategory]} // Ensure templates is defined
+            direction="right"
+            isPaused={isPaused}
+            onHover={handleHover} // Pass hover handler
+            
+          />
         </div>
       </div>
-      {/* <div className="mt-6 text-center">
-        <Link  className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition">
-          See All
-        </Link>
-      </div> */}
     </div>
   );
 };
