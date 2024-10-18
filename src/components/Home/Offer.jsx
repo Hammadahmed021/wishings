@@ -77,7 +77,7 @@ const OfferSlider = () => {
       <div className="container mx-auto px-0 lg:px-10 xl:px-20 2xl:px-36">
         <div className="relative px-8 pt-20">
           <p className="text-small text-center">Our Services</p>
-          <h2 className="text-h2 text-center pt-3 font-roboto">What We Are Offering</h2>
+          <h2 className="text-h2 text-center pt-3 font-roboto">Personalized Videos for Every Occasion</h2>
 
           {/* Slick Slider */}
           <Slider {...settings}>

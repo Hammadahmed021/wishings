@@ -64,9 +64,10 @@ const Header = () => {
     <header className="dark:bg-slate-600 dark:text-white">
       {/* First Row: Offer Banner */}
       <div className="offer first-row px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10% via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
-        <div className="flex flex-col md:flex-row gap-3 py-4 items-center justify-center font-roboto font-semibold text-small leading-normal">
+        <div className="flex flex-col lg:flex-row gap-3 lg:gap-8 py-4 items-center justify-center font-roboto font-semibold text-small leading-normal">
           <p className="text-white text-center">
-            Back-to-School for Education: 40% OFF + 700 Extra FREE AI Credits
+            Spread the Cheer! Enjoy 30% Off on Personalized Wish Videos This
+            Holiday Season – Don’t Miss Out!
           </p>
           <a
             href="#"
@@ -86,7 +87,7 @@ const Header = () => {
             className="dark:filter dark:brightness-0 dark:invert"
           />
           <p className="text-[#5C6671] text-sm font-normal dark:text-white">
-            contact@nextpro.com
+            Info@wishings.io
           </p>
         </div>
         <div className="right flex gap-10">
@@ -145,10 +146,10 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="border-b-2"></div>
+      <div className="border-b-2 mb-3"></div>
 
       {/* Third Row: Main Navigation */}
-      <div className="third-row xl:container m-auto relative flex items-center justify-between py-4 px-4 md:px-10">
+      <div className="third-row xl:container m-auto relative flex items-center justify-between py-0 px-4 md:px-10">
         <img
           src={logo}
           alt="logo"
@@ -156,7 +157,7 @@ const Header = () => {
         />
 
         {/* Hamburger Menu for Mobile View */}
-        <div className="lg:hidden ml-auto">
+        <div className="lg:hidden ml-auto flex items-center justify-center mt-3">
           <button onClick={toggleMenu} className="text-2xl">
             {isMenuOpen ? <HiOutlineXMark /> : <HiOutlineBars3 />}
           </button>
@@ -284,15 +285,15 @@ const Header = () => {
         </nav>
 
         {/* Second Row Content in Mobile */}
-        <div className="flex flex-col gap-6 mt-4">
-          <div className="flex gap-3">
+        <div className="flex flex-col gap-6 mt-4 ">
+          <div className="flex gap-3 ">
             <img
               src={icons.mail}
               alt="mail icon"
               className="dark:filter dark:brightness-0 dark:invert"
             />
             <span className="text-[#5C6671] text-sm font-normal dark:text-white">
-              contact@nextpro.com
+              Info@wishings.io
             </span>
           </div>
           <ul className="flex justify-start gap-10">

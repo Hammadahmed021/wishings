@@ -55,101 +55,101 @@ export const offers = [
   {
     id: 1,
     icon: icon.fastforward,
-    title: "Promo Video",
+    title: "Birthday Videos",
     description:
-      "Identify relevant and high-impact keywords for your industry.",
+      "Send a one-of-a-kind birthday wish with a personalized video. Celebrate their special day in a way they’ll never forget!",
   },
   {
     id: 2,
     icon: icon.home,
-    title: "Real Estate Video",
+    title: "Wedding Videos",
     description:
-      "Identify relevant and high-impact keywords for your industry.",
+      "Create a personalized wedding video that captures the magic of their big day. A beautiful keepsake to celebrate love and commitment!",
   },
   {
     id: 3,
     icon: icon.loudspeaker,
-    title: "News Video",
+    title: "Convocation Videos",
     description:
-      "Identify relevant and high-impact keywords for your industry.",
+      "Congratulate graduates with a unique convocation video that honors their achievement in style.",
   },
   {
     id: 4,
     icon: icon.people,
-    title: "Corporate Video",
+    title: "Engagement Videos",
     description:
-      "Identify relevant and high-impact keywords for your industry.",
+      "Announce or celebrate engagements with a beautifully crafted video, the perfect way to announce and cherish your love story.",
   },
   {
     id: 5,
     icon: icon.filmtape,
-    title: "Trailer Video",
+    title: "Christmas Videos",
     description:
-      "Identify relevant and high-impact keywords for your industry.",
+      "Spread holiday joy with a festive Christmas video, perfect for sending warm wishes to friends and family.",
   },
-  {
-    id: 6,
-    icon: icon.videoplayer,
-    title: "Tutorial Video",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 7,
-    icon: icon.fastforward,
-    title: "Offer 7",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 8,
-    icon: icon.fastforward,
-    title: "Offer 8",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 9,
-    icon: icon.fastforward,
-    title: "Offer 9",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 10,
-    icon: icon.fastforward,
-    title: "Offer 10",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 11,
-    icon: icon.fastforward,
-    title: "Offer 11",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 12,
-    icon: icon.fastforward,
-    title: "Offer 12",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 13,
-    icon: icon.fastforward,
-    title: "Offer 13",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
-  {
-    id: 14,
-    icon: icon.fastforward,
-    title: "Offer 14",
-    description:
-      "Identify relevant and high-impact keywords for your industry.",
-  },
+  // {
+  //   id: 6,
+  //   icon: icon.videoplayer,
+  //   title: "Tutorial Video",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 7,
+  //   icon: icon.fastforward,
+  //   title: "Offer 7",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 8,
+  //   icon: icon.fastforward,
+  //   title: "Offer 8",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 9,
+  //   icon: icon.fastforward,
+  //   title: "Offer 9",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 10,
+  //   icon: icon.fastforward,
+  //   title: "Offer 10",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 11,
+  //   icon: icon.fastforward,
+  //   title: "Offer 11",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 12,
+  //   icon: icon.fastforward,
+  //   title: "Offer 12",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 13,
+  //   icon: icon.fastforward,
+  //   title: "Offer 13",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
+  // {
+  //   id: 14,
+  //   icon: icon.fastforward,
+  //   title: "Offer 14",
+  //   description:
+  //     "Identify relevant and high-impact keywords for your industry.",
+  // },
 ];
 
 export const templates = {

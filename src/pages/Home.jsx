@@ -12,7 +12,7 @@ const Home = () => {
       <Offer/>
       <SplitContent/>
       <Template/>
-      <TwoColumnLayout/>
+      
       <Testimonial/>
       <CallToAction/>
       <FAQ/>
