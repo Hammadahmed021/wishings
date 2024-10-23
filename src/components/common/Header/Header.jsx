@@ -146,10 +146,10 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="border-b-2 mb-3"></div>
+      <div className="border-b-2"></div>
 
       {/* Third Row: Main Navigation */}
-      <div className="third-row xl:container m-auto relative flex items-center justify-between py-0 px-4 md:px-10">
+      <div className="third-row xl:container m-auto relative flex items-center justify-between py-5 px-4 md:px-10">
         <img
           src={logo}
           alt="logo"
@@ -157,7 +157,7 @@ const Header = () => {
         />
 
         {/* Hamburger Menu for Mobile View */}
-        <div className="lg:hidden ml-auto flex items-center justify-center mt-3">
+        <div className="lg:hidden ml-auto flex items-center justify-center">
           <button onClick={toggleMenu} className="text-2xl">
             {isMenuOpen ? <HiOutlineXMark /> : <HiOutlineBars3 />}
           </button>
