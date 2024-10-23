@@ -11,7 +11,7 @@ const Testimonial = () => {
             Loved by Thousands, Trusted for Every Occasion
           </h2>
         </div>
-        <div>
+        <div className="min-h-96 md:min-h-fit">
           <VerticalSlider />
         </div>
       </div>

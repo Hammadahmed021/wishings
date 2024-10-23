@@ -82,9 +82,9 @@ const OfferSlider = () => {
           {/* Slick Slider */}
           <Slider {...settings}>
             {offerGroups.map((group, groupIndex) => (
-              <div key={groupIndex}>
+              <div key={groupIndex} className="align-top	py-5">
                 {group.map((offer) => (
-                  <div key={offer.id} className="px-2 pt-10 md:px-6 md:py-8">
+                  <div key={offer.id} className="px-2 pt-10 md:px-6 md:py-8 ">
                     <img src={offer.icon} alt="icon" />
                     <h6 className="py-4 font-roboto font-extrabold text-xl text-[#001F3F]">
                       {offer.title}

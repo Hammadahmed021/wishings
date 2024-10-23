@@ -12,7 +12,6 @@ const Home = () => {
       <Offer/>
       <SplitContent/>
       <Template/>
-      
       <Testimonial/>
       <CallToAction/>
       <FAQ/>

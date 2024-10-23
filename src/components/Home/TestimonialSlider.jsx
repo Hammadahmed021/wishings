@@ -73,11 +73,11 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
   };
 
   return (
-    <div className="xl:container mx-auto my-10 relative overflow-hidden">
+    <div className="xl:container mx-auto my-6 relative overflow-hidden">
       {/* Position the buttons relative to the slider container */}
       <Slider ref={sliderRef} {...settings}>
         {slides.map((slide) => (
-          <div key={slide.id} className="relative h-max">
+          <div key={slide.id}>
             <div className="h-fit w-11/12 sm:w-10/12	my-6 lg:w-9/12	 xl:w-7/12 m-auto p-5 sm:p-10 grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-5  justify-items-center sm:justify-items-center items-stretch	 bg-white  rounded-xl shadow-xl">
               <img
                 src={testimonialperson}

@@ -2,7 +2,7 @@ import { faqs } from "../../utils/localDb.js";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
- const FAQ = () => {
+const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
@@ -12,22 +12,22 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
   return (
     <section className="xl:container mx-auto">
       <div className="flex flex-col lg:flex-row gap-10 py-20 lg:mt-8 px-6">
-        <div className="flex flex-col gap-6 lg:basis-2/4 2xl:basis-1/3	">
+        <div className="flex flex-col gap-6 lg:basis-5/12 ">
           <div>
             <p className="bg-primary text-background py-2 px-6 rounded-full font-roboto inline">
               Frequently Asked Questions
             </p>
           </div>
           <h2 className="text-h2 font-roboto leading-tight	">
-            Your Digital Journey Clarified
+            Everything You Need to Know
           </h2>
           <p className="font-poppins text-small text-muted leading-relaxed font-normal">
-            Explore essential information about Rankflow and our services. Find
-            quick answers to common queries in our FAQ section, ensuring a clear
-            understanding of your digital journey with us.
+            Got questions? We’ve got answers! Explore our FAQs to learn more
+            about how Wishings works and how we can help you create the perfect
+            personalized video.
           </p>
         </div>
-        <div className="space-y-2 ">
+        <div className="space-y-2 lg:basis-7/12">
           {faqs.map((faq, index) => (
             <div
               key={index}

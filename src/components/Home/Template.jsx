@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Slider from "react-slick";
 import { templates } from "../../utils/localDb.js";
 import "slick-carousel/slick/slick.css";
@@ -8,34 +8,33 @@ import "slick-carousel/slick/slick-theme.css";
 import { useSwipeable } from "react-swipeable";
 
 const categories = [
-  "Category 1",
-  "Category 2",
-  "Category 3",
-  "Category 4",
-  "Category 5",
-  "Category 6",
-  "Category 7",
-  "Category 8",
+  "Birthday",
+  "Convocation",
+  "Christmas",
+  "Wedding",
+  "Engagement",
 ];
 
-const VideoSlider = ({ videos, direction, isPaused, onHover }) => {
+const VideoSlider = ({ videos, direction, onHover }) => {
+  const sliderRef = useRef(null); // Reference to access slider methods
+
   const settings = {
     infinite: true,
-    speed: 1500,
+    speed: 3500,
     lazyLoad: true,
     slidesToShow: 3,
-    slidesToScroll: 3,
-    autoplay: true, // Control autoplay based on pause state
-    cssEase: "ease",
+    slidesToScroll: 1,
+    autoplay: true, // Autoplay by default
+    cssEase: "linear",
     dots: false,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 0,
     rtl: direction === "right", // Reverse direction for the second slider
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
       {
@@ -48,12 +47,24 @@ const VideoSlider = ({ videos, direction, isPaused, onHover }) => {
     ],
   };
 
+  // Pause autoplay on hover
+  const handleMouseEnter = () => {
+    sliderRef.current.slickPause(); // Pause slider
+    onHover(true);
+  };
+
+  // Resume autoplay on hover out
+  const handleMouseLeave = () => {
+    sliderRef.current.slickPlay(); // Resume slider
+    onHover(false);
+  };
+
   return (
     <div
-      onMouseEnter={() => onHover(true)} // Pause both sliders on hover
-      onMouseLeave={() => onHover(false)} // Resume both sliders on mouse leave
+      onMouseEnter={handleMouseEnter} // Pause on hover
+      onMouseLeave={handleMouseLeave} // Resume on mouse leave
     >
-      <Slider {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {videos.map((video, index) => (
           <div key={index} className="p-2">
             <video
@@ -71,28 +82,8 @@ const VideoSlider = ({ videos, direction, isPaused, onHover }) => {
 };
 
 const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
-  // Swiping handler for mobile devices
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handleSwipe("left"),
-    onSwipedRight: () => handleSwipe("right"),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-  });
-
-  const handleSwipe = (direction) => {
-    const currentIndex = categories.indexOf(selectedCategory);
-    if (direction === "left" && currentIndex < categories.length - 1) {
-      onSelectCategory(categories[currentIndex + 1]);
-    } else if (direction === "right" && currentIndex > 0) {
-      onSelectCategory(categories[currentIndex - 1]);
-    }
-  };
-
   return (
-    <div
-      {...handlers}
-      className="overflow-x-auto whitespace-nowrap flex lg:justify-center space-x-4 mb-6"
-    >
+    <div className="overflow-x-auto whitespace-nowrap flex md:justify-center space-x-4 mb-6">
       {categories.map((category, index) => (
         <button
           key={index}
@@ -111,18 +102,10 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
 };
 
 const TemplateSlider = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Category 1");
-  const [isPaused, setIsPaused] = useState(false); // State to track pause
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-  };
-
-  // Function to pause/resume sliders
-  const handleHover = (pause) => {
-    setIsPaused(pause);
-    console.log("Hover");
-    
   };
 
   return (
@@ -130,29 +113,26 @@ const TemplateSlider = () => {
       <h3 className="text-h3 text-center pt-3 font-roboto pb-8 xl:pb-12">
         Start Fast with <span className="text-primary">6000+</span> Templates
       </h3>
-      {/* Category Buttons with Swiping */}
+      {/* Category Buttons */}
       <CategoryButtons
         onSelectCategory={handleCategoryChange}
         selectedCategory={selectedCategory}
       />
 
       {/* Sliders */}
-      <div className={`overflow-hidden`}>
+      <div className="overflow-hidden">
         <div className="w-full">
           <VideoSlider
             videos={templates[selectedCategory]} // Ensure templates is defined
             direction="left"
-            isPaused={isPaused}
-            onHover={handleHover} // Pass hover handler
+            onHover={() => {}} // No need for hover state in the parent
           />
         </div>
         <div className="w-full">
           <VideoSlider
             videos={templates[selectedCategory]} // Ensure templates is defined
             direction="right"
-            isPaused={isPaused}
-            onHover={handleHover} // Pass hover handler
-            
+            onHover={() => {}} // No need for hover state in the parent
           />
         </div>
       </div>
@@ -161,8 +141,6 @@ const TemplateSlider = () => {
 };
 
 export default TemplateSlider;
-
-
 
 // import React, { useEffect, useState } from "react";
 // import Slider from "react-slick";

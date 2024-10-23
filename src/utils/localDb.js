@@ -153,7 +153,12 @@ export const offers = [
 ];
 
 export const templates = {
-  "Category 1": [
+  "Birthday": [
+    // { id: 1, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
+    // { id: 2, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
+    // { id: 3, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
+    // { id: 4, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
+    // { id: 5, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -161,7 +166,7 @@ export const templates = {
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
   ],
-  "Category 2": [
+  "Convocation": [
     "https://www.w3schools.com/html/movie.mp4",
     "https://www.w3schools.com/html/movie.mp4",
     "https://www.w3schools.com/html/movie.mp4",
@@ -169,7 +174,7 @@ export const templates = {
     "https://www.w3schools.com/html/movie.mp4",
     "https://www.w3schools.com/html/movie.mp4",
   ],
-  "Category 3": [
+  "Christmas": [
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -177,7 +182,7 @@ export const templates = {
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
   ],
-  "Category 4": [
+  "Wedding": [
     "https://www.w3schools.com/html/movie.mp4",
     "https://www.w3schools.com/html/movie.mp4",
     "https://www.w3schools.com/html/movie.mp4",
@@ -185,7 +190,7 @@ export const templates = {
     "https://www.w3schools.com/html/movie.mp4",
     "https://www.w3schools.com/html/movie.mp4",
   ],
-  "Category 5": [
+  "Engagement": [
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -193,59 +198,58 @@ export const templates = {
     "https://www.w3schools.com/html/mov_bbb.mp4",
     "https://www.w3schools.com/html/mov_bbb.mp4",
   ],
-  "Category 6": [
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-  ],
-  "Category 7": [
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-    "https://www.w3schools.com/html/mov_bbb.mp4",
-  ],
-  "Category 8": [
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-    "https://www.w3schools.com/html/movie.mp4",
-  ],
+  // "Category 6": [
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  // ],
+  // "Category 7": [
+  //   "https://www.w3schools.com/html/mov_bbb.mp4",
+  //   "https://www.w3schools.com/html/mov_bbb.mp4",
+  //   "https://www.w3schools.com/html/mov_bbb.mp4",
+  //   "https://www.w3schools.com/html/mov_bbb.mp4",
+  //   "https://www.w3schools.com/html/mov_bbb.mp4",
+  //   "https://www.w3schools.com/html/mov_bbb.mp4",
+  // ],
+  // "Category 8": [
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  //   "https://www.w3schools.com/html/movie.mp4",
+  // ],
 
   // A d d v i d e o s f o r o t h e r c a t e g o r i e s. . .
 };
 
 export const faqs = [
   {
-    question: `What is React?`,
-    answer: `React is a JavaScript 
-                 library for building user interfaces.`,
+    question: `What types of videos does Wishings create?`,
+    answer: `Wishings specializes in creating personalized videos for special occasions such as Christmas, Halloween, Weddings, Birthdays, Convocations and more. Our videos are designed to capture the essence of each event and are tailored to your specific requirements.`,
   },
   {
-    question: `What is Tailwind CSS?`,
-    answer: `Tailwind CSS is a utility-first 
-                 CSS framework for creating custom designs.`,
+    question: `Can I personalize my video?`,
+    answer: `Yes, all our videos are fully customizable! You can personalize the video by according to your details like names, photos, special messages, and other elements that reflect your vision.`,
   },
   {
-    question: `How do you install Tailwind CSS?`,
-    answer: `You can install Tailwind CSS using npm 
-                 and configure it in your project.`,
+    question: `Do I need to create the video myself, or will Wishings handle everything for me?`,
+    answer: `You won’t need to create the video yourself! Simply choose your favorite template and provide us with the details, such as photos, videos, and messages. From there, we’ll take care of everything and create a beautiful, personalized video just the way you want it.`,
   },
   {
-    question: `How do you toggle content visibility?`,
-    answer: `You can use state management in 
-                 React to toggle content visibility.`,
+    question: `How do I place an order?`,
+    answer: `Placing an order is simple. Just visit our website, select your occasion, fill out the customization form with your details, and our team will handle the rest. We’ll work closely with you to create the perfect video.`,
   },
   {
-    question: `What is a state in React?`,
-    answer: `State is an object that holds the 
-                 values that determine the behavior of a component.`,
+    question: `How long does it take to receive my video?`,
+    answer: `The delivery time varies depending on the complexity of your request. Generally, you can expect your video within 3-5 business days. We also offer expedited delivery options for those last-minute needs.`,
+  },
+  {
+    question: `What formats will the video be available in?`,
+    answer: `Our videos are delivered in high-quality formats that are compatible with most devices, including MP4. If you need a specific format, please let us know when placing your order`,
   },
 ];
 
