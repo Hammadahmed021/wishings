@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { templates } from "../../utils/localDb.js";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router-dom";
 
 // Import react-swipeable to handle swipe gestures
 import { useSwipeable } from "react-swipeable";
@@ -15,7 +16,7 @@ const categories = [
   "Engagement",
 ];
 
-const VideoSlider = ({ videos, direction, onHover }) => {
+const VideoSlider = ({ videos, direction, onVideoClick  }) => {
   const sliderRef = useRef(null); // Reference to access slider methods
 
   const settings = {
@@ -26,6 +27,7 @@ const VideoSlider = ({ videos, direction, onHover }) => {
     slidesToScroll: 1,
     autoplay: true, // Autoplay by default
     cssEase: "linear",
+    pauseOnHover:true,
     dots: false,
     autoplaySpeed: 0,
     rtl: direction === "right", // Reverse direction for the second slider
@@ -73,16 +75,16 @@ const VideoSlider = ({ videos, direction, onHover }) => {
   });
 
   return (
-    <div
-      {...handlers} // Apply swipeable handlers
-      onMouseEnter={handleMouseEnter} // Pause on hover
-      onMouseLeave={handleMouseLeave} // Resume on mouse leave
-    >
+    <div {...handlers} >
       <Slider ref={sliderRef} {...settings}>
-        {videos.map((video, index) => (
-          <div key={index} className="p-2">
+        {videos.map((video) => (
+          <div
+            key={video.id}
+            className="p-2"
+            onClick={() => onVideoClick(video.id)}
+          >
             <video
-              src={video}
+              src={video.url}
               className="w-full h-full object-cover rounded-xl min-h-44 hover:cursor-pointer"
               autoPlay
               loop
@@ -117,9 +119,14 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
 
 const TemplateSlider = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const navigate = useNavigate();
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleVideoClick = (id) => {
+    navigate(`/Wishing/template/${id}`);
   };
 
   return (
@@ -127,24 +134,23 @@ const TemplateSlider = () => {
       <h3 className="text-h3 text-center pt-3 font-roboto pb-8 xl:pb-12">
         Start Fast with <span className="text-primary">6000+</span> Templates
       </h3>
-      {/* Category Buttons */}
       <CategoryButtons
         onSelectCategory={handleCategoryChange}
         selectedCategory={selectedCategory}
       />
-
-      {/* Sliders */}
       <div className="overflow-hidden">
         <div className="w-full">
           <VideoSlider
-            videos={templates[selectedCategory]} // Ensure templates is defined
+            videos={templates[selectedCategory]}
             direction="left"
+            onVideoClick={handleVideoClick} // Pass the click handler
           />
         </div>
         <div className="w-full">
           <VideoSlider
-            videos={templates[selectedCategory]} // Ensure templates is defined
+            videos={templates[selectedCategory]}
             direction="right"
+            onVideoClick={handleVideoClick}
           />
         </div>
       </div>
