@@ -20,7 +20,7 @@ const VideoSlider = ({ videos, direction, onHover }) => {
 
   const settings = {
     infinite: true,
-    speed: 3500,
+    speed: 4500,
     lazyLoad: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -35,6 +35,7 @@ const VideoSlider = ({ videos, direction, onHover }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
+          
         },
       },
       {
@@ -42,6 +43,10 @@ const VideoSlider = ({ videos, direction, onHover }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          autoPlay: false,
+          cssEase: "ease",
+          speed: 1200,
+          autoplaySpeed: 3000,
         },
       },
     ],
@@ -59,8 +64,17 @@ const VideoSlider = ({ videos, direction, onHover }) => {
     onHover(false);
   };
 
+  // Swipe handlers
+  const handlers = useSwipeable({
+    onSwipedLeft: () => sliderRef.current.slickNext(), // Move to the next slide on swipe left
+    onSwipedRight: () => sliderRef.current.slickPrev(), // Move to the previous slide on swipe right
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
     <div
+      {...handlers} // Apply swipeable handlers
       onMouseEnter={handleMouseEnter} // Pause on hover
       onMouseLeave={handleMouseLeave} // Resume on mouse leave
     >
@@ -125,14 +139,12 @@ const TemplateSlider = () => {
           <VideoSlider
             videos={templates[selectedCategory]} // Ensure templates is defined
             direction="left"
-            onHover={() => {}} // No need for hover state in the parent
           />
         </div>
         <div className="w-full">
           <VideoSlider
             videos={templates[selectedCategory]} // Ensure templates is defined
             direction="right"
-            onHover={() => {}} // No need for hover state in the parent
           />
         </div>
       </div>
@@ -141,6 +153,7 @@ const TemplateSlider = () => {
 };
 
 export default TemplateSlider;
+
 
 // import React, { useEffect, useState } from "react";
 // import Slider from "react-slick";

@@ -71,7 +71,7 @@ const Header = () => {
           </p>
           <a
             href="#"
-            className="px-7 py-1 bg-slate-100 rounded-[8px] capitalize text-[#896340] text-center text-small"
+            className="px-7 py-1 bg-slate-100 rounded-[8px] capitalize text-[#896340] text-center text-small text-nowrap	"
           >
             grab now
           </a>

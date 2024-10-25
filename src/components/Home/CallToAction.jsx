@@ -16,19 +16,21 @@ const CallToAction = () => {
             We Made Videos for Your Special Occasions!
           </h2>
           <p className="font-poppins text-small text-background leading-relaxed font-light">
-            Celebrate in style and save big with Wishings! For a limited time,
-            enjoy a flat 30% discount on your very first personalized video
-            order. This is the perfect chance to create a unique, heartfelt
-            video for any special moment in your life. Simply choose your
-            favorite template, send us your details, and we’ll handle the rest.
-            Don’t miss out on this amazing deal – it’s our way of helping you
-            make unforgettable memories for less. Order now and bring your
-            celebration to life with Wishings!
-            video for any special moment in your life. Simply choose your
-            favorite template, send us your details, and we’ll handle the rest.
-            Don’t miss out on this amazing deal – it’s our way of helping you
-            make unforgettable memories for less. Order now and bring your
-            celebration to life with Wishings!
+            For a limited time, enjoy a flat 30% discount on your first
+            personalized video order. Be it a birthday, engagement, convocation,
+            Christmas, or any other special occasion, we’re here to help you
+            mark these moments with something truly special. This is the perfect
+            opportunity to create a unique, heartfelt video that will leave a
+            lasting impression on your loved ones, ensuring they’ll treasure it
+            for years to come. Simply browse through our beautiful collection of
+            templates, select your favorite, and provide us with the
+            details—photos, messages, and more. We’ll take care of the rest,
+            crafting a stunning video that perfectly captures the essence of
+            your celebration. Our expert team is dedicated to making sure your
+            video reflects the joy and emotion of the moment, making your
+            memories truly unforgettable for life. Don’t miss out on this
+            amazing offer—order now and let Wishings turn your special moments
+            into cherished memories in the most meaningful way possible!
           </p>
           <div className="mt-2">
             <a
@@ -48,14 +50,18 @@ const CallToAction = () => {
         >
           <div className="py-6 px-0 lg:py-14 lg:px-10">
             <h3 className="text-h3 font-roboto text-background">
-              Flat 30% Off Your First Personalized Video!
+              Celebrate in style and save big with Wishings!
             </h3>
             {/* <p className="font-poppins text-small text-background font-light leading-relaxed pt-5">
               At Next you can seamlessly integrates with a variety of industry-
               leading tools, ensuring a cohesive and efficient digital ecosystem
               for your business.
             </p> */}
-            <img src={ctaOffer} alt="offer" className="mt-4 rounded-lg w-full lg:w-[430px] h-auto" />
+            <img
+              src={ctaOffer}
+              alt="offer"
+              className="mt-4 rounded-lg w-full lg:w-[430px] h-auto"
+            />
           </div>
         </div>
       </div>
