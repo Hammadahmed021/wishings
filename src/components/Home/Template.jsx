@@ -143,7 +143,7 @@ const TemplateSlider = () => {
           <VideoSlider
             videos={templates[selectedCategory]}
             direction="left"
-            onVideoClick={handleVideoClick} // Pass the click handler
+            onVideoClick={handleVideoClick} 
           />
         </div>
         <div className="w-full">

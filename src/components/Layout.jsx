@@ -11,11 +11,17 @@ function Layout() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  console.log("Current Path:", pathname);
+
+  const noHeaderFooterPaths = ['/Wishing/signIn', '/Wishing/signUp'];
+
+  const shouldShowHeaderFooter = !noHeaderFooterPaths.includes(pathname);
+
   return (
     <>
-      <Header />
-      <Outlet /> 
-      <Footer />
+      {shouldShowHeaderFooter && <Header />}
+      <Outlet />
+      {shouldShowHeaderFooter && <Footer />}
     </>
   );
 }

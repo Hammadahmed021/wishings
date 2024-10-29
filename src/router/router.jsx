@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Pages, TemplatePage } from "../pages/index.js";
+import { Home, Pages, TemplatePage, SignUp, SignIn } from "../pages/index.js";
 import Layout from "../components/Layout";
+
 
 const router = createBrowserRouter([
   {
-    path: "/Wishing",
+    path: "/",
     element: <Layout />,
     children: [
       {
@@ -18,6 +19,14 @@ const router = createBrowserRouter([
       {
         path: "/Wishing/template/:id",  
         element: <TemplatePage />,     
+      },
+      {
+        path: "/Wishing/signin",  
+        element: <SignIn />,     
+      },
+      {
+        path: "/Wishing/signup",  
+        element: <SignUp />,     
       },
     ],
   },
