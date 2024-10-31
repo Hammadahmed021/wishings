@@ -7,12 +7,24 @@ import DarkModeToggler from "../DarkModeToggler.jsx";
 import { navLinks } from "../../../utils/localDb.js";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { MdExpandMore } from "react-icons/md";
+import { useSelector } from "react-redux";
+import LogoutBtn from "./LogoutBtn.jsx";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false); // Lifted state for dark mode
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const authStatus = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData);
   const dropdownRef = useRef([]);
+  console.log(authStatus, 'authStatus');
+
+  const toggleDropdownAuth = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,7 +75,7 @@ const Header = () => {
   return (
     <header className="dark:bg-slate-600 dark:text-white">
       {/* First Row: Offer Banner */}
-      <div className="offer first-row px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10% via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
+      {/* <div className="offer first-row px-4 mx-auto relative bg-gradient-to-r from-[#AB262B] from-10% via-[#EBBA0E] via-70% to-[#EBBA0E] to-90%">
         <div className="flex flex-col lg:flex-row gap-3 lg:gap-8 py-4 items-center justify-center font-roboto font-semibold text-small leading-normal">
           <p className="text-white text-center">
             Spread the Cheer! Enjoy 30% Off on Personalized Wish Videos This
@@ -76,10 +88,10 @@ const Header = () => {
             grab now
           </a>
         </div>
-      </div>
+      </div> */}
 
       {/* Second Row: Hidden on Mobile */}
-      <div className="second-row hidden xl:container xl:mx-auto lg:flex font-poppins bg-background justify-between py-4 items-center px-10 dark:bg-slate-600">
+      {/* <div className="second-row hidden xl:container xl:mx-auto lg:flex font-poppins bg-background justify-between py-4 items-center px-10 dark:bg-slate-600">
         <div className="left flex gap-3 ">
           <img
             src={icons.mail}
@@ -144,17 +156,19 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="border-b-2"></div>
 
       {/* Third Row: Main Navigation */}
       <div className="third-row xl:container m-auto relative flex items-center justify-between py-5 px-4 md:px-10">
-        <img
-          src={logo}
-          alt="logo"
-          className="inline align-middle w-40 xl:w-60"
-        />
+        <Link to={'/'} className="outline-none">
+          <img
+            src={logo}
+            alt="logo"
+            className="inline align-middle w-40 xl:w-60"
+          />
+        </Link>
 
         {/* Hamburger Menu for Mobile View */}
         <div className="lg:hidden ml-auto flex items-center justify-center">
@@ -186,19 +200,17 @@ const Header = () => {
                 >
                   {section.title}
                   <MdExpandMore
-                    className={`w-5 h-5 ml-1 transition-transform duration-300 ${
-                      activeDropdown === index ? "rotate-180" : "rotate-0"
-                    }`}
+                    className={`w-5 h-5 ml-1 transition-transform duration-300 ${activeDropdown === index ? "rotate-180" : "rotate-0"
+                      }`}
                   />
                 </NavLink>
 
                 {/* Dropdown Menu */}
                 <div
-                  className={`${
-                    activeDropdown === index
-                      ? "max-h-auto opacity-100"
-                      : "max-h-0 opacity-0"
-                  } lg:absolute left-0 w-48 p-2 top-12 bg-white shadow-lg rounded-xl transition-all duration-500 ease-in-out overflow-hidden`}
+                  className={`${activeDropdown === index
+                    ? "max-h-auto opacity-100"
+                    : "max-h-0 opacity-0"
+                    } lg:absolute left-0 w-48 p-2 top-12 bg-white shadow-lg rounded-xl transition-all duration-500 ease-in-out overflow-hidden`}
                 >
                   {section.links.map((link, subIndex) => (
                     <a
@@ -214,27 +226,67 @@ const Header = () => {
             ))}
           </nav>
         </div>
-        <div className="cta-btns items-center gap-6 hidden lg:flex">
-          <a
-            href="#"
-            className="cursor-pointer capitalize text-small font-medium"
-          >
-            login
-          </a>
-          <a
-            href="#"
-            className="cursor-pointer py-2 px-5 text-small font-medium text-white rounded-full capitalize bg-[#FEA500]"
-          >
-            sign up
-          </a>
-        </div>
+        <ul className="flex items-center">
+          {authStatus ? (
+            <li className="inline-flex space-x-2">
+              <div className="relative inline-block">
+                <div className="flex items-center cursor-pointer">
+                  <img
+                    src={userData?.profile_image?.name}
+                    alt="user profile"
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="text-tn_dark text-base font-medium ml-2">
+                    {userData?.name || userData?.user?.name || userData?.displayName}
+                  </span>
+                  <span className="p-2" onClick={toggleDropdownAuth}>
+                    {isDropdownOpen ? (
+                      <FaChevronUp className="text-tn_pink" size={12} />
+                    ) : (
+                      <FaChevronDown className="text-tn_dark" size={12} />
+                    )}
+                  </span>
+                </div>
+                {isDropdownOpen && (
+                  <div ref={dropdownRef} className="absolute left-0 right-0 top-12 mt-1 bg-white border border-gray-300 shadow-md rounded-lg z-10">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-tn_dark hover:bg-gray-200"
+                    >
+                      Profile
+                    </Link>
+                    <LogoutBtn />
+                  </div>
+                )}
+              </div>
+            </li>
+          ) : (
+            <>
+              <div className="cta-btns items-center gap-6 hidden lg:flex">
+                <Link
+                  to={'/signin'}
+                  className="cursor-pointer capitalize text-small font-medium"
+                >
+                  login
+                </Link>
+                <Link
+                  to={'/signup'}
+                  className="cursor-pointer py-2 px-5 text-small font-medium text-white rounded-full capitalize bg-[#FEA500]"
+                >
+                  sign up
+                </Link>
+
+              </div>
+            </>
+          )}
+        </ul>
+
       </div>
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`lg:hidden ${
-          isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50 dark:bg-slate-600 dark:border-slate-600`}
+        className={`lg:hidden ${isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50 dark:bg-slate-600 dark:border-slate-600`}
       >
         {/* Nav Links */}
         <nav className="flex flex-col gap-0 ">
@@ -253,18 +305,16 @@ const Header = () => {
                 </NavLink>
                 <MdExpandMore
                   onClick={() => toggleDropdown(index)}
-                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${
-                    activeDropdown === index ? "rotate-180" : "rotate-0"
-                  }`}
+                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${activeDropdown === index ? "rotate-180" : "rotate-0"
+                    }`}
                 />
               </div>
               {/* Dropdown Menu */}
               <div
-                className={`${
-                  activeDropdown === index
-                    ? "max-h-40 opacity-100"
-                    : "max-h-0 opacity-0"
-                } overflow-hidden transition-all duration-300 ease-in-out`}
+                className={`${activeDropdown === index
+                  ? "max-h-40 opacity-100"
+                  : "max-h-0 opacity-0"
+                  } overflow-hidden transition-all duration-300 ease-in-out`}
               >
                 {section.links.map((link, subIndex) => (
                   <a
@@ -334,18 +384,18 @@ const Header = () => {
             </li>
           </ul>
           <div className="flex gap-4 max-w-96">
-            <a
-              href="#"
-              className="cursor-pointer capitalize text-center py-2 px-4 border border-gray-300 rounded-md basis-1/2"
+            <Link
+              to={'/signin'}
+              className="cursor-pointer capitalize text-small font-medium"
             >
               login
-            </a>
-            <a
-              href="#"
-              className="cursor-pointer py-2 px-4 text-white bg-[#FEA500] text-center rounded-md capitalize basis-1/2"
+            </Link>
+            <Link
+              to={'/signup'}
+              className="cursor-pointer py-2 px-5 text-small font-medium text-white rounded-full capitalize bg-[#FEA500]"
             >
-              Sign up
-            </a>
+              sign up
+            </Link>
           </div>
           <div className="flex justify-between text-center">
             <div className="dark-mode">

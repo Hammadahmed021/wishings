@@ -1,7 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Pages, TemplatePage, SignUp, SignIn } from "../pages/index.js";
+import { Home, Pages, TemplatePage, SignUp, SignIn, Profile } from "../pages/index.js";
 import Layout from "../components/Layout";
+import AuthLayout from "../components/AuthLayout.jsx";
 
+// Determine base path based on environment
+const baseURL = import.meta.env.MODE === 'production'
+  ? import.meta.env.VITE_BASE_URL_PRODUCTION
+  : import.meta.env.VITE_BASE_URL_LOCAL;
 
 const router = createBrowserRouter([
   {
@@ -9,27 +14,50 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/Wishing",
+        path: "/",
         element: <Home />,
       },
       {
-        path: "/Wishing/pages",
+        path: "/pages",
         element: <Pages />,
       },
       {
-        path: "/Wishing/template/:id",  
+        path: "/template/:id",  
         element: <TemplatePage />,     
       },
       {
-        path: "/Wishing/signin",  
-        element: <SignIn />,     
+        path: "/signin",
+        element: (
+          <AuthLayout authentication={false}>
+            <SignIn />
+          </AuthLayout>
+        ),
       },
       {
-        path: "/Wishing/signup",  
-        element: <SignUp />,     
+        path: "/signup",
+        element: (
+          <AuthLayout authentication={false}>
+            <SignUp />
+          </AuthLayout>
+        ),
       },
+      {
+        path: "/profile",
+        element: (
+          <AuthLayout authentication={true}>
+            <Profile />
+          </AuthLayout>
+        ),
+      },
+      // {
+      //   path: "*",
+      //   element: <NotFound />,
+      // },
     ],
   },
 ]);
+
+
+
 
 export default router;
