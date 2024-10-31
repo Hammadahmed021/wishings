@@ -13,7 +13,7 @@ function Layout() {
 
   console.log("Current Path:", pathname);
 
-  const noHeaderFooterPaths = ['/Wishing/signIn', '/Wishing/signUp'];
+  const noHeaderFooterPaths = ['/signIn', '/signUp'];
 
   const shouldShowHeaderFooter = !noHeaderFooterPaths.includes(pathname);
 

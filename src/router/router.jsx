@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home, Pages, TemplatePage, SignUp, SignIn, Profile } from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
+import App from "../App.jsx";
 
 // Determine base path based on environment
 const baseURL = import.meta.env.MODE === 'production'
@@ -11,7 +12,7 @@ const baseURL = import.meta.env.MODE === 'production'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <App />,
     children: [
       {
         path: "/",
