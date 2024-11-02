@@ -1,13 +1,11 @@
-import axios from "axios";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import axiosInstance from "./axiosInstance";
 
 export const Signup = async (userData) => {
     console.log(userData, 'userData');
 
     try {
         const { token } = userData;
-        const response = await axios.post(`${BASE_URL}auth/signup-login`, { token });
+        const response = await axiosInstance.post(`auth/signup-login`, { token });
         console.log(response, 'response >>>>signup');
 
         return response.data;
@@ -20,7 +18,30 @@ export const Signup = async (userData) => {
 export const Login = async (userData) => {
     try {
         const { token } = userData;
-        const response = await axios.post(`${BASE_URL}auth/signup-login`, { token });
+        const response = await axiosInstance.post(`auth/signup-login`, { token });
+        return response.data;
+    } catch (error) {
+        console.error("API Login request failed:", error.response);
+        throw error;
+    }
+};
+
+export const Verify = async () => {
+    const token = localStorage.getItem("wishToken")
+    console.log(token, 'token');
+
+    try {
+        const response = await axiosInstance.get(`auth/verify`);
+        return response.data;
+    } catch (error) {
+        console.error("API Login request failed:", error.response);
+        throw error;
+    }
+};
+
+export const Logout = async () => {
+    try {
+        const response = await axiosInstance.get(`auth/signout`);
         return response.data;
     } catch (error) {
         console.error("API Login request failed:", error.response);

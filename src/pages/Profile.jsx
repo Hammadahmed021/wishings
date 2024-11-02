@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { stars } from "../assets/images";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Input } from "../components";
+import { Verify } from "../utils/Api";
 
 // import { updateFirebasePassword } from "../service";
 
@@ -15,7 +16,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [imagePreview, setImagePreview] = useState(stars);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -23,9 +24,9 @@ const Profile = () => {
   const [showError, setShowError] = useState("");
   const [isSigning, setIsSigning] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  
-    console.log(userData, 'userData');
-    
+
+  console.log(userData, 'userData');
+
   const {
     register,
     handleSubmit,
@@ -33,7 +34,7 @@ const Profile = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: currentUser?.name || "",
+      name: currentUser?.displayName || "",
       phone: currentUser?.phone || "",
       newPassword: "",
       confirmPassword: "",
@@ -80,90 +81,90 @@ const Profile = () => {
     }
   };
 
-//   const onSave = async (data) => {
-//     setIsSigning(true);
-//     setSuccessMessage(""); // Clear previous success message
-//     try {
-//       const { newPassword, confirmPassword } = data;
-//       // let profileImageURL = currentUser?.profile_image;
-//       let profileImageFile = selectedFile;
+  //   const onSave = async (data) => {
+  //     setIsSigning(true);
+  //     setSuccessMessage(""); // Clear previous success message
+  //     try {
+  //       const { newPassword, confirmPassword } = data;
+  //       // let profileImageURL = currentUser?.profile_image;
+  //       let profileImageFile = selectedFile;
 
-//       // Ensure newPassword and confirmPassword match
-//       if (newPassword && confirmPassword) {
-//         if (newPassword !== confirmPassword) {
-//           setShowError("Passwords do not match.");
-//           return;
-//         }
+  //       // Ensure newPassword and confirmPassword match
+  //       if (newPassword && confirmPassword) {
+  //         if (newPassword !== confirmPassword) {
+  //           setShowError("Passwords do not match.");
+  //           return;
+  //         }
 
-//         // Ensure newPassword is provided
-//         if (!newPassword) {
-//           setShowError("New password is required.");
-//           return;
-//         }
+  //         // Ensure newPassword is provided
+  //         if (!newPassword) {
+  //           setShowError("New password is required.");
+  //           return;
+  //         }
 
-//         // Update Firebase password
-//         const passwordUpdated = await updateFirebasePassword(newPassword);
-//         if (!passwordUpdated) {
-//           setShowError("Failed to update password. Please try again.");
-//           return;
-//         }
-//       }
+  //         // Update Firebase password
+  //         const passwordUpdated = await updateFirebasePassword(newPassword);
+  //         if (!passwordUpdated) {
+  //           setShowError("Failed to update password. Please try again.");
+  //           return;
+  //         }
+  //       }
 
-//       // If a new image is selected, prepare to upload it
-//       if (selectedFile) {
-//         profileImageFile = selectedFile;
-//       }
+  //       // If a new image is selected, prepare to upload it
+  //       if (selectedFile) {
+  //         profileImageFile = selectedFile;
+  //       }
 
-//       // Construct the updated user data object
-//       const updatedUserData = {
-//         user_id: currentUser?.id || userData?.user?.id,
-//         name: data?.name,
-//         phone: data?.phone,
-//         // Add the profile_image key only if a new image was uploaded
-//         ...(profileImageFile !== currentUser?.profile_image && {
-//           profile_image: profileImageFile,
-//         }),
-//       };
+  //       // Construct the updated user data object
+  //       const updatedUserData = {
+  //         user_id: currentUser?.id || userData?.user?.id,
+  //         name: data?.name,
+  //         phone: data?.phone,
+  //         // Add the profile_image key only if a new image was uploaded
+  //         ...(profileImageFile !== currentUser?.profile_image && {
+  //           profile_image: profileImageFile,
+  //         }),
+  //       };
 
-//       console.log(updatedUserData, "updatedUserData");
+  //       console.log(updatedUserData, "updatedUserData");
 
-//       // Update user profile on the server
-//       await updateUserProfile(updatedUserData);
+  //       // Update user profile on the server
+  //       await updateUserProfile(updatedUserData);
 
-//       // Update Redux state with the new user data
-//       dispatch(updateUserData(updatedUserData));
+  //       // Update Redux state with the new user data
+  //       dispatch(updateUserData(updatedUserData));
 
-//       // Optionally, refetch the user data after a successful update
-//       fetchUserData();
-//       setSuccessMessage("Profile updated successfully!");
-//       setTimeout(() => {
-//         setSuccessMessage(""); // Clear the success message after 5 seconds
-//       }, 3000);
-//     } catch (error) {
-//       console.error("Error saving profile:", error);
-//     } finally {
-//       setIsSigning(false);
-//     }
-//   };
+  //       // Optionally, refetch the user data after a successful update
+  //       fetchUserData();
+  //       setSuccessMessage("Profile updated successfully!");
+  //       setTimeout(() => {
+  //         setSuccessMessage(""); // Clear the success message after 5 seconds
+  //       }, 3000);
+  //     } catch (error) {
+  //       console.error("Error saving profile:", error);
+  //     } finally {
+  //       setIsSigning(false);
+  //     }
+  //   };
 
-//   const fetchUserData = async () => {
-//     try {
-//       const response = await verifyUser();
-//       const data = await response.data;
-//       console.log(data, "data on fetch");
+  const fetchUserData = async () => {
+    try {
+      const response = await Verify();
+      const data = await response.user;
+      console.log(data, "data on fetch");
 
-//       setCurrentUser(data);
-//       // dispatch(updateUserData(data));
-//       setValue("name", data?.name || "");
-//       setValue("phone", data?.phone || "");
-//       setImagePreview(data?.profile_image || fallback);
-//     } catch (error) {
-//       console.error("Error fetching user data:", error);
-//     }
-//   };
+      setCurrentUser(data);
+      // dispatch(updateUserData(data));
+      setValue("name", data?.displayNames|| "");
+      setValue("phone", data?.phone || "");
+      setImagePreview(data?.profile_image);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
-    // fetchUserData();
+    fetchUserData();
   }, [setValue]);
 
   useEffect(() => {
@@ -191,33 +192,34 @@ const Profile = () => {
       e.preventDefault();
     }
   };
-
+  console.log(currentUser, 'currentUser >>>>>>> profile');
+  
   return (
     <>
       <div className="container mx-auto p-4">
         <div className="flex flex-col md:flex-row items-start justify-between mb-4">
           <div className="w-full md:w-1/2">
             <div className="flex flex-col">
-              <div className="flex items-center overflow-hidden">
-                {/* <img
+              {/* <div className="flex items-center overflow-hidden">
+                <img
                   src={imagePreview}
                   alt="user profile"
                   className="w-16 h-16 rounded-full"
-                /> */}
+                />
                 <div className="ml-4">
                   <input type="file" onChange={handleFileChange} />
                   {fileError && <p className="text-red-500">{fileError}</p>}
                 </div>
-              </div>
+              </div> */}
 
               <div className="my-6">
                 <h2 className="text-3xl font-black text-tn_dark">
-                  Welcome {currentUser?.name || "N/A"}
+                  Welcome {currentUser?.displayName || "N/A"}
                 </h2>
                 <p>You can change your profile information here.</p>
               </div>
             </div>
-            <form onSubmit={handleSubmit(() => {})} className="mt-4 w-full">
+            <form onSubmit={handleSubmit(() => { })} className="mt-4 w-full">
               <span className="flex-wrap flex space-x-0 sm:space-x-2 sm:flex-nowrap">
                 <Input
                   label="Name"
@@ -258,7 +260,7 @@ const Profile = () => {
                       type="password"
                       {...register("confirmPassword")}
                       placeholder="Confirm new password"
-                      // disabled={isGmailUser}
+                    // disabled={isGmailUser}
                     />
                   </span>
                   {showError && (
@@ -269,9 +271,8 @@ const Profile = () => {
 
               <Button
                 type="submit"
-                className={`w-full  ${
-                  isSigning ? "opacity-70 cursor-not-allowed" : ""
-                }`}
+                className={`w-full  ${isSigning ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
                 disabled={isSigning}
               >
                 {isSigning ? "Saving..." : "Save changes"}
@@ -287,7 +288,7 @@ const Profile = () => {
         </div>
       </div>
 
-    
+
     </>
   );
 };

@@ -126,7 +126,7 @@ const TemplateSlider = () => {
   };
 
   const handleVideoClick = (id) => {
-    navigate(`/Wishing/template/${id}`);
+    navigate(`/template/${id}`);
   };
 
   return (

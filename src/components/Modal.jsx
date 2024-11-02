@@ -30,7 +30,7 @@ const Modal = ({ title, onYes, onClose }) => {
           </button>
           <button
             onClick={() => { onYes(); onClose(); }}
-            className="px-4 py-2 w-full bg-tn_dark text-white rounded hover:bg-tn_pink"
+            className="px-4 py-2 w-full bg-secondary text-white rounded hover:bg-primary"
           >
             Yes
           </button>

@@ -4,6 +4,7 @@ import { logout } from "../../../store/authSlice";
 import { signOut } from "../../../service";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../Modal";
+import { Logout } from "../../../utils/Api";
 
 export default function LogoutBtn({className}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function LogoutBtn({className}) {
   const navigate = useNavigate();
   const logoutHandler = async () => {
     try {
-      await signOut(); // Call Firebase signOut function
+      await Logout(); // Call Firebase signOut function
       dispatch(logout()); // Dispatch your logout action
     } catch (error) {
       console.error("Logout failed:", error.message);

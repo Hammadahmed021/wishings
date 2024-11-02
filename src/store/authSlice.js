@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword,
   getIdToken,
   signInWithEmailAndPassword,
-  AuthErrorCodes 
+  AuthErrorCodes,
+  updateProfile
 } from "firebase/auth";
 import { auth } from "../service/firebase";
 
@@ -19,29 +20,39 @@ export const signupUser = createAsyncThunk(
   "auth/signupUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const { email, password, fname } = userData;
+      const { email, password, fname, phone } = userData;
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = userCredential.user;
       console.log(user, 'user >>>');
-      
+
       const token = await getIdToken(user);
       console.log(token, 'token >>>>');
-      
+
+      if (user) {
+        updateProfile(user, {
+          displayName: fname
+        })
+      }
+
       const signupData = {
         fname,
         token,
       };
 
       const response = await Signup(signupData);
+      console.log(response, 'getting response auth slice');
+
+      localStorage.setItem("wishToken", response?.user?.token);
+
 
       return {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
         token,
         ...response,
       };
@@ -56,9 +67,6 @@ export const loginUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const { email, password } = userData;
-      console.log("Starting login process...");
-      console.log("Email:", email);
-      console.log("Password:", password);
 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -69,7 +77,8 @@ export const loginUser = createAsyncThunk(
       console.log("Firebase ID Token:", token);
 
       const response = await ApiLogin({ token });
-      console.log("API Login Response:", response);
+
+      localStorage.setItem("wishToken", response?.user?.token);
 
       return {
         uid: user.uid,
@@ -98,6 +107,7 @@ const authSlice = createSlice({
       state.userData = null;
       state.loading = false;
       state.error = null;
+      localStorage.removeItem("wishToken")
     },
     updateUserData: (state, action) => {
       state.userData = {

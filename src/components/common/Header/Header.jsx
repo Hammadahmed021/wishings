@@ -10,16 +10,21 @@ import { MdExpandMore } from "react-icons/md";
 import { useSelector } from "react-redux";
 import LogoutBtn from "./LogoutBtn.jsx";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { Verify } from "../../../utils/Api.js";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false); // Lifted state for dark mode
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState([])
   const authStatus = useSelector((state) => state.auth.status);
   const userData = useSelector((state) => state.auth.userData);
   const dropdownRef = useRef([]);
+  const dropRef = useRef([]);
+
   console.log(authStatus, 'authStatus');
+  console.log(currentUser, 'currentUser >>>>>>>>');
 
   const toggleDropdownAuth = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -71,6 +76,21 @@ const Header = () => {
   const toggleDropdown = (index) => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
+
+
+
+  useEffect(() => {
+    const fetchCurrentUserData = async () => {
+      try {
+        const response = await Verify();
+        const data = await response.data;
+        setCurrentUser(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchCurrentUserData()
+  }, [])
 
   return (
     <header className="dark:bg-slate-600 dark:text-white">
@@ -248,7 +268,7 @@ const Header = () => {
                   </span>
                 </div>
                 {isDropdownOpen && (
-                  <div ref={dropdownRef} className="absolute left-0 right-0 top-12 mt-1 bg-white border border-gray-300 shadow-md rounded-lg z-10">
+                  <div ref={dropRef} className="absolute left-0 right-0 top-12 mt-1 bg-white border border-gray-300 shadow-md rounded-lg z-10">
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-tn_dark hover:bg-gray-200"
