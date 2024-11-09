@@ -410,7 +410,7 @@ const TemplatePage = () => {
     return (
       showModal && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 w-11/12 md:w-1/2 overflow-y-auto">
+          <div className="bg-white rounded-lg p-6 w-11/12 md:w-1/2">
             <h3 className="text-xl font-semibold mb-4">
               Summary of Your Selections
             </h3>
@@ -418,69 +418,33 @@ const TemplatePage = () => {
             {/* Images Summary */}
             <div className="mb-4">
               <h4 className="font-semibold">Images:</h4>
-              {images.length > 0 ? (
-                <div className="grid grid-cols-3 gap-4">
-                  {images.map((image, index) => (
-                    <div key={index} className="text-center">
-                      <img
-                        src={URL.createObjectURL(image)}
-                        alt={image.name}
-                        className="w-24 h-24 object-cover mb-2 mx-auto"
-                      />
-                      <p className="text-sm">{image.name}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p>No images uploaded</p>
-              )}
+              <ul className="list-disc pl-5">
+                {images.map((image, index) => (
+                  <li key={index}>{image.name}</li>
+                ))}
+              </ul>
             </div>
 
             {/* Audios Summary */}
             <div className="mb-4">
               <h4 className="font-semibold">Audios:</h4>
-              {audios.length > 0 ? (
-                <ul className="list-disc pl-5">
-                  {audios.map((audio, index) => (
-                    <li key={index} className="text-sm">
-                      {audio.name}{" "}
-                      <audio controls className="ml-2">
-                        <source
-                          src={URL.createObjectURL(audio)}
-                          type="audio/mp3"
-                        />
-                      </audio>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No audios uploaded</p>
-              )}
+              <ul className="list-disc pl-5">
+                <li>{selectedFile.name}</li>
+
+                {/*{selectedFile.map((audio, index) => (
+                  <li key={index}>{audio.name}</li>
+                ))}*/}
+              </ul>
             </div>
 
             {/* Videos Summary */}
             <div className="mb-4">
               <h4 className="font-semibold">Videos:</h4>
-              {videos.length > 0 ? (
-                <div className="grid grid-cols-3 gap-4">
-                  {videos.map((video, index) => (
-                    <div key={index} className="text-center">
-                      <video
-                        controls
-                        className="w-32 h-32 object-cover mb-2 mx-auto"
-                      >
-                        <source
-                          src={URL.createObjectURL(video)}
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p className="text-sm">{video.name}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p>No videos uploaded</p>
-              )}
+              <ul className="list-disc pl-5">
+                {videos.map((video, index) => (
+                  <li key={index}>{video.name}</li>
+                ))}
+              </ul>
             </div>
 
             {/* Script Summary */}
