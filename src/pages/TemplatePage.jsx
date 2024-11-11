@@ -1,12 +1,15 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
+import { getAudioApi } from "../utils/Api";
 //import
 
 const TemplatePage = () => {
   const { id } = useParams();
+
+  const { state } = useLocation();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -17,11 +20,17 @@ const TemplatePage = () => {
 
   // Audio funtions
 
-  const [audioFiles, setAudioFiles] = useState([
-    { id: 1, name: "Audio 1", url: audio1 },
-    { id: 2, name: "Audio 2", url: audio2 },
-    { id: 3, name: "Audio 3", url: audio3 },
-  ]);
+  const getAudio = async () => {
+    const { status, data } = await getAudioApi();
+    if (status == 200) setAudioFiles(data?.music ?? []);
+    console.log("kjsabjkbdkjbvskbdlkvbs", status, data);
+  };
+
+  useEffect(() => {
+    getAudio();
+  }, []);
+
+  const [audioFiles, setAudioFiles] = useState([]);
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -69,10 +78,10 @@ const TemplatePage = () => {
                 onChange={() => handleSelect(file)}
                 className="form-radio"
               />
-              <span className="flex-1">{file.name}</span>
+              <span className="flex-1">{file.title ?? file?.name}</span>
               <audio
                 controls
-                src={file.url}
+                src={file?.music_path ?? file?.url}
                 className="flex-shrink-0 w-32"
                 controlsList="nodownload"
               >
@@ -180,9 +189,9 @@ const TemplatePage = () => {
     return (
       <div className="flex flex-col space-y-2 w-64">
         <label htmlFor="category" className="text-gray-700 font-medium">
-          Choose a category:
+          Category Name: {state?.categoryName}
         </label>
-        <select
+        {/*<select
           id="category"
           name="category"
           className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -192,7 +201,7 @@ const TemplatePage = () => {
               {category}
             </option>
           ))}
-        </select>
+        </select>*/}
       </div>
     );
   }
@@ -379,7 +388,6 @@ const TemplatePage = () => {
     );
   };
 
-  // Validation Function
   // Validation function
   const validateAllFields = () => {
     if (images.length === 0) {
@@ -414,7 +422,9 @@ const TemplatePage = () => {
             <h3 className="text-xl font-semibold mb-4">
               Summary of Your Selections
             </h3>
-
+            <label htmlFor="category" className="text-gray-700 font-medium">
+              Category Name: {state?.categoryName}
+            </label>
             {/* Images Summary */}
             <div className="mb-4">
               <h4 className="font-semibold">Images:</h4>
@@ -429,7 +439,7 @@ const TemplatePage = () => {
             <div className="mb-4">
               <h4 className="font-semibold">Audios:</h4>
               <ul className="list-disc pl-5">
-                <li>{selectedFile.name}</li>
+                <li>{selectedFile.name ?? selectedFile.title}</li>
 
                 {/*{selectedFile.map((audio, index) => (
                   <li key={index}>{audio.name}</li>
@@ -445,6 +455,12 @@ const TemplatePage = () => {
                   <li key={index}>{video.name}</li>
                 ))}
               </ul>
+            </div>
+
+            {/* Time Summary */}
+            <div className="mb-4">
+              <h4 className="font-semibold">Time: {selectedTime}</h4>
+              <p>{calculatePrice()} $</p>
             </div>
 
             {/* Script Summary */}
@@ -486,6 +502,45 @@ const TemplatePage = () => {
     );
   };
 
+  // Time wheel function
+
+  const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // Creates intervals of 30 seconds up to 600 seconds
+
+  const [selectedTime, setSelectedTime] = useState(30); // Default selection is 60 seconds
+  const basePrice = 49;
+const additionalCostPerInterval = 30;
+
+  // Calculate price based on the selected time
+  const calculatePrice = () =>
+    basePrice + (selectedTime / 30 - 1) * additionalCostPerInterval;
+
+  const TimeWheelView = () => {
+    return (
+      <div style={{ textAlign: "center", padding: "20px" }}>
+        <h2>Time Selection Wheel</h2>
+        <div style={{ display: "flex", overflowX: "scroll" }}>
+          {timeOptions.map((time) => (
+            <button
+              key={time}
+              onClick={() => setSelectedTime(time)}
+              style={{
+                margin: "5px",
+                padding: "10px 20px",
+                backgroundColor: selectedTime === time ? "#4caf50" : "#f1f1f1",
+                borderRadius: "50%",
+                color: selectedTime === time ? "white" : "black",
+              }}
+            >
+              {time} sec
+            </button>
+          ))}
+        </div>
+        <h3>Selected Time: {selectedTime} sec</h3>
+        <h3>Price: ${calculatePrice()}</h3>
+      </div>
+    );
+  };
+
   // Fetch or display data using the template id
   return (
     <div className="template-page">
@@ -497,6 +552,7 @@ const TemplatePage = () => {
       <ImagesView />
       <VideoView />
       <SummaryView />
+      <TimeWheelView />
       {/* Validate and show summary button */}
       <button
         onClick={validateAllFields}

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import { templates } from "../../utils/localDb.js";
 import "slick-carousel/slick/slick.css";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 // Import react-swipeable to handle swipe gestures
 import { useSwipeable } from "react-swipeable";
+import { getCategoryWithVideos } from "../../utils/Api.js";
 
 const categories = [
   "Birthday",
@@ -16,7 +17,7 @@ const categories = [
   "Engagement",
 ];
 
-const VideoSlider = ({ videos, direction, onVideoClick  }) => {
+const VideoSlider = ({ videos, direction, onVideoClick, selectedCategory }) => {
   const sliderRef = useRef(null); // Reference to access slider methods
 
   const settings = {
@@ -27,7 +28,7 @@ const VideoSlider = ({ videos, direction, onVideoClick  }) => {
     slidesToScroll: 1,
     autoplay: true, // Autoplay by default
     cssEase: "linear",
-    pauseOnHover:true,
+    pauseOnHover: true,
     dots: false,
     autoplaySpeed: 0,
     rtl: direction === "right", // Reverse direction for the second slider
@@ -37,7 +38,6 @@ const VideoSlider = ({ videos, direction, onVideoClick  }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          
         },
       },
       {
@@ -75,16 +75,18 @@ const VideoSlider = ({ videos, direction, onVideoClick  }) => {
   });
 
   return (
-    <div {...handlers} >
+    <div {...handlers}>
       <Slider ref={sliderRef} {...settings}>
         {videos.map((video) => (
           <div
             key={video.id}
             className="p-2"
-            onClick={() => onVideoClick(video.id)}
+            onClick={() =>
+              onVideoClick({ ...video, categoryName: selectedCategory?.name })
+            }
           >
             <video
-              src={video.url}
+              src={video.video_path}
               className="w-full h-full object-cover rounded-xl min-h-44 hover:cursor-pointer"
               autoPlay
               loop
@@ -97,20 +99,28 @@ const VideoSlider = ({ videos, direction, onVideoClick  }) => {
   );
 };
 
-const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
+const CategoryButtons = ({
+  onSelectCategory,
+  selectedCategory,
+  allCategory,
+}) => {
+  console.log(
+    "selectedCategoryselectedCategoryselectedCategory",
+    selectedCategory
+  );
   return (
     <div className="overflow-x-auto whitespace-nowrap flex md:justify-center space-x-4 mb-6">
-      {categories.map((category, index) => (
+      {allCategory.map((category, index) => (
         <button
           key={index}
           className={`px-4 py-2 text-small ${
-            selectedCategory === category
+            selectedCategory?.id === category?.id
               ? "first:text-primary first:border-primary text-primary border border-primary rounded-full"
               : "text-black font-medium"
           }`}
-          onClick={() => onSelectCategory(category)}
+          onClick={() => onSelectCategory(category, index)}
         >
-          {category}
+          {category?.name}
         </button>
       ))}
     </div>
@@ -118,15 +128,33 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory }) => {
 };
 
 const TemplateSlider = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+  const [allCategory, setAllCategory] = useState([]);
+
+
+  const getCategory =async () => {
+    const {status,data} = await getCategoryWithVideos()
+    if (status == 200) {
+      setSelectedCategory(data?.categories[0] ?? []);
+      setAllCategory(data?.categories ?? []);
+    }
+    
+
+  }
+
+  useEffect(() => {
+    getCategory()
+  },[])
+
+  const [selectedCategory, setSelectedCategory] = useState(allCategory[0]);
   const navigate = useNavigate();
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+  const handleCategoryChange = (category,index) => {
+    setSelectedCategory({...category,index});
   };
 
-  const handleVideoClick = (id) => {
-    navigate(`/template/${id}`);
+  const handleVideoClick = (obj) => {
+    navigate(`/template/${obj?.id}`,{state:obj});
   };
 
   return (
@@ -135,24 +163,26 @@ const TemplateSlider = () => {
         Start Fast with <span className="text-primary">6000+</span> Templates
       </h3>
       <CategoryButtons
-        onSelectCategory={handleCategoryChange}
+        onSelectCategory={(cat, i) => handleCategoryChange(cat, i)}
         selectedCategory={selectedCategory}
+        allCategory={allCategory}
       />
       <div className="overflow-hidden">
         <div className="w-full">
           <VideoSlider
-            videos={templates[selectedCategory]}
+            videos={allCategory[selectedCategory?.index ?? 0]?.videos ?? []}
             direction="left"
-            onVideoClick={handleVideoClick} 
+            onVideoClick={handleVideoClick}
+            selectedCategory={selectedCategory}
           />
         </div>
-        <div className="w-full">
+        {/*<div className="w-full">
           <VideoSlider
-            videos={templates[selectedCategory]}
+            videos={allCategory[selectedCategory?.index ?? 0]?.videos ?? []}
             direction="right"
             onVideoClick={handleVideoClick}
           />
-        </div>
+        </div>*/}
       </div>
     </div>
   );

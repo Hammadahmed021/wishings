@@ -48,3 +48,38 @@ export const Logout = async () => {
         throw error;
     }
 };
+
+export const getCategoryWithVideos = async () => {
+    try {
+           const token = localStorage.getItem("wishToken");
+           console.log(token, "token");
+
+      // const fullUrl = user_id
+      //   ? `${BASE_URL}${url}/${user_id}`
+      //   : `${BASE_URL}${url}`;
+      // console.log(fullUrl, user_id, "fullUrl");
+
+    const response = await axiosInstance.get(`/category/read/all`);
+      return response;;
+    } catch (error) {
+      return error;
+    }
+}
+
+
+export const getAudioApi = async () => {
+    try {
+           const token = localStorage.getItem("wishToken");
+           console.log(token, "token");
+
+      // const fullUrl = user_id
+      //   ? `${BASE_URL}${url}/${user_id}`
+      //   : `${BASE_URL}${url}`;
+      // console.log(fullUrl, user_id, "fullUrl");
+
+    const response = await axiosInstance.get(`/music/read/all`);
+      return response;;
+    } catch (error) {
+      return error;
+    }
+}
