@@ -1,5 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Pages, TemplatePage, SignUp, SignIn, Profile } from "../pages/index.js";
+import {
+  Home,
+  Pages,
+  TemplatePage,
+  SignUp,
+  SignIn,
+  Profile,
+  CheckOutPage,
+} from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
 import App from "../App.jsx";
@@ -23,8 +31,8 @@ const router = createBrowserRouter([
         element: <Pages />,
       },
       {
-        path: "/template/:id",  
-        element: <TemplatePage />,     
+        path: "/template/:id",
+        element: <TemplatePage />,
       },
       {
         path: "/signin",
@@ -47,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication={true}>
             <Profile />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <AuthLayout authentication={true}>
+            <CheckOutPage />
           </AuthLayout>
         ),
       },

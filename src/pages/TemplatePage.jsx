@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams ,useNavigate} from "react-router-dom";
 import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
 import { getAudioApi } from "../utils/Api";
+
 //import
 
 const TemplatePage = () => {
   const { id } = useParams();
 
   const { state } = useLocation();
+
+    const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -488,7 +491,7 @@ const TemplatePage = () => {
               <button
                 onClick={() => {
                   closeModal();
-                  alert("Proceeding to payment...");
+                  //navigate("checkOutPage",{state:sc})
                   // Add payment function call here
                 }}
                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
@@ -541,26 +544,31 @@ const additionalCostPerInterval = 30;
     );
   };
 
+
+
+
+
+
   // Fetch or display data using the template id
   return (
-    <div className="template-page">
-      <h1 className="text-5xl">Template ID: {id}</h1>
-      {/* Display template content */}
-      <CategorySelect />
-      <ScriptView />
-      <AudioFilesView />
-      <ImagesView />
-      <VideoView />
-      <SummaryView />
-      <TimeWheelView />
-      {/* Validate and show summary button */}
-      <button
-        onClick={validateAllFields}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Show Summary and Proceed to Payment
-      </button>
-    </div>
+      <div className="template-page">
+        <h1 className="text-5xl">Template ID: {id}</h1>
+        {/* Display template content */}
+        <CategorySelect />
+        <ScriptView />
+        <AudioFilesView />
+        <ImagesView />
+        <VideoView />
+        <SummaryView />
+        <TimeWheelView />
+        {/* Validate and show summary button */}
+        <button
+          onClick={validateAllFields}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Show Summary and Proceed to Payment
+        </button>
+      </div>
   );
 };
 
