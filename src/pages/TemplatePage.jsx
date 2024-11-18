@@ -491,7 +491,14 @@ const TemplatePage = () => {
               <button
                 onClick={() => {
                   closeModal();
-                  //navigate("checkOutPage",{state:sc})
+                navigate("/checkout",{state:{
+                    price :calculatePrice() ,
+                    selectedTime,
+                    images,
+                    videos,
+                    audio :selectedFile,
+                    scripts:pdfFile ?? scriptText,
+                  }})
                   // Add payment function call here
                 }}
                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
