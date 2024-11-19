@@ -4,6 +4,11 @@ import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
 import { getAudioApi } from "../utils/Api";
+import AudioFilesView from "../components/AudioFile";
+import ImagesView from "../components/ImageView";
+import VideoView from "../components/VideoView";
+import SummaryView from "../components/SummaryView";
+import ScriptView from "../components/ScriptView";
 
 //import
 
@@ -54,50 +59,6 @@ const TemplatePage = () => {
   const handleSelect = (file) => {
     setSelectedFile(file.id === selectedFile?.id ? null : file); // Toggle selection
   };
-  const AudioFilesView = () => {
-    return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">Audio Files</h2>
-
-        <div className="mb-4">
-          <input
-            type="file"
-            accept="audio/*"
-            onChange={handleUpload}
-            className="border p-2"
-          />
-        </div>
-
-        <ul className="space-y-2">
-          {audioFiles.map((file) => (
-            <li
-              key={file.id}
-              className="flex items-center space-x-3 p-2 border rounded"
-            >
-              <input
-                type="radio"
-                name="audioSelect"
-                checked={selectedFile?.id === file.id}
-                onChange={() => handleSelect(file)}
-                className="form-radio"
-              />
-              <span className="flex-1">{file.title ?? file?.name}</span>
-              <audio
-                controls
-                src={file?.music_path ?? file?.url}
-                className="flex-shrink-0 w-32"
-                controlsList="nodownload"
-              >
-                Your browser does not support the audio element.
-              </audio>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
-
-  // Images function
 
   const [images, setImages] = useState([]);
   const MAX_IMAGES = 25;
@@ -138,47 +99,47 @@ const TemplatePage = () => {
     setImages((prevImages) => prevImages.filter((img) => img.id !== id));
   };
 
-  const ImagesView = () => {
-    return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">Upload Images</h2>
+  // const ImagesView = () => {
+  //   return (
+  //     <div className="p-4">
+  //       <h2 className="text-lg font-semibold mb-4">Upload Images</h2>
 
-        <div className="mb-4">
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImageUpload}
-            className="border p-2"
-          />
-        </div>
+  //       <div className="mb-4">
+  //         <input
+  //           type="file"
+  //           accept="image/*"
+  //           multiple
+  //           onChange={handleImageUpload}
+  //           className="border p-2"
+  //         />
+  //       </div>
 
-        <p className="text-sm text-gray-500 mb-4">
-          You can upload up to {MAX_IMAGES} images. Total size must be less than
-          2GB.
-        </p>
+  //       <p className="text-sm text-gray-500 mb-4">
+  //         You can upload up to {MAX_IMAGES} images. Total size must be less than
+  //         2GB.
+  //       </p>
 
-        <div className="grid grid-cols-3 gap-4">
-          {images.map((image) => (
-            <div key={image.id} className="relative">
-              <img
-                src={image.id}
-                alt={image.name}
-                className="w-full h-32 object-cover rounded"
-              />
-              <button
-                onClick={() => handleRemoveImage(image.id)}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
-              >
-                ✕
-              </button>
-              <p className="text-xs text-center mt-1">{image.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+  //       <div className="grid grid-cols-3 gap-4">
+  //         {images.map((image) => (
+  //           <div key={image.id} className="relative">
+  //             <img
+  //               src={image.id}
+  //               alt={image.name}
+  //               className="w-full h-32 object-cover rounded"
+  //             />
+  //             <button
+  //               onClick={() => handleRemoveImage(image.id)}
+  //               className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
+  //             >
+  //               ✕
+  //             </button>
+  //             <p className="text-xs text-center mt-1">{image.name}</p>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   const categories = [
     "Birthday",
@@ -250,48 +211,7 @@ const TemplatePage = () => {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
   };
 
-  const VideoView = () => {
-    return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">Upload Videos</h2>
-
-        <div className="mb-4">
-          <input
-            type="file"
-            accept="video/*"
-            multiple
-            onChange={handleVideoUpload}
-            className="border p-2"
-          />
-        </div>
-
-        <p className="text-sm text-gray-500 mb-4">
-          You can upload up to {MAX_VIDEOS} videos. Total size must be less than
-          2GB.
-        </p>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {videos.map((video) => (
-            <div key={video.id} className="relative">
-              <video
-                src={video.id}
-                controls
-                className="w-full h-32 object-cover rounded"
-              />
-              <button
-                onClick={() => handleRemoveVideo(video.id)}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
-              >
-                ✕
-              </button>
-              <p className="text-xs text-center mt-1">{video.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
+  // 
   //  All scrips function
 
   const [pdfFile, setPdfFile] = useState(null); // Store uploaded PDF file
@@ -335,62 +255,7 @@ const TemplatePage = () => {
   // Calculate the word count of the script text
   const wordCount = scriptText.trim().split(/\s+/).filter(Boolean).length;
 
-  const ScriptView = () => {
-    return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">
-          Upload or Write Your Script
-        </h2>
-
-        <div className="mb-4">
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={handlePdfUpload}
-            className="border p-2"
-          />
-          {pdfFile && (
-            <div className="mt-2 flex items-center space-x-2">
-              <p className="text-sm">{pdfFile.name}</p>
-              <button
-                onClick={removePdfFile}
-                className="bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
-              >
-                ✕
-              </button>
-            </div>
-          )}
-        </div>
-
-        <p className="text-sm text-gray-500 mb-2">
-          Or, you can type your script (max {MAX_WORDS} words):
-        </p>
-
-        <textarea
-          value={scriptText}
-          onChange={handleScriptChange}
-          placeholder="Type your script here..."
-          rows="10"
-          className="border w-full p-2"
-          disabled={pdfFile !== null} // Disable textarea if PDF is uploaded
-        ></textarea>
-
-        <p className="text-sm text-gray-500 mt-2">
-          Word Count: {wordCount}/{MAX_WORDS}
-        </p>
-
-        {scriptText && (
-          <button
-            onClick={clearScriptText}
-            className="mt-2 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-          >
-            Clear Script
-          </button>
-        )}
-      </div>
-    );
-  };
-
+  
   // Validation function
   const validateAllFields = () => {
     if (images.length === 0) {
@@ -417,100 +282,7 @@ const TemplatePage = () => {
 
   // Summary Function
 
-  const SummaryView = () => {
-    return (
-      showModal && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 w-11/12 md:w-1/2">
-            <h3 className="text-xl font-semibold mb-4">
-              Summary of Your Selections
-            </h3>
-            <label htmlFor="category" className="text-gray-700 font-medium">
-              Category Name: {state?.categoryName}
-            </label>
-            {/* Images Summary */}
-            <div className="mb-4">
-              <h4 className="font-semibold">Images:</h4>
-              <ul className="list-disc pl-5">
-                {images.map((image, index) => (
-                  <li key={index}>{image.name}</li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Audios Summary */}
-            <div className="mb-4">
-              <h4 className="font-semibold">Audios:</h4>
-              <ul className="list-disc pl-5">
-                <li>{selectedFile.name ?? selectedFile.title}</li>
-
-                {/*{selectedFile.map((audio, index) => (
-                  <li key={index}>{audio.name}</li>
-                ))}*/}
-              </ul>
-            </div>
-
-            {/* Videos Summary */}
-            <div className="mb-4">
-              <h4 className="font-semibold">Videos:</h4>
-              <ul className="list-disc pl-5">
-                {videos.map((video, index) => (
-                  <li key={index}>{video.name}</li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Time Summary */}
-            <div className="mb-4">
-              <h4 className="font-semibold">Time: {selectedTime}</h4>
-              <p>{calculatePrice()} $</p>
-            </div>
-
-            {/* Script Summary */}
-            <div className="mb-4">
-              <h4 className="font-semibold">Script:</h4>
-              {pdfFile ? (
-                <p>Uploaded PDF: {pdfFile.name}</p>
-              ) : (
-                <p>
-                  {scriptText
-                    ? scriptText.slice(0, 100) + "..."
-                    : "No script provided"}
-                </p>
-              )}
-            </div>
-
-            {/* Actions */}
-            <div className="flex justify-end space-x-2 mt-4">
-              <button
-                onClick={closeModal}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-              >
-                Close
-              </button>
-              <button
-                onClick={() => {
-                  closeModal();
-                navigate("/checkout",{state:{
-                    price :calculatePrice() ,
-                    selectedTime,
-                    images,
-                    videos,
-                    audio :selectedFile,
-                    scripts:pdfFile ?? scriptText,
-                  }})
-                  // Add payment function call here
-                }}
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-              >
-                Confirm and Proceed to Payment
-              </button>
-            </div>
-          </div>
-        </div>
-      )
-    );
-  };
+  
 
   // Time wheel function
 
@@ -562,11 +334,11 @@ const additionalCostPerInterval = 30;
         <h1 className="text-5xl">Template ID: {id}</h1>
         {/* Display template content */}
         <CategorySelect />
-        <ScriptView />
-        <AudioFilesView />
-        <ImagesView />
-        <VideoView />
-        <SummaryView />
+        <ScriptView MAX_WORDS={MAX_WORDS} clearScriptText={clearScriptText} handlePdfUpload={e=>handlePdfUpload(e)} handleScriptChange={e=>handleScriptChange(e)} pdfFile={pdfFile} removePdfFile={removePdfFile} scriptText={scriptText} wordCount={wordCount} />
+        <AudioFilesView audioFiles={audioFiles} handleSelect={(e)=>handleSelect(e)} handleUpload={(e)=>handleUpload(e)} selectedFile={selectedFile} />
+        <ImagesView MAX_IMAGES={MAX_IMAGES} handleImageUpload={e=>handleImageUpload(e)} handleRemoveImage={e=>handleRemoveImage(e)} images={images} />
+        <VideoView MAX_VIDEOS={MAX_VIDEOS} handleRemoveVideo={e=>handleRemoveVideo(e)} handleVideoUpload={e=>handleVideoUpload(e)}  videos={videos}/>
+        <SummaryView calculatePrice={calculatePrice} closeModal={closeModal} images={images} navigate={navigate} pdfFile={pdfFile} scriptText={scriptText} selectedFile={selectedFile} selectedTime={selectedTime} showModal={showModal} state={state} videos={videos} />
         <TimeWheelView />
         {/* Validate and show summary button */}
         <button
