@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import CheckoutForm, { stripePromise } from "../components/StripeCheckOut";
+import { placeOrderApi } from "../utils/Api";
 
 
 const CheckOutPage = () => {
@@ -19,12 +20,24 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
 
   return (
     <Elements stripe={stripePromise}>
-    <CheckoutForm
-      amount={state}
-      handlePayment={e=>console.log("After payment ",e)}
-      // buttonDis={totalPrice}
-    />
-  </Elements>
+      <CheckoutForm
+        amount={state}
+        handlePayment={(e) =>
+          placeOrderApi({
+            //user_id: 1,
+            category_id: state.categoryId,
+            "videos[]": state.videos,
+            "pictures[]": state.images,
+            script: state.scripts,
+            amount: state.price,
+            payment_id: e,
+            music_id: state.audio.id,
+            music: state.audio,
+          })
+        }
+        // buttonDis={totalPrice}
+      />
+    </Elements>
   );
 };
 

@@ -88,9 +88,66 @@ export const getPayment = async (paymentData) => {
   console.log("Booking object before API call:", paymentData);
   try {
     const response = await axiosInstance.post(
-      `create-payment-intent`,
+      `/stripe/create-payment-intent`,
       paymentData
     );
+    console.log("API response:", response.data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Error response data:", error.response.data);
+      console.error("Error response status:", error.response.status);
+      console.error("Error response headers:", error.response.headers);
+    } else if (error.request) {
+      console.error("Error request data:", error.request);
+    } else {
+      console.error("Error message:", error.message);
+    }
+    throw error;
+  }
+};
+
+// Functions to fetch payment stripe payment intent
+export const placeOrderApi = async (paymentData) => {
+  console.log("Booking object before API call:", paymentData);
+
+  try {
+    // Create FormData object
+    const formData = new FormData();
+
+    // Append key-value pairs to FormData
+    for (const key in paymentData) {
+      if (paymentData.hasOwnProperty(key)) {
+        if (Array.isArray(paymentData[key])) {
+          // Handle array data
+          paymentData[key].forEach((item) => {
+            formData.append(`${key}`, item); // Append each item of the array
+          });
+        } else if (
+          typeof paymentData[key] === "object" &&
+          paymentData[key] !== null
+        ) {
+          // Handle nested object
+          formData.append(key, JSON.stringify(paymentData[key]));
+        } else {
+          // Append regular key-value pair
+          formData.append(key, paymentData[key]);
+        }
+      }
+    }
+
+    console.log(
+      "FormData before API call:",
+      Object.fromEntries(formData.entries())
+    );
+
+    // Make API call
+    const response = await axiosInstance.post(`/order/create`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     console.log("API response:", response.data);
     return response.data;
   } catch (error) {

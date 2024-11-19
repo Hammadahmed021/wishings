@@ -17,6 +17,8 @@ const TemplatePage = () => {
 
   const { state } = useLocation();
 
+  console.log("statestatestatestatestatestate", state);
+
     const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
@@ -330,24 +332,61 @@ const additionalCostPerInterval = 30;
 
   // Fetch or display data using the template id
   return (
-      <div className="template-page">
-        <h1 className="text-5xl">Template ID: {id}</h1>
-        {/* Display template content */}
-        <CategorySelect />
-        <ScriptView MAX_WORDS={MAX_WORDS} clearScriptText={clearScriptText} handlePdfUpload={e=>handlePdfUpload(e)} handleScriptChange={e=>handleScriptChange(e)} pdfFile={pdfFile} removePdfFile={removePdfFile} scriptText={scriptText} wordCount={wordCount} />
-        <AudioFilesView audioFiles={audioFiles} handleSelect={(e)=>handleSelect(e)} handleUpload={(e)=>handleUpload(e)} selectedFile={selectedFile} />
-        <ImagesView MAX_IMAGES={MAX_IMAGES} handleImageUpload={e=>handleImageUpload(e)} handleRemoveImage={e=>handleRemoveImage(e)} images={images} />
-        <VideoView MAX_VIDEOS={MAX_VIDEOS} handleRemoveVideo={e=>handleRemoveVideo(e)} handleVideoUpload={e=>handleVideoUpload(e)}  videos={videos}/>
-        <SummaryView calculatePrice={calculatePrice} closeModal={closeModal} images={images} navigate={navigate} pdfFile={pdfFile} scriptText={scriptText} selectedFile={selectedFile} selectedTime={selectedTime} showModal={showModal} state={state} videos={videos} />
-        <TimeWheelView />
-        {/* Validate and show summary button */}
-        <button
-          onClick={validateAllFields}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Show Summary and Proceed to Payment
-        </button>
-      </div>
+    <div className="template-page">
+      <h1 className="text-5xl">Template ID: {id}</h1>
+      {/* Display template content */}
+      <CategorySelect />
+      <ScriptView
+        MAX_WORDS={MAX_WORDS}
+        clearScriptText={clearScriptText}
+        handlePdfUpload={(e) => handlePdfUpload(e)}
+        handleScriptChange={(e) => handleScriptChange(e)}
+        pdfFile={pdfFile}
+        removePdfFile={removePdfFile}
+        scriptText={scriptText}
+        wordCount={wordCount}
+      />
+      <AudioFilesView
+        audioFiles={audioFiles}
+        handleSelect={(e) => handleSelect(e)}
+        handleUpload={(e) => handleUpload(e)}
+        selectedFile={selectedFile}
+      />
+      <ImagesView
+        MAX_IMAGES={MAX_IMAGES}
+        handleImageUpload={(e) => handleImageUpload(e)}
+        handleRemoveImage={(e) => handleRemoveImage(e)}
+        images={images}
+      />
+      <VideoView
+        MAX_VIDEOS={MAX_VIDEOS}
+        handleRemoveVideo={(e) => handleRemoveVideo(e)}
+        handleVideoUpload={(e) => handleVideoUpload(e)}
+        videos={videos}
+      />
+      <SummaryView
+        categoryId={state.category_id}
+        calculatePrice={calculatePrice}
+        closeModal={closeModal}
+        images={images}
+        navigate={navigate}
+        pdfFile={pdfFile}
+        scriptText={scriptText}
+        selectedFile={selectedFile}
+        selectedTime={selectedTime}
+        showModal={showModal}
+        state={state}
+        videos={videos}
+      />
+      <TimeWheelView />
+      {/* Validate and show summary button */}
+      <button
+        onClick={validateAllFields}
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        Show Summary and Proceed to Payment
+      </button>
+    </div>
   );
 };
 
