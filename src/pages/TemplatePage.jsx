@@ -9,6 +9,10 @@ import ImagesView from "../components/ImageView";
 import VideoView from "../components/VideoView";
 import SummaryView from "../components/SummaryView";
 import ScriptView from "../components/ScriptView";
+import VideoTitleInput from "../components/TitleInput";
+import VideoTagsInput from "../components/TagsFroVideo";
+import VideoInstructionsInput from "../components/VideoInstructionInput";
+import VideoProportionSelector from "../components/VideoProportionSelect";
 
 //import
 
@@ -257,6 +261,21 @@ const TemplatePage = () => {
   // Calculate the word count of the script text
   const wordCount = scriptText.trim().split(/\s+/).filter(Boolean).length;
 
+
+  // hadle title 
+
+    const [title, setTitle] = useState("");
+
+    const handleInputChange = (e) => {
+      setTitle(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log("Video Title:", title);
+      // Add additional logic for submission here
+    };
+
   
   // Validation function
   const validateAllFields = () => {
@@ -325,10 +344,43 @@ const additionalCostPerInterval = 30;
     );
   };
 
+// add tags for my video
+
+  const [tags, setTags] = useState([]);
+  const [currentTag, setCurrentTag] = useState("");
+
+  const handleTagsInputChange = (e) => {
+    setCurrentTag(e.target.value);
+  };
+
+  const addTag = (e) => {
+    //e.preventDefault();
+    if (currentTag.trim() && !tags.includes(currentTag)) {
+      setTags([...tags, currentTag.trim()]);
+    }
+    setCurrentTag("");
+  };
+
+  const removeTag = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
 
 
+// add instruction for my video 
 
+  const [instructions, setInstructions] = useState("");
 
+  const handleInstructionInputChange = (e) => {
+    setInstructions(e.target.value);
+  };
+
+  // proportions selection 
+
+  const [proportion, setProportion] = useState("");
+
+  const handleSelection = (selectedProportion) => {
+    setProportion(selectedProportion);
+  };
 
   // Fetch or display data using the template id
   return (
@@ -345,6 +397,26 @@ const additionalCostPerInterval = 30;
         removePdfFile={removePdfFile}
         scriptText={scriptText}
         wordCount={wordCount}
+      />
+      <VideoTagsInput
+        addTag={(tag) => addTag(tag)}
+        currentTag={currentTag}
+        handleInputChange={(input) => handleTagsInputChange(input)}
+        removeTag={(e) => removeTag(e)}
+        tags={tags}
+      />
+      <VideoInstructionsInput
+        instructions={instructions}
+        handleInputChange={(e) => handleInstructionInputChange(e)}
+      />
+      <VideoTitleInput
+        title={title}
+        handleSubmit={(e) => handleSubmit(e)}
+        handleInputChange={(e) => handleInputChange(e)}
+      />
+      <VideoProportionSelector
+        proportion={proportion}
+        handleSelection={(e) => handleSelection(e)}
       />
       <AudioFilesView
         audioFiles={audioFiles}
@@ -377,6 +449,10 @@ const additionalCostPerInterval = 30;
         showModal={showModal}
         state={state}
         videos={videos}
+        instructions={instructions}
+        proportion={proportion}
+        title={title}
+        tags={tags}
       />
       <TimeWheelView />
       {/* Validate and show summary button */}

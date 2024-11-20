@@ -6,6 +6,7 @@ export const Signup = async (userData) => {
   try {
     const { token } = userData;
     const response = await axiosInstance.post(`auth/signup-login`, { token });
+    localStorage.setItem("userData", response.data.user);
     console.log(response, "response >>>>signup");
 
     return response.data;
@@ -19,6 +20,8 @@ export const Login = async (userData) => {
   try {
     const { token } = userData;
     const response = await axiosInstance.post(`auth/signup-login`, { token });
+    console.log("logi respose ",response.data)
+    localStorage.setItem("userData", JSON.stringify(response.data.user));
     return response.data;
   } catch (error) {
     console.error("API Login request failed:", error.response);
@@ -32,6 +35,7 @@ export const Verify = async () => {
 
   try {
     const response = await axiosInstance.get(`auth/verify`);
+    console.log("lhdklhsdklhfksdhflksdhf",response.data)
     return response.data;
   } catch (error) {
     console.error("API Login request failed:", error.response);
@@ -110,7 +114,8 @@ export const getPayment = async (paymentData) => {
 // Functions to fetch payment stripe payment intent
 export const placeOrderApi = async (paymentData) => {
   console.log("Booking object before API call:", paymentData);
-
+      const userData = localStorage.getItem("userData");
+console.log("userashvhjavsavsdvasjkdvaksj", JSON.stringify(userData));
   try {
     // Create FormData object
     const formData = new FormData();
@@ -135,7 +140,7 @@ export const placeOrderApi = async (paymentData) => {
         }
       }
     }
-
+formData.append("user_id", JSON.parse(userData)?.id);
     console.log(
       "FormData before API call:",
       Object.fromEntries(formData.entries())

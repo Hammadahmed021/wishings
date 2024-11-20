@@ -33,6 +33,7 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
             payment_id: e,
             music_id: state.audio.id,
             music: state.audio,
+            category_video_id: state.videoId,
           })
         }
         // buttonDis={totalPrice}
