@@ -43,6 +43,10 @@ const SummaryView = ({
         categoryId,
         videoId: state?.id,
         isGuest: true, // Add guest flag to checkout
+        instructions,
+        tags,
+        title,
+        proportion,
       },
     });
   };
@@ -84,6 +88,10 @@ const handleSignup = async (userData) => {
           scripts: pdfFile ?? scriptText,
           categoryId,
           videoId: state?.id,
+          instructions,
+          tags,
+          title,
+          proportion,
         },
       });
     } else {
@@ -248,6 +256,10 @@ const handleSignup = async (userData) => {
                     categoryId,
                     videoId: state?.id,
                     isGuest, // Pass guest flag
+                    instructions,
+                    tags,
+                    title,
+                    proportion
                   },
                 });
               }}

@@ -6,7 +6,7 @@ export const Signup = async (userData) => {
   try {
     const { token } = userData;
     const response = await axiosInstance.post(`auth/signup-login`, { token });
-    localStorage.setItem("userData", response.data.user);
+      localStorage.setItem("userData", JSON.stringify(response.data.user));
     console.log(response, "response >>>>signup");
 
     return response.data;
@@ -35,6 +35,7 @@ export const Verify = async () => {
 
   try {
     const response = await axiosInstance.get(`auth/verify`);
+       localStorage.setItem("userData", JSON.stringify(response.data.user));
     console.log("lhdklhsdklhfksdhflksdhf",response.data)
     return response.data;
   } catch (error) {
@@ -114,8 +115,11 @@ export const getPayment = async (paymentData) => {
 // Functions to fetch payment stripe payment intent
 export const placeOrderApi = async (paymentData) => {
   console.log("Booking object before API call:", paymentData);
-      const userData = localStorage.getItem("userData");
-console.log("userashvhjavsavsdvasjkdvaksj", JSON.stringify(userData));
+
+  // Retrieve user data from local storage
+  const userData = localStorage.getItem("userData");
+  console.log("User data:", JSON.stringify(userData));
+
   try {
     // Create FormData object
     const formData = new FormData();
@@ -126,21 +130,36 @@ console.log("userashvhjavsavsdvasjkdvaksj", JSON.stringify(userData));
         if (Array.isArray(paymentData[key])) {
           // Handle array data
           paymentData[key].forEach((item) => {
-            formData.append(`${key}`, item); // Append each item of the array
+            formData.append(`${key}[]`, item); // Append each item of the array
           });
         } else if (
           typeof paymentData[key] === "object" &&
-          paymentData[key] !== null
+          paymentData[key] !== null &&
+          !(paymentData[key] instanceof File)
         ) {
-          // Handle nested object
+          // Handle nested object (excluding File objects)
           formData.append(key, JSON.stringify(paymentData[key]));
+        } else if (paymentData[key] instanceof File) {
+          // Handle files (like scripts, images, etc.)
+          formData.append(key, paymentData[key]);
         } else {
-          // Append regular key-value pair
+          // Append regular key-value pair (like strings or numbers)
           formData.append(key, paymentData[key]);
         }
       }
     }
-formData.append("user_id", JSON.parse(userData)?.id);
+
+    // Ensure that 'music' field contains a file, not an object
+    if (paymentData.music && paymentData.music instanceof File) {
+      formData.append("music", paymentData.music);
+    } else if (paymentData.music && paymentData.music.file) {
+      // If music field is an object with a 'file' key (extract and append the file)
+      formData.append("music", paymentData.music.file);
+    }
+
+    // Append user ID from local storage
+    formData.append("user_id", JSON.parse(userData)?.id ??1);
+
     console.log(
       "FormData before API call:",
       Object.fromEntries(formData.entries())

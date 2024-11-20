@@ -22,19 +22,41 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
     <Elements stripe={stripePromise}>
       <CheckoutForm
         amount={state}
-        handlePayment={(e) =>
-          placeOrderApi({
-            //user_id: 1,
-            category_id: state.categoryId,
-            "videos[]": state.videos,
-            "pictures[]": state.images,
-            script: state.scripts,
-            amount: state.price,
-            payment_id: e,
-            music_id: state.audio.id,
-            music: state.audio,
-            category_video_id: state.videoId,
-          })
+        handlePayment={(e) => {
+          console.table("jksdbvklbsdklvbklsdbvlksbdlkvbsldk", state);
+
+          //placeOrderApi({
+          //  //user_id: 1,
+          //  category_id: state.categoryId,
+          //  "videos[]": state.videos,
+          //  "pictures[]": state.images,
+          //  script: state.scripts,
+          //  amount: state.price,
+          //  payment_id: e,
+          //  music_id: state.audio.id,
+          //  music: state.audio,
+          //  category_video_id: state.videoId,
+          //  titles: state.title,
+          //  taglines: state.tags,
+          //  instruction: state.instructions,
+          //  video_proportion: state.proportion,
+          //});
+        placeOrderApi({
+          category_id: state.categoryId,
+          "videos[]": state.videos,
+          "pictures[]": state.images,
+          script: state.scripts, // Ensure this is a File object if it's a file
+          amount: state.price,
+          payment_id: e,
+          music_id: state.audio.id,
+          music: state.audio,
+          category_video_id: state.videoId,
+          titles: state.title,
+          taglines: state.tags,
+          instruction: state.instructions,
+          video_proportion: state.proportion,
+        });
+        }
         }
         // buttonDis={totalPrice}
       />
