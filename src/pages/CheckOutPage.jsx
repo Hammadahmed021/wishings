@@ -43,8 +43,8 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
           //});
         placeOrderApi({
           category_id: state.categoryId,
-          "videos[]": state.videos,
-          "pictures[]": state.images,
+          "videos": state.videos,
+          "pictures": state.images,
           script: state.scripts, // Ensure this is a File object if it's a file
           amount: state.price,
           payment_id: e,
