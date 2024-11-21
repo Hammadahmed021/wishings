@@ -28,6 +28,8 @@ const SummaryView = ({
 
   const token = localStorage.getItem("wishToken");
 
+console.log("tokentokentokentokentokentokentokentoken",token)
+
   const handleGuestSignup = () => {
     // Handle guest signup logic here, e.g., navigate as guest or set some flag
     setIsGuest(true);
@@ -57,6 +59,7 @@ const handleSignup = async (userData) => {
   try {
     const response = await dispatch(signupUser(userData)).unwrap();
     console.log("Signup response:", response);
+    return response
     // Navigate to home or another page
     // navigate("/");
   } catch (error) {
@@ -74,7 +77,7 @@ const handleSignup = async (userData) => {
       closeModal();
 
       // Handle actual login or sign-up logic here
-         await handleSignup({ name, email, password })
+       const response=  await handleSignup({ name, email, password })
       console.log("Signup response:", response);
       console.log("User signed up/logged in:", { name, email, password });
       if(response)
