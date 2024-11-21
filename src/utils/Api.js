@@ -6,7 +6,7 @@ export const Signup = async (userData) => {
   try {
     const { token } = userData;
     const response = await axiosInstance.post(`auth/signup-login`, { token });
-      localStorage.setItem("userData", JSON.stringify(response.data.user));
+    localStorage.setItem("userData", JSON.stringify(response.data.user));
     console.log(response, "response >>>>signup");
 
     return response.data;
@@ -20,7 +20,7 @@ export const Login = async (userData) => {
   try {
     const { token } = userData;
     const response = await axiosInstance.post(`auth/signup-login`, { token });
-    console.log("logi respose ",response.data)
+    console.log("logi respose ", response.data);
     localStorage.setItem("userData", JSON.stringify(response.data.user));
     return response.data;
   } catch (error) {
@@ -35,8 +35,8 @@ export const Verify = async () => {
 
   try {
     const response = await axiosInstance.get(`auth/verify`);
-       localStorage.setItem("userData", JSON.stringify(response.data.user));
-    console.log("lhdklhsdklhfksdhflksdhf",response.data)
+    localStorage.setItem("userData", JSON.stringify(response.data.user));
+    console.log("lhdklhsdklhfksdhflksdhf", response.data);
     return response.data;
   } catch (error) {
     console.error("API Login request failed:", error.response);
@@ -112,16 +112,24 @@ export const getPayment = async (paymentData) => {
   }
 };
 
+function getFileExtension(filename) {
+  // Check if filename contains a dot
+  if (filename.includes(".")) {
+    // Split the filename at the last dot and return the extension
+    return filename.substring(filename.lastIndexOf(".") + 1);
+  }
+  // If no dot is found, return null or an appropriate value
+  return null;
+}
+
 // Functions to fetch payment stripe payment intent
 export const placeOrderApi = async (paymentData) => {
   console.log("Booking object before API call:", paymentData);
 
-  // Retrieve user data from local storage
   const userData = localStorage.getItem("userData");
   console.log("User data:", JSON.stringify(userData));
 
   try {
-    // Create FormData object
     const formData = new FormData();
 
     // Append key-value pairs to FormData
@@ -129,8 +137,13 @@ export const placeOrderApi = async (paymentData) => {
       if (paymentData.hasOwnProperty(key)) {
         if (Array.isArray(paymentData[key])) {
           // Handle array data
-          paymentData[key].forEach((item) => {
-            formData.append(`${key}[]`, item); // Append each item of the array
+          paymentData[key].forEach((item, index) => {
+            const imageFile = item?.id
+              ? new File([item?.file], item?.file?.name, {
+                  type: getFileExtension(item?.file?.name),
+                })
+              : {};
+            formData.append(`${key}[${index}]`, item?.id ? imageFile : item); // Append each item of the array
           });
         } else if (
           typeof paymentData[key] === "object" &&
@@ -138,7 +151,7 @@ export const placeOrderApi = async (paymentData) => {
           !(paymentData[key] instanceof File)
         ) {
           // Handle nested object (excluding File objects)
-          formData.append(key, JSON.stringify(paymentData[key]));
+          formData.append(key, paymentData[key]);
         } else if (paymentData[key] instanceof File) {
           // Handle files (like scripts, images, etc.)
           formData.append(key, paymentData[key]);
@@ -149,16 +162,21 @@ export const placeOrderApi = async (paymentData) => {
       }
     }
 
-    // Ensure that 'music' field contains a file, not an object
-    if (paymentData.music && paymentData.music instanceof File) {
-      formData.append("music", paymentData.music);
-    } else if (paymentData.music && paymentData.music.file) {
-      // If music field is an object with a 'file' key (extract and append the file)
-      formData.append("music", paymentData.music.file);
+    // Handle the 'music' field
+    if (paymentData.music) {
+      const { music_path, file, name, url } = paymentData.music;
+      if (music_path || url) {
+        const musicFile = new File([url ?? music_path], name ?? file, {
+          type: "mp3",
+        });
+        formData.append("music", musicFile);
+      } else {
+        console.error("Invalid music file data provided.");
+      }
     }
 
     // Append user ID from local storage
-    formData.append("user_id", JSON.parse(userData)?.id ??1);
+    formData.append("user_id", JSON.parse(userData)?.id ?? 1);
 
     console.log(
       "FormData before API call:",
