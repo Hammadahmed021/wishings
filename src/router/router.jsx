@@ -7,6 +7,7 @@ import {
   SignIn,
   Profile,
   CheckOutPage,
+  AboutUs,
 } from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/pages",
         element: <Pages />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
       },
       {
         path: "/template/:id",

@@ -1,5 +1,6 @@
 import * as icon from "../assets/icons/offerIcon.js";
 import * as blogImages from "../assets/images/blogImages/blogImages.js";
+import * as professional from "../assets/images/aboutImages/index.js";
 
 export const navLinks = [
   {
@@ -334,4 +335,55 @@ export const footerLinks = [
       { name: "Privacy", url: "#" },
     ],
   },
+];
+
+export const teamCardData = [
+  {
+    image: professional.person,
+    heading: "Card Title 1",
+    paragraph: "This is a description for card 1."
+  },
+  {
+    image: professional.person,
+    heading: "Card Title 2",
+    paragraph: "This is a description for card 2."
+  },
+  {
+    image: professional.person,
+    heading: "Card Title 3",
+    paragraph: "This is a description for card 3."
+  },
+  {
+    image: professional.person,
+    heading: "Card Title 4",
+    paragraph: "This is a description for card 4."
+  }
+];
+
+
+export const statsCardData = [
+  {
+    "heading": "Revenue",
+    "paragraph": "This is our revenue for the year.",
+    "endValue": 250000,
+    "sign": "$"
+  },
+  {
+    "heading": "Growth",
+    "paragraph": "This is our revenue for the year.",
+    "endValue": 35,
+    "sign": "%"
+  },
+  {
+    "heading": "Users",
+    "paragraph": "This is our revenue for the year.",
+    "endValue": 12000,
+    "sign": "+"
+  },
+  {
+    "heading": "Sales",
+    "paragraph": "This is our revenue for the year.",
+    "endValue": 850,
+    "sign": "+"
+  }
 ];
