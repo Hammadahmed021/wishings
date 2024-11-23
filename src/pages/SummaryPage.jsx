@@ -21,6 +21,7 @@ const SummaryPage = () => {
       proportion={state?.proportion}
       titles={state?.titles ?? []}
       tags={state?.tags ?? []}
+      allData={state}
     />
   );
 }

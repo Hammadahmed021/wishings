@@ -15,10 +15,11 @@ const AuthLayout = ({ children, authentication = true }) => {
       navigate("/signin");
     } else if (!authentication && authStatus) {
       // If authentication is not required and user is logged in, redirect to home
-      //navigate("/profile");
+      navigate("/profile");
     } else if (redirectState && redirectState.fromReservation && authStatus) {
       // If redirected from reservation and user is logged in, navigate back to reservation
       localStorage.removeItem("redirectState");
+      console.log("pathnamepathnamepathnamepathnamepathname",redirectState.location);
       navigate(redirectState.location.pathname, { state: redirectState.location.state });
     }
     

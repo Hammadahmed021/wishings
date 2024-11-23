@@ -21,7 +21,7 @@ const Login = ({isGoBack}) => {
     setIsSigning(true); // Assuming you have setIsSigning state
     try {
       const loginResponse = await dispatch(loginUser(data)).unwrap();
-      if (isGoBack) window.history.back();
+      //if (isGoBack) window.history.back();
         console.log("Login Response:", loginResponse);
       // Handle success, navigate user or update UI
     } catch (error) {

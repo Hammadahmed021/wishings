@@ -17,6 +17,7 @@ const SummaryView = ({
   proportion,
   titles,
   tags,
+  allData
 }) => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -96,8 +97,15 @@ const SummaryView = ({
           </div>
           <h4 className="font-semibold mb-4">or want to login?</h4>
           <button
-            onClick={ () => {
-              navigate("/signin",{state:{navigate:true}});
+            onClick={() => {
+                  localStorage.setItem(
+                    "redirectState",
+                    JSON.stringify({
+                      fromReservation: true,
+                      location: { state: allData, pathname: "/summary" },
+                    })
+                  );
+              navigate("/signin");
             }}
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >

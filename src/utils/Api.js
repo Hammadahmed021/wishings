@@ -205,3 +205,17 @@ export const placeOrderApi = async (paymentData) => {
     throw error;
   }
 };
+
+
+export const getAllOrdersApi = async () => {
+  const token = localStorage.getItem("wishToken");
+  console.log(token, "token");
+
+  try {
+    const response = await axiosInstance.get(`order/read/all`);
+    return response;
+  } catch (error) {
+    console.error("API Login request failed:", error.response);
+    throw error;
+  }
+};
