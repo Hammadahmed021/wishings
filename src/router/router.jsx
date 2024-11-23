@@ -11,6 +11,7 @@ import {
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
 import App from "../App.jsx";
+import SummaryPage from "../pages/SummaryPage.jsx";
 
 // Determine base path based on environment
 const baseURL = import.meta.env.MODE === 'production'
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
             <CheckOutPage />
           </AuthLayout>
         ),
+      },
+      {
+        path: "/summary",
+        element: 
+            <SummaryPage />
       },
       // {
       //   path: "*",

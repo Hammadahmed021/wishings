@@ -206,7 +206,7 @@ const TemplatePage = () => {
       id: URL.createObjectURL(file), // temporary URL for preview
       file,
       size: file.size,
-      name: file.name,
+      name: file?.name,
     }));
 
     setVideos((prevVideos) => [...prevVideos, ...newVideos]);
@@ -264,18 +264,25 @@ const TemplatePage = () => {
 
   // hadle title 
 
-    const [title, setTitle] = useState("");
+  const [titles, setTitles] = useState([""]); // Array to store multiple titles
 
-    const handleInputChange = (e) => {
-      setTitle(e.target.value);
-    };
+  // Handle input change for a specific title
+  const handleTitleChange = (index, value) => {
+    const newTitles = [...titles];
+    newTitles[index] = value;
+    setTitles(newTitles);
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log("Video Title:", title);
-      // Add additional logic for submission here
-    };
+  // Add a new title
+  const addTitle = () => {
+    setTitles([...titles, ""]);
+  };
 
+  // Remove a title
+  const removeTitle = (index) => {
+    const newTitles = titles.filter((_, i) => i !== index);
+    setTitles(newTitles);
+  };
   
   // Validation function
   const validateAllFields = () => {
@@ -295,7 +302,23 @@ const TemplatePage = () => {
       alert("Please upload a script PDF or type a script.");
       return false;
     }
-
+    navigate("/summary", {
+      state: {
+        categoryId: state.category_id,
+        calculatePrice: priceState,
+        images: images,
+        pdfFile: pdfFile,
+        scriptText,
+        selectedFile,
+        selectedTime,
+        state,
+        videos,
+        instructions,
+        proportion,
+        titles,
+        tags,
+      },
+    });
     // If all validations pass, show summary modal
     setShowModal(true);
     return true;
@@ -310,12 +333,13 @@ const TemplatePage = () => {
   const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // Creates intervals of 30 seconds up to 600 seconds
 
   const [selectedTime, setSelectedTime] = useState(30); // Default selection is 60 seconds
+  const [priceState,setPriceState]= useState(49)
   const basePrice = 49;
 const additionalCostPerInterval = 30;
 
   // Calculate price based on the selected time
   const calculatePrice = () =>
-    basePrice + (selectedTime / 30 - 1) * additionalCostPerInterval;
+   setPriceState( priceState + (selectedTime / 30 - 1) * additionalCostPerInterval);
 
   const TimeWheelView = () => {
     return (
@@ -325,7 +349,11 @@ const additionalCostPerInterval = 30;
           {timeOptions.map((time) => (
             <button
               key={time}
-              onClick={() => setSelectedTime(time)}
+              onClick={() => {
+                setSelectedTime(time)
+                calculatePrice()
+                
+              }}
               style={{
                 margin: "5px",
                 padding: "10px 20px",
@@ -339,7 +367,7 @@ const additionalCostPerInterval = 30;
           ))}
         </div>
         <h3>Selected Time: {selectedTime} sec</h3>
-        <h3>Price: ${calculatePrice()}</h3>
+        <h3>Price: ${priceState}</h3>
       </div>
     );
   };
@@ -410,9 +438,10 @@ const additionalCostPerInterval = 30;
         handleInputChange={(e) => handleInstructionInputChange(e)}
       />
       <VideoTitleInput
-        title={title}
-        handleSubmit={(e) => handleSubmit(e)}
-        handleInputChange={(e) => handleInputChange(e)}
+        titles={titles}
+        handleTitleChange={(e,v) => handleTitleChange(e,v)}
+        addTitle={(e) => addTitle(e)}
+        removeTitle={e=>removeTitle(e)}
       />
       <VideoProportionSelector
         proportion={proportion}
@@ -436,11 +465,11 @@ const additionalCostPerInterval = 30;
         handleVideoUpload={(e) => handleVideoUpload(e)}
         videos={videos}
       />
-      <SummaryView
+      {/*<SummaryView
         categoryId={state.category_id}
         calculatePrice={calculatePrice}
         closeModal={closeModal}
-        images={images}
+        images={imagess}
         navigate={navigate}
         pdfFile={pdfFile}
         scriptText={scriptText}
@@ -453,7 +482,7 @@ const additionalCostPerInterval = 30;
         proportion={proportion}
         title={title}
         tags={tags}
-      />
+      />*/}
       <TimeWheelView />
       {/* Validate and show summary button */}
       <button

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Login } from '../components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from "../assets/logo.png";
 
 function SignIn() {
-
+const location= useLocation()
 
   return (
    
@@ -20,7 +20,7 @@ function SignIn() {
          </Link>
          <Link to={'/signup'} className='absolute top-2 right-4 text-base hover:underline'>Sign Up</Link>
        </div>
-       <Login />
+       <Login isGoBack={Boolean(location?.state?.navigate)} />
      </div>
    </div>
   );

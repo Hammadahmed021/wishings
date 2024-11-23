@@ -191,7 +191,7 @@ export const placeOrderApi = async (paymentData) => {
     });
 
     console.log("API response:", response.data);
-    return response.data;
+    return response;
   } catch (error) {
     if (error.response) {
       console.error("Error response data:", error.response.data);

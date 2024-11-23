@@ -1,27 +1,53 @@
 import React, { useState } from "react";
 
-const VideoTitleInput = ({ handleSubmit, title, handleInputChange }) => {
+const VideoTitleInput = ({
+  removeTitle,
+  titles,
+  handleTitleChange,
+  addTitle,
+}) => {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="p-6 bg-white rounded-lg shadow-md w-full max-w-sm"
+    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
+      <h1 className="text-2xl font-bold text-gray-800">Video Titles</h1>
+      <div className="space-y-4">
+        {titles.map((title, index) => (
+          <div key={index} className="flex items-center space-x-4">
+            <input
+              type="text"
+              className="flex-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder={`Title ${index + 1}`}
+              value={title}
+              onChange={(e) => handleTitleChange(index, e.target.value)}
+            />
+            <button
+              type="button"
+              className="text-red-500 hover:text-red-700"
+              onClick={() => removeTitle(index)}
+            >
+              ✖
+            </button>
+          </div>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"
+        onClick={addTitle}
       >
-        <label
-          htmlFor="videoTitle"
-          className="block text-gray-700 text-sm font-medium mb-2"
-        >
-          Video Title
-        </label>
-        <input
-          type="text"
-          id="videoTitle"
-          value={title}
-          onChange={(e) => handleInputChange(e)}
-          placeholder="Enter video title"
-          className="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-        />
-      </form>
+        Add Title
+      </button>
+      <div className="pt-4">
+        <h2 className="text-lg font-semibold text-gray-700">Your Titles:</h2>
+        <ul className="list-disc list-inside">
+          {titles
+            .filter((title) => title?.trim() !== "") // Filter out empty titles
+            .map((title, index) => (
+              <li key={index} className="text-gray-600">
+                {title}
+              </li>
+            ))}
+        </ul>
+      </div>
     </div>
   );
 };
