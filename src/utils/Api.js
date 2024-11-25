@@ -4,8 +4,11 @@ export const Signup = async (userData) => {
   console.log(userData, "userData");
 
   try {
-    const { token } = userData;
-    const response = await axiosInstance.post(`auth/signup-login`, { token });
+    const { token, fname } = userData;
+    const response = await axiosInstance.post(`auth/signup-login`, {
+      token,
+      fname,
+    });
     localStorage.setItem("userData", JSON.stringify(response.data.user));
     console.log(response, "response >>>>signup");
 
@@ -205,7 +208,6 @@ export const placeOrderApi = async (paymentData) => {
     throw error;
   }
 };
-
 
 export const getAllOrdersApi = async () => {
   const token = localStorage.getItem("wishToken");
