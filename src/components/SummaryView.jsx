@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { signupUser } from "../store/authSlice";
-import { useState } from "react";
+import { anonymousUser, signupUser } from "../store/authSlice";
+import { useEffect, useState } from "react";
 
 const SummaryView = ({
   state,
@@ -23,8 +23,11 @@ const SummaryView = ({
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [isGuest, setIsGuest] = useState(false);
-
+const [token,setToken]=useState(null)
+useEffect(()=>{
   const token = localStorage.getItem("wishToken");
+  setToken(token)
+},[])
 
   const dispatch = useDispatch();
 
@@ -110,6 +113,17 @@ const SummaryView = ({
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
            login
+          </button>
+          <h4>or</h4>
+          <button
+            onClick={async() => {
+              const loginResponse = await dispatch(anonymousUser()).unwrap();
+              setToken(loginResponse?.token)
+              console.log("loginResponseloginResponseloginResponseloginResponse",loginResponse)
+            }}
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+           login as a guest
           </button>
         </div>
       ) : (
