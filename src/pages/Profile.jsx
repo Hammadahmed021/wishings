@@ -16,7 +16,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imagePreview, setImagePreview] = useState(stars);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -34,8 +34,8 @@ const Profile = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: currentUser?.displayName || "",
-      phone: currentUser?.phone || "",
+      name: userData?.displayName || currentUser?.displayName ||"",
+      phone: userData?.phone ||  currentUser?.phone ||"",
       newPassword: "",
       confirmPassword: "",
     },
