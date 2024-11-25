@@ -5,7 +5,9 @@ import {
   getIdToken,
   signInWithEmailAndPassword,
   AuthErrorCodes,
-  updateProfile
+  updateProfile,
+  signInAnonymously,
+  getAuth,
 } from "firebase/auth";
 import { auth } from "../service/firebase";
 
@@ -24,18 +26,18 @@ export const signupUser = createAsyncThunk(
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
       const user = userCredential.user;
-      console.log(user, 'user >>>');
+      console.log(user, "user >>>");
 
       const token = await getIdToken(user);
-      console.log(token, 'token >>>>');
+      console.log(token, "token >>>>");
 
       if (user) {
         updateProfile(user, {
-          displayName: fname
-        })
+          displayName: fname,
+        });
       }
 
       const signupData = {
@@ -44,15 +46,52 @@ export const signupUser = createAsyncThunk(
       };
 
       const response = await Signup(signupData);
-      console.log(response, 'getting response auth slice');
+      console.log(response, "getting response auth slice");
 
       localStorage.setItem("wishToken", response?.user?.token);
-
 
       return {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
+        token,
+        ...response,
+      };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const anonymousUser = createAsyncThunk(
+  "auth/AnonymouslySignupUser",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const userCredential = await signInAnonymously(auth);
+      const user = userCredential.user;
+      console.log(user, "user >>>");
+
+      const token = await getIdToken(user);
+      console.log(token, "token >>>>");
+
+      if (user) {
+        updateProfile(user, {
+          displayName: "Guest User",
+        });
+      }
+
+      // const signupData = {
+      //   fname,
+      //   token,
+      // };
+      const response = await ApiLogin({ token });
+      console.log(response, "getting response auth slice");
+
+      localStorage.setItem("wishToken", response?.user?.token);
+
+      return {
+        uid: user?.uid,
+        email: user?.email,
+        displayName: user?.displayName,
         token,
         ...response,
       };
@@ -68,7 +107,11 @@ export const loginUser = createAsyncThunk(
     try {
       const { email, password } = userData;
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
       console.log("User Credential:", userCredential);
@@ -80,6 +123,8 @@ export const loginUser = createAsyncThunk(
 
       localStorage.setItem("wishToken", response?.user?.token);
 
+      console.log("responseresponseresponseresponseresponse", response);
+
       return {
         uid: user.uid,
         email: user.email,
@@ -88,7 +133,11 @@ export const loginUser = createAsyncThunk(
         ...response,
       };
     } catch (error) {
-      console.error("Firebase Authentication Error:", error.code, error.message);
+      console.error(
+        "Firebase Authentication Error:",
+        error.code,
+        error.message
+      );
       return rejectWithValue(error.message);
     }
   }
@@ -107,7 +156,7 @@ const authSlice = createSlice({
       state.userData = null;
       state.loading = false;
       state.error = null;
-      localStorage.removeItem("wishToken")
+      localStorage.removeItem("wishToken");
     },
     updateUserData: (state, action) => {
       state.userData = {
