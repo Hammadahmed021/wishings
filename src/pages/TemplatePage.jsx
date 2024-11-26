@@ -423,7 +423,7 @@ const TemplatePage = () => {
 
   // Fetch or display data using the template id
   return (
-    <div className="container mx-auto py-16">
+    <div className="container mx-auto py-16 p-4">
       <h1 className="text-5xl font-poppins mb-8">
         Template ID: {id}</h1>
       {/* Display template content */}

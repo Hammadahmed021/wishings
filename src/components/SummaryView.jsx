@@ -69,7 +69,7 @@ const SummaryView = ({
   };
 
   return (
-    <div className="container mx-auto space-y-8 bg-white  my-10 rounded-lg">
+    <div className="container mx-auto space-y-8 bg-white  my-10 rounded-lg p-4">
       {/* Page Heading */}
       <h1 className="text-5xl font-poppins mb-8">
         Selection Summary
