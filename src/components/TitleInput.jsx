@@ -7,8 +7,10 @@ const VideoTitleInput = ({
   addTitle,
 }) => {
   return (
-    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
-      <h1 className="text-2xl font-bold text-gray-800">Video Titles</h1>
+    <div className="p-6  mx-auto bg-white rounded-lg border space-y-4 mb-16">
+        <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+        Video Titles
+      </h2>
       <div className="space-y-4">
         {titles.map((title, index) => (
           <div key={index} className="flex items-center space-x-4">
@@ -31,18 +33,18 @@ const VideoTitleInput = ({
       </div>
       <button
         type="button"
-        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"
+        className="w-full bg-primary text-white py-2 px-4 rounded-lg duration-200 transition-all hover:bg-secondary"
         onClick={addTitle}
       >
         Add Title
       </button>
       <div className="pt-4">
         <h2 className="text-lg font-semibold text-gray-700">Your Titles:</h2>
-        <ul className="list-disc list-inside">
+        <ul className="list-item list-inside">
           {titles
             .filter((title) => title?.trim() !== "") // Filter out empty titles
             .map((title, index) => (
-              <li key={index} className="text-gray-600">
+              <li key={index} className="text-muted text-base">
                 {title}
               </li>
             ))}

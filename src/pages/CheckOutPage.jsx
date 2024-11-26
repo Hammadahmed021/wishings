@@ -19,6 +19,7 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
 
 
   return (
+    <div className="container mx-auto max-w-md text-center my-16">
     <Elements stripe={stripePromise}>
       <CheckoutForm
         amount={state}
@@ -63,6 +64,7 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
         // buttonDis={totalPrice}
       />
     </Elements>
+    </div>
   );
 };
 

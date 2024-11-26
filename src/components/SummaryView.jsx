@@ -23,11 +23,11 @@ const SummaryView = ({
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [isGuest, setIsGuest] = useState(false);
-const [token,setToken]=useState(null)
-useEffect(()=>{
-  const token = localStorage.getItem("wishToken");
-  setToken(token)
-},[])
+  const [token, setToken] = useState(null)
+  useEffect(() => {
+    const token = localStorage.getItem("wishToken");
+    setToken(token)
+  }, [])
 
   const dispatch = useDispatch();
 
@@ -69,38 +69,44 @@ useEffect(()=>{
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h3 className="text-xl font-semibold mb-6">Summary of Your Selections</h3>
+    <div className="container mx-auto space-y-8 bg-white  my-10 rounded-lg">
+      {/* Page Heading */}
+      <h1 className="text-5xl font-poppins mb-8">
+        Selection Summary
+      </h1>
 
+      {/* Sign Up or Login Section */}
       {!token ? (
-        <div className="mb-6">
-          <h4 className="font-semibold mb-4">Sign Up</h4>
-          <div className="space-y-4">
+        <div className="space-y-6">
+          <h3 className="text-2xl font-medium text-black">Sign Up</h3>
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
             <input
               type="text"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
-          <h4 className="font-semibold mb-4">or want to login?</h4>
-          <button
-            onClick={() => {
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold">Already have an account?</h3>
+            <div className="flex gap-4 justify-start items-center">
+              <button
+                onClick={() => {
                   localStorage.setItem(
                     "redirectState",
                     JSON.stringify({
@@ -108,106 +114,118 @@ useEffect(()=>{
                       location: { state: allData, pathname: "/summary" },
                     })
                   );
-              navigate("/signin");
-            }}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-           login
-          </button>
-          <h4>or</h4>
-          <button
-            onClick={async() => {
-              const loginResponse = await dispatch(anonymousUser()).unwrap();
-              setToken(loginResponse?.token)
-              console.log("loginResponseloginResponseloginResponseloginResponse",loginResponse)
-            }}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-           login as a guest
-          </button>
+                  navigate("/signin");
+                }}
+                className="px-6 py-2 bg-secondary text-white font-medium rounded-lg hover:bg-opacity-90 transition duration-300"
+              >
+                Login
+              </button>
+              <h3 className="text-2xl font-medium font-poppins text-center">or</h3>
+              <button
+                onClick={async () => {
+                  const loginResponse = await dispatch(anonymousUser()).unwrap();
+                  setToken(loginResponse?.token);
+                }}
+                className="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition duration-300"
+              >
+                Continue as a Guest
+              </button>
+            </div>
+
+          </div>
         </div>
       ) : (
-        <p className="font-semibold mb-6">You are logged in</p>
+        <p className="text-lg font-medium text-gray-600">You are logged in</p>
       )}
 
-      <div className="mb-6">
-        <h4 className="font-semibold">Category Name:</h4>
-        <p>{state?.categoryName}</p>
+      {/* Summary Details */}
+      <div className="space-y-6">
+        <div className="border-b pb-4">
+          <h4 className="text-2xl font-medium font-poppins">Category Name:</h4>
+          <p className="text-gray-700">{state?.categoryName}</p>
+        </div>
+
+        <div className="border-b pb-4">
+          <h4 className="text-2xl font-medium font-poppins">Titles:</h4>
+          <ul className="list-disc pl-6 text-gray-700">
+            {titles.length > 0
+              ? titles.map((title, index) => <li key={index}>{title}</li>)
+              : "No titles added"}
+          </ul>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Instructions:</h4>
+          <p className="text-gray-700">{instructions}</p>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Proportion:</h4>
+          <p className="text-gray-700">{proportion}</p>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Tags:</h4>
+          <ul className="list-disc pl-6 text-gray-700">
+            {tags.length > 0
+              ? tags.map((tag, index) => <li key={index}>{tag}</li>)
+              : "No tags added"}
+          </ul>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Images:</h4>
+          <ul className="list-disc pl-6 text-gray-700">
+            {images.map((image, index) => (
+              <li key={index}>{image.name}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Audios:</h4>
+          <ul className="list-disc pl-6 text-gray-700">
+            <li>{selectedFile.name ?? selectedFile.title}</li>
+          </ul>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Videos:</h4>
+          <ul className="list-disc pl-6 text-gray-700">
+            {videos.map((video, index) => (
+              <li key={index}>{video.name}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Time:</h4>
+          <p className="text-gray-700">{selectedTime}</p>
+          <p className="text-gray-700">Price: {calculatePrice} $</p>
+        </div>
+
+        <div className="border-b pb-4">
+
+          <h4 className="text-2xl font-medium font-poppins">Script:</h4>
+          {pdfFile ? (
+            <p className="text-gray-700">Uploaded PDF: {pdfFile.name}</p>
+          ) : (
+            <p className="text-gray-700">
+              {scriptText ? `${scriptText.slice(0, 100)}...` : "No script provided"}
+            </p>
+          )}
+        </div>
       </div>
 
-      <div className="mb-6">
-        <h4 className="font-semibold">Titles:</h4>
-        <ul className="list-disc pl-6">
-          {titles.length > 0
-            ? titles.map((title, index) => <li key={index}>{title}</li>)
-            : "No titles added"}
-        </ul>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Instructions:</h4>
-        <p>{instructions}</p>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Proportion:</h4>
-        <p>{proportion}</p>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Tags:</h4>
-        <ul className="list-disc pl-6">
-          {tags.length > 0
-            ? tags.map((tag, index) => <li key={index}>{tag}</li>)
-            : "No tags added"}
-        </ul>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Images:</h4>
-        <ul className="list-disc pl-6">
-          {images.map((image, index) => (
-            <li key={index}>{image.name}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Audios:</h4>
-        <ul className="list-disc pl-6">
-          <li>{selectedFile.name ?? selectedFile.title}</li>
-        </ul>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Videos:</h4>
-        <ul className="list-disc pl-6">
-          {videos.map((video, index) => (
-            <li key={index}>{video.name}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Time:</h4>
-        <p>{selectedTime}</p>
-        <p>Price: {calculatePrice} $</p>
-      </div>
-
-      <div className="mb-6">
-        <h4 className="font-semibold">Script:</h4>
-        {pdfFile ? (
-          <p>Uploaded PDF: {pdfFile.name}</p>
-        ) : (
-          <p>
-            {scriptText
-              ? `${scriptText.slice(0, 100)}...`
-              : "No script provided"}
-          </p>
-        )}
-      </div>
-
-      <div className="flex justify-end">
+      {/* Confirm Button */}
+      <div className="flex justify-start">
         <button
           onClick={async () => {
             if (!token) {
@@ -231,12 +249,13 @@ useEffect(()=>{
               });
             }
           }}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Confirm and Proceed to Payment
+          className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary text-lg"
+                >
+          Proceed to Payment
         </button>
       </div>
     </div>
+
   );
 };
 

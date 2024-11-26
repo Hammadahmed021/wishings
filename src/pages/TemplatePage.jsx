@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams ,useNavigate} from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
@@ -23,7 +23,7 @@ const TemplatePage = () => {
 
   console.log("statestatestatestatestatestate", state);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -157,8 +157,8 @@ const TemplatePage = () => {
 
   function CategorySelect() {
     return (
-      <div className="flex flex-col space-y-2 w-64">
-        <label htmlFor="category" className="text-gray-700 font-medium">
+      <div className="flex flex-col ">
+        <label htmlFor="category" className="text-gray-700 font-medium font-poppins">
           Category Name: {state?.categoryName}
         </label>
         {/*<select
@@ -283,7 +283,7 @@ const TemplatePage = () => {
     const newTitles = titles.filter((_, i) => i !== index);
     setTitles(newTitles);
   };
-  
+
   // Validation function
   const validateAllFields = () => {
     if (images.length === 0) {
@@ -326,53 +326,64 @@ const TemplatePage = () => {
 
   // Summary Function
 
-  
+
 
   // Time wheel function
 
   const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // Creates intervals of 30 seconds up to 600 seconds
 
   const [selectedTime, setSelectedTime] = useState(30); // Default selection is 60 seconds
-  const [priceState,setPriceState]= useState(49)
+  const [priceState, setPriceState] = useState(49)
   const basePrice = 49;
-const additionalCostPerInterval = 30;
+  const additionalCostPerInterval = 30;
 
   // Calculate price based on the selected time
   const calculatePrice = () =>
-   setPriceState( priceState + (selectedTime / 30 - 1) * additionalCostPerInterval);
+    setPriceState(priceState + (selectedTime / 30 - 1) * additionalCostPerInterval);
 
   const TimeWheelView = () => {
     return (
-      <div style={{ textAlign: "center", padding: "20px" }}>
-        <h2>Time Selection Wheel</h2>
-        <div style={{ display: "flex", overflowX: "scroll" }}>
+      <div className="text-start mb-16">
+        <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+
+          Time Selection Wheel
+        </h2>
+
+        {/* Time Wheel */}
+        <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-muted">
           {timeOptions.map((time) => (
             <button
               key={time}
               onClick={() => {
-                setSelectedTime(time)
-                calculatePrice()
-                
+                setSelectedTime(time);
+                calculatePrice();
               }}
-              style={{
-                margin: "5px",
-                padding: "10px 20px",
-                backgroundColor: selectedTime === time ? "#4caf50" : "#f1f1f1",
-                borderRadius: "50%",
-                color: selectedTime === time ? "white" : "black",
-              }}
+              className={`bg-gray-200 font-thin  px-2 py-1 flex items-center justify-center rounded-lg border transition-all duration-200 ${selectedTime === time
+                ? "bg-gradient-to-r from-btn-gradient-start to-btn-gradient-end text-white"
+                : "bg-surface text-text hover:bg-secondary hover:text-white"
+                }`}
             >
-              {time} sec
+              <span className="text-base sm:text-sm">{time} sec</span>
             </button>
           ))}
         </div>
-        <h3>Selected Time: {selectedTime} sec</h3>
-        <h3>Price: ${priceState}</h3>
+
+        {/* Selected Time and Price */}
+        <div className="mt-8 flex items-center justify-start gap-4">
+          <h3 className="text-xl sm:text-lg font-normal text-text">
+            Selected Time:{" "}
+            <span className="text-secondary font-medium">{selectedTime} sec</span>
+          </h3>
+          <h3 className="text-xl sm:text-lg font-normal text-text">
+            Price: <span className="text-secondary font-medium">${priceState}</span>
+          </h3>
+        </div>
       </div>
+
     );
   };
 
-// add tags for my video
+  // add tags for my video
 
   const [tags, setTags] = useState([]);
   const [currentTag, setCurrentTag] = useState("");
@@ -394,7 +405,7 @@ const additionalCostPerInterval = 30;
   };
 
 
-// add instruction for my video 
+  // add instruction for my video 
 
   const [instructions, setInstructions] = useState("");
 
@@ -412,8 +423,9 @@ const additionalCostPerInterval = 30;
 
   // Fetch or display data using the template id
   return (
-    <div className="template-page">
-      <h1 className="text-5xl">Template ID: {id}</h1>
+    <div className="container mx-auto py-16">
+      <h1 className="text-5xl font-poppins mb-8">
+        Template ID: {id}</h1>
       {/* Display template content */}
       <CategorySelect />
       <ScriptView
@@ -439,9 +451,9 @@ const additionalCostPerInterval = 30;
       />
       <VideoTitleInput
         titles={titles}
-        handleTitleChange={(e,v) => handleTitleChange(e,v)}
+        handleTitleChange={(e, v) => handleTitleChange(e, v)}
         addTitle={(e) => addTitle(e)}
-        removeTitle={e=>removeTitle(e)}
+        removeTitle={e => removeTitle(e)}
       />
       <VideoProportionSelector
         proportion={proportion}
@@ -487,9 +499,9 @@ const additionalCostPerInterval = 30;
       {/* Validate and show summary button */}
       <button
         onClick={validateAllFields}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary text-lg"
       >
-        Show Summary and Proceed to Payment
+        View summary
       </button>
     </div>
   );

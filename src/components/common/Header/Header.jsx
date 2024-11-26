@@ -181,7 +181,7 @@ const Header = () => {
       <div className="border-b-2"></div>
 
       {/* Third Row: Main Navigation */}
-      <div className="third-row xl:container m-auto relative flex items-center justify-between py-5 px-4 md:px-10">
+      <div className="third-row container mx-auto relative flex items-center justify-between py-4">
         <Link to={'/'} className="outline-none">
           <img
             src={logo}

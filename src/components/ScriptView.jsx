@@ -1,11 +1,12 @@
 const ScriptView = ({handlePdfUpload,pdfFile,removePdfFile,MAX_WORDS,scriptText,handleScriptChange,wordCount,clearScriptText}) => {
     return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">
+      <div className="py-16">
+        <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+
           Upload or Write Your Script
         </h2>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <input
             type="file"
             accept="application/pdf"
@@ -25,7 +26,7 @@ const ScriptView = ({handlePdfUpload,pdfFile,removePdfFile,MAX_WORDS,scriptText,
           )}
         </div>
 
-        <p className="text-sm text-gray-500 mb-2">
+        <p className="text-base text-muted mb-4">
           Or, you can type your script (max {MAX_WORDS} words):
         </p>
 
@@ -34,7 +35,7 @@ const ScriptView = ({handlePdfUpload,pdfFile,removePdfFile,MAX_WORDS,scriptText,
           onChange={handleScriptChange}
           placeholder="Type your script here..."
           rows="10"
-          className="border w-full p-2"
+          className="border w-full p-2 font-roboto"
           disabled={pdfFile !== null} // Disable textarea if PDF is uploaded
         ></textarea>
 

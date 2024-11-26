@@ -1,44 +1,47 @@
-const VideoView = ({handleRemoveVideo,handleVideoUpload,MAX_VIDEOS,videos}) => {
-    return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">Upload Videos</h2>
+const VideoView = ({ handleRemoveVideo, handleVideoUpload, MAX_VIDEOS, videos }) => {
+  return (
+    <div className="mb-16">
+      <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
 
-        <div className="mb-4">
-          <input
-            type="file"
-            accept="video/*"
-            multiple
-            onChange={handleVideoUpload}
-            className="border p-2"
-          />
-        </div>
+        Upload Videos</h2>
 
-        <p className="text-sm text-gray-500 mb-4">
-          You can upload up to {MAX_VIDEOS} videos. Total size must be less than
-          2GB.
-        </p>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {videos.map((video) => (
-            <div key={video.id} className="relative">
-              <video
-                src={video.id}
-                controls
-                className="w-full h-32 object-cover rounded"
-              />
-              <button
-                onClick={() => handleRemoveVideo(video.id)}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
-              >
-                ✕
-              </button>
-              <p className="text-xs text-center mt-1">{video.name}</p>
-            </div>
-          ))}
-        </div>
+      <div className="mb-4">
+        <input
+          type="file"
+          accept="video/*"
+          multiple
+          onChange={handleVideoUpload}
+          className="border p-2"
+        />
       </div>
-    );
-  };
-  
 
-  export default VideoView
+      <p className="text-base text-muted mb-4">
+        You can upload up to {MAX_VIDEOS} videos. Total size must be less than
+        2GB.
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+
+        {videos.map((video) => (
+          <div key={video.id} className="relative">
+            <video
+              src={video.id}
+              controls
+              className="w-full h-32 object-cover rounded"
+            />
+            <button
+              onClick={() => handleRemoveVideo(video.id)}
+              className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 hover:bg-red-700"
+            >
+              ✕
+            </button>
+            <p className="text-sm text-center mt-1">{video.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
+export default VideoView

@@ -76,7 +76,8 @@ const VideoSlider = ({ videos, direction, onVideoClick, selectedCategory }) => {
 
   return (
     <div {...handlers}>
-      <Slider ref={sliderRef} {...settings}>
+      {/* <Slider ref={sliderRef} {...settings}> */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {videos.map((video) => (
           <div
             key={video.id}
@@ -94,7 +95,8 @@ const VideoSlider = ({ videos, direction, onVideoClick, selectedCategory }) => {
             ></video>
           </div>
         ))}
-      </Slider>
+      {/* </Slider> */}
+      </div>
     </div>
   );
 };
