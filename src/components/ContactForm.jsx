@@ -32,7 +32,9 @@ const ContactForm = () => {
 
   // Remove a file from the selected list
   const handleRemoveFile = (fileIndex) => {
-    setFiles((prevFiles) => prevFiles.filter((_, index) => index !== fileIndex));
+    setFiles((prevFiles) =>
+      prevFiles.filter((_, index) => index !== fileIndex)
+    );
   };
 
   // Handle form submission
@@ -57,11 +59,10 @@ const ContactForm = () => {
     files.forEach((file, index) => {
       formData.append(`file_${index}`, file);
     });
-// Log all entries in the FormData object
-for (let [key, value] of formData.entries()) {
-  console.log(key, value);
-}
-
+    // Log all entries in the FormData object
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
 
     // Mocking the API call
     setTimeout(() => {
@@ -71,63 +72,75 @@ for (let [key, value] of formData.entries()) {
     }, 2000);
   };
 
+  // rounded-xl shadow-lg
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
+    <div className="max-w-full m-auto  w-full  bg-white ">
+      <h2 className="text-large font-bold text-left text-gray-700 mb-6">
         Contact Form
       </h2>
       <form onSubmit={handleSubmit}>
-        {/* Name Field */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="mt-1 p-2 block w-full text-gray-700 bg-gray-50 rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
+        <div className="flex flex-col md:flex-row md:gap-4">
+          {/* Name Field  */}
+          <div className="mb-4 flex-1">
+            <label className="text-sm font-medium text-gray-700 hidden">
+              Name
+            </label>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="mt-1 p-3 block w-full text-gray-700  rounded-sm border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-small"
+            />
+          </div>
 
-        {/* Phone Number Field */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-            className="mt-1 p-2 block w-full text-gray-700 bg-gray-50 rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
+          {/* Phone Number Field */}
+          <div className="mb-4 flex-1">
+            <label className="hidden text-sm font-medium text-gray-700 ">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              value={phone}
+              placeholder="Phone"
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              className="mt-1 p-3 block w-full text-gray-700  rounded-sm border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-small"
+            />
+          </div>
         </div>
 
         {/* Email Field */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <label className="text-sm font-medium text-gray-700 hidden">
+            Email
+          </label>
           <input
             type="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 p-2 block w-full text-gray-700 bg-gray-50 rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 p-3 block w-full text-gray-700  rounded-sm border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-small"
           />
         </div>
 
         {/* Service Dropdown */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Service</label>
+          <label className="hidden text-sm font-medium text-gray-700">
+            Service
+          </label>
           <select
             value={service}
             onChange={(e) => setService(e.target.value)}
             required
-            className="mt-1 p-2 block w-full text-gray-700 bg-gray-50 rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 p-3 block w-full text-gray-700  rounded-sm border border-gray-300 shadow-sm focus:border-primary placeholder:text-small"
           >
-            <option value="" disabled>
+            <option value="" disabled className="mx-3">
               Select a service
             </option>
-            <option value="option1">Option 1</option>
+            <option value="option1" >Option 1</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
             <option value="option4">Option 4</option>
@@ -136,15 +149,16 @@ for (let [key, value] of formData.entries()) {
 
         {/* Message Field */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="hidden text-sm font-medium text-gray-700">
             Message
           </label>
           <textarea
             value={message}
+            placeholder="Message"
             onChange={(e) => setMessage(e.target.value)}
             required
             rows="4"
-            className="mt-1 p-2 block w-full text-gray-700 bg-gray-50 rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 p-3 block w-full text-gray-700  rounded-sm border border-gray-300 shadow-sm focus:border-primary placeholder:text-small"
           />
         </div>
 
@@ -196,7 +210,9 @@ for (let [key, value] of formData.entries()) {
       {/* Preview Selected Files */}
       {files.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-lg font-semibold text-gray-700">Selected Files</h3>
+          <h3 className="text-lg font-semibold text-gray-700">
+            Selected Files
+          </h3>
           <ul className="mt-2 space-y-3">
             {files.map((file, index) => (
               <li

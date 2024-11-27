@@ -8,7 +8,7 @@ const TeamCardGrid = () => {
   return (
     <section className="xl:container xl:mx-auto text-center">
       <div
-        className={`${"inline-block shadow-[0px_1px_40px_-4px_#a8a5a5] rounded-full "}`}
+        className={`${"inline-block shadow-[0px_1px_40px_-4px_#FEA500] rounded-full "}`}
       >
         <p className="bg-primary text-background py-2 px-6 rounded-full font-roboto inline text-small">
           Team Members
@@ -18,7 +18,7 @@ const TeamCardGrid = () => {
         Meet Our Professional Team Members
       </h2>
       <div className="flex justify-center items-center mt-8 md:mt-14">
-        <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-3 md:gap-y-6     xl:gap-8 w-full max-w-full">
+        <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-3 md:gap-y-6 xl:gap-8 w-full max-w-full">
           {teamCardData.map((card, index) => (
             <motion.div
               key={index}
@@ -39,7 +39,7 @@ const TeamCardGrid = () => {
         </div>
       </div>
       <div className="flex justify-center items-center mt-14 md:mt-20">
-        <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
+        <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-3 md:gap-y-6 xl:gap-8 w-full max-w-full">
           {statsCardData.length > 0
             ? statsCardData?.map((card, index) => (
                 <motion.div

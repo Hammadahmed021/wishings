@@ -6,4 +6,5 @@ export {default as SignUp} from './SignUp.jsx'
 export { default as Profile } from "./Profile.jsx";
 export { default as CheckOutPage } from "./CheckOutPage.jsx";
 export { default as AboutUs } from "./AboutUs.jsx";
+export { default as Contact } from "./Contact.jsx";
 

@@ -14,7 +14,7 @@ const AboutUs = () => {
           className={`pattern-boxes pattern-gray-500 pattern-bg-white  pattern-size-12 pattern-opacity-5`}
         />
       </AnimatedSection>
-
+    
       <div className="py-10 md:py-20 px-8">
         {/* First Section: Text on Left, Image on Right */}
         <TextImageSection
