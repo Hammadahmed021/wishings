@@ -330,55 +330,57 @@ const TemplatePage = () => {
 
   // Time wheel function
 
-  const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // Creates intervals of 30 seconds up to 600 seconds
 
-  const [selectedTime, setSelectedTime] = useState(30); // Default selection is 60 seconds
-  const [priceState, setPriceState] = useState(49)
+  const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // 30s to 600s intervals
+  const [selectedTime, setSelectedTime] = useState(30); // Default time
+  const [priceState, setPriceState] = useState(49); // Default price
   const basePrice = 49;
   const additionalCostPerInterval = 30;
 
   // Calculate price based on the selected time
-  const calculatePrice = () =>
-    setPriceState(priceState + (selectedTime / 30 - 1) * additionalCostPerInterval);
+  const calculatePrice = (time) => {
+    const timeDifference = (time / 30) - 1;
+    const newPrice = basePrice + timeDifference * additionalCostPerInterval;
+    setPriceState(newPrice);
+  };
 
   const TimeWheelView = () => {
     return (
       <div className="text-start mb-16">
-        <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+      <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+        Time Selection Wheel
+      </h2>
 
-          Time Selection Wheel
-        </h2>
-
-        {/* Time Wheel */}
-        <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-muted">
-          {timeOptions.map((time) => (
-            <button
-              key={time}
-              onClick={() => {
-                setSelectedTime(time);
-                calculatePrice();
-              }}
-              className={`bg-gray-200 font-thin  px-2 py-1 flex items-center justify-center rounded-lg border transition-all duration-200 ${selectedTime === time
-                ? "bg-gradient-to-r from-btn-gradient-start to-btn-gradient-end text-white"
-                : "bg-surface text-text hover:bg-secondary hover:text-white"
-                }`}
-            >
-              <span className="text-base sm:text-sm">{time} sec</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Selected Time and Price */}
-        <div className="mt-8 flex items-center justify-start gap-4">
-          <h3 className="text-xl sm:text-lg font-normal text-text">
-            Selected Time:{" "}
-            <span className="text-secondary font-medium">{selectedTime} sec</span>
-          </h3>
-          <h3 className="text-xl sm:text-lg font-normal text-text">
-            Price: <span className="text-secondary font-medium">${priceState}</span>
-          </h3>
-        </div>
+      {/* Time Wheel */}
+      <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-muted">
+        {timeOptions.map((time) => (
+          <button
+            key={time}
+            onClick={() => {
+              setSelectedTime(time);
+              calculatePrice(time);
+            }}
+            className={`bg-gray-200 font-thin px-1 text-xs flex items-center justify-center rounded-lg border transition-all duration-200 ${
+              selectedTime === time
+                ? 'bg-secondary text-white'
+                : 'bg-gray-100 text-black hover:bg-blue-300 hover:text-white'
+            }`}
+          >
+            <span className="text-base sm:text-sm">{time} sec</span>
+          </button>
+        ))}
       </div>
+
+      {/* Selected Time and Price */}
+      <div className="mt-8 flex items-center justify-start gap-4">
+        <h3 className="text-xl sm:text-lg font-normal text-black">
+          Selected Time: <span className="text-blue-500 font-medium">{selectedTime} sec</span>
+        </h3>
+        <h3 className="text-xl sm:text-lg font-normal text-black">
+          Price: <span className="text-green-500 font-medium">${priceState.toFixed(2)}</span>
+        </h3>
+      </div>
+    </div>
 
     );
   };
