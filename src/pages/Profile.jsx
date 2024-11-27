@@ -214,7 +214,7 @@ const Profile = () => {
 
               <div className="my-6">
                 <h2 className="text-3xl font-black text-tn_dark">
-                  Welcome {currentUser?.displayName || "N/A"}
+                  Welcome {userData?.displayName || currentUser?.displayName || "N/A"}
                 </h2>
                 <p>You can change your profile information here.</p>
               </div>
