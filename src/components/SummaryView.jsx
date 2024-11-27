@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
-import { anonymousUser, signupUser } from "../store/authSlice";
+import { anonymousUser, logout, signupUser } from "../store/authSlice";
 import { useEffect, useState } from "react";
+import { Logout } from "../utils/Api";
 
 const SummaryView = ({
   state,
@@ -125,6 +126,11 @@ const SummaryView = ({
                 onClick={async () => {
                   const loginResponse = await dispatch(anonymousUser()).unwrap();
                   setToken(loginResponse?.token);
+                  setIsGuest(true)
+                  setTimeout(async() => {
+                    await Logout(); // Call Firebase signOut function
+                    dispatch(logout()); // Dispatch your logout action
+                  }, 50000);
                 }}
                 className="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition duration-300"
               >
@@ -135,7 +141,7 @@ const SummaryView = ({
           </div>
         </div>
       ) : (
-        <p className="text-lg font-medium text-gray-600">You are logged in</p>
+        <p className="text-lg font-medium text-gray-600">You are logged in {isGuest && "as a guest after 5 minute you will be logout "}</p>
       )}
 
       {/* Summary Details */}
@@ -229,6 +235,7 @@ const SummaryView = ({
         <button
           onClick={async () => {
             if (!token) {
+              // console.log("ljksdbvkljbsksdblksdblkvsblkbsdklv",token)
               handleLoginSubmit();
             } else {
               navigate("/checkout", {
