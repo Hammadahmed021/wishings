@@ -63,9 +63,7 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: (
-          <AuthLayout authentication={true}>
             <CheckOutPage />
-          </AuthLayout>
         ),
       },
       {
