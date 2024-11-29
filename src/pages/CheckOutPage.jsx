@@ -24,24 +24,6 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
       <CheckoutForm
         amount={state}
         handlePayment={async(e) => {
-          console.table("jksdbvklbsdklvbklsdbvlksbdlkvbsldk", state);
-
-          //placeOrderApi({
-          //  //user_id: 1,
-          //  category_id: state.categoryId,
-          //  "videos[]": state.videos,
-          //  "pictures[]": state.images,
-          //  script: state.scripts,
-          //  amount: state.price,
-          //  payment_id: e,
-          //  music_id: state.audio.id,
-          //  music: state.audio,
-          //  category_video_id: state.videoId,
-          //  titles: state.title,
-          //  taglines: state.tags,
-          //  instruction: state.instructions,
-          //  video_proportion: state.proportion,
-          //});
      const response =  await  placeOrderApi({
           category_id: state.categoryId,
           videos: state.videos,

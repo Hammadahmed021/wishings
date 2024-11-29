@@ -18,17 +18,18 @@ const SummaryView = ({
   proportion,
   titles,
   tags,
-  allData
+  allData,
+  showPaymentModal,
 }) => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [isGuest, setIsGuest] = useState(false);
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
   useEffect(() => {
     const token = localStorage.getItem("wishToken");
-    setToken(token)
-  }, [])
+    setToken(token);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -47,22 +48,23 @@ const SummaryView = ({
     if (name != null && email != null && password != null) {
       const response = await handleSignup({ name, email, password });
       if (response) {
-        navigate("/checkout", {
-          state: {
-            price: calculatePrice,
-            selectedTime,
-            images,
-            videos,
-            audio: selectedFile,
-            scripts: pdfFile ?? scriptText,
-            categoryId,
-            videoId: state?.id,
-            instructions,
-            tags,
-            titles,
-            proportion,
-          },
-        });
+        showPaymentModal()
+        //navigate("/checkout", {
+        //  state: {
+        //    price: calculatePrice,
+        //    selectedTime,
+        //    images,
+        //    videos,
+        //    audio: selectedFile,
+        //    scripts: pdfFile ?? scriptText,
+        //    categoryId,
+        //    videoId: state?.id,
+        //    instructions,
+        //    tags,
+        //    titles,
+        //    proportion,
+        //  },
+        //});
       }
     } else {
       alert("Please fill in all fields to proceed.");
@@ -72,9 +74,7 @@ const SummaryView = ({
   return (
     <div className="container mx-auto space-y-8 bg-white  my-10 rounded-lg p-4">
       {/* Page Heading */}
-      <h1 className="text-5xl font-poppins mb-8">
-        Selection Summary
-      </h1>
+      <h1 className="text-5xl font-poppins mb-8">Selection Summary</h1>
 
       {/* Sign Up or Login Section */}
       {!token ? (
@@ -121,13 +121,17 @@ const SummaryView = ({
               >
                 Login
               </button>
-              <h3 className="text-2xl font-medium font-poppins text-center">or</h3>
+              <h3 className="text-2xl font-medium font-poppins text-center">
+                or
+              </h3>
               <button
                 onClick={async () => {
-                  const loginResponse = await dispatch(anonymousUser()).unwrap();
+                  const loginResponse = await dispatch(
+                    anonymousUser()
+                  ).unwrap();
                   setToken(loginResponse?.token);
-                  setIsGuest(true)
-                  setTimeout(async() => {
+                  setIsGuest(true);
+                  setTimeout(async () => {
                     await Logout(); // Call Firebase signOut function
                     dispatch(logout()); // Dispatch your logout action
                   }, 50000);
@@ -137,11 +141,13 @@ const SummaryView = ({
                 Continue as a Guest
               </button>
             </div>
-
           </div>
         </div>
       ) : (
-        <p className="text-lg font-medium text-gray-600">You are logged in {isGuest && "as a guest after 5 minute you will be logout "}</p>
+        <p className="text-lg font-medium text-gray-600">
+          You are logged in{" "}
+          {isGuest && "as a guest after 5 minute you will be logout "}
+        </p>
       )}
 
       {/* Summary Details */}
@@ -161,19 +167,16 @@ const SummaryView = ({
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Instructions:</h4>
           <p className="text-gray-700">{instructions}</p>
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Proportion:</h4>
           <p className="text-gray-700">{proportion}</p>
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Tags:</h4>
           <ul className="list-disc pl-6 text-gray-700">
             {tags.length > 0
@@ -183,7 +186,6 @@ const SummaryView = ({
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Images:</h4>
           <ul className="list-disc pl-6 text-gray-700">
             {images.map((image, index) => (
@@ -193,7 +195,6 @@ const SummaryView = ({
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Audios:</h4>
           <ul className="list-disc pl-6 text-gray-700">
             <li>{selectedFile.name ?? selectedFile.title}</li>
@@ -201,7 +202,6 @@ const SummaryView = ({
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Videos:</h4>
           <ul className="list-disc pl-6 text-gray-700">
             {videos.map((video, index) => (
@@ -211,20 +211,20 @@ const SummaryView = ({
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Time:</h4>
           <p className="text-gray-700">{selectedTime}</p>
           <p className="text-gray-700">Price: {calculatePrice} $</p>
         </div>
 
         <div className="border-b pb-4">
-
           <h4 className="text-2xl font-medium font-poppins">Script:</h4>
           {pdfFile ? (
             <p className="text-gray-700">Uploaded PDF: {pdfFile.name}</p>
           ) : (
             <p className="text-gray-700">
-              {scriptText ? `${scriptText.slice(0, 100)}...` : "No script provided"}
+              {scriptText
+                ? `${scriptText.slice(0, 100)}...`
+                : "No script provided"}
             </p>
           )}
         </div>
@@ -238,31 +238,31 @@ const SummaryView = ({
               // console.log("ljksdbvkljbsksdblksdblkvsblkbsdklv",token)
               handleLoginSubmit();
             } else {
-              navigate("/checkout", {
-                state: {
-                  price: calculatePrice,
-                  selectedTime,
-                  images,
-                  videos,
-                  audio: selectedFile,
-                  scripts: pdfFile ?? scriptText,
-                  categoryId,
-                  videoId: state?.id,
-                  instructions,
-                  tags,
-                  titles,
-                  proportion,
-                },
-              });
+              showPaymentModal()
+              //navigate("/checkout", {
+              //  state: {
+              //    price: calculatePrice,
+              //    selectedTime,
+              //    images,
+              //    videos,
+              //    audio: selectedFile,
+              //    scripts: pdfFile ?? scriptText,
+              //    categoryId,
+              //    videoId: state?.id,
+              //    instructions,
+              //    tags,
+              //    titles,
+              //    proportion,
+              //  },
+              //});
             }
           }}
           className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary text-lg"
-                >
+        >
           Proceed to Payment
         </button>
       </div>
     </div>
-
   );
 };
 
