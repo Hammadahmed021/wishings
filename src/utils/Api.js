@@ -4,8 +4,12 @@ export const Signup = async (userData) => {
   console.log(userData, "userData");
 
   try {
-    const { token } = userData;
-    const response = await axiosInstance.post(`auth/signup-login`, { token });
+    const { token, fname } = userData;
+    const response = await axiosInstance.post(`auth/signup-login`, {
+      token,
+      fname,
+    });
+    localStorage.setItem("userData", JSON.stringify(response.data.user));
     console.log(response, "response >>>>signup");
 
     return response.data;
@@ -19,6 +23,8 @@ export const Login = async (userData) => {
   try {
     const { token } = userData;
     const response = await axiosInstance.post(`auth/signup-login`, { token });
+    console.log("logi respose ", response.data);
+    localStorage.setItem("userData", JSON.stringify(response.data.user));
     return response.data;
   } catch (error) {
     console.error("API Login request failed:", error.response);
@@ -32,6 +38,8 @@ export const Verify = async () => {
 
   try {
     const response = await axiosInstance.get(`auth/verify`);
+    localStorage.setItem("userData", JSON.stringify(response.data.user));
+    console.log("lhdklhsdklhfksdhflksdhf", response.data);
     return response.data;
   } catch (error) {
     console.error("API Login request failed:", error.response);
@@ -107,12 +115,24 @@ export const getPayment = async (paymentData) => {
   }
 };
 
+function getFileExtension(filename) {
+  // Check if filename contains a dot
+  if (filename.includes(".")) {
+    // Split the filename at the last dot and return the extension
+    return filename.substring(filename.lastIndexOf(".") + 1);
+  }
+  // If no dot is found, return null or an appropriate value
+  return null;
+}
+
 // Functions to fetch payment stripe payment intent
 export const placeOrderApi = async (paymentData) => {
   console.log("Booking object before API call:", paymentData);
 
+  const userData = localStorage.getItem("userData");
+  console.log("User data:", JSON.stringify(userData));
+
   try {
-    // Create FormData object
     const formData = new FormData();
 
     // Append key-value pairs to FormData
@@ -120,21 +140,46 @@ export const placeOrderApi = async (paymentData) => {
       if (paymentData.hasOwnProperty(key)) {
         if (Array.isArray(paymentData[key])) {
           // Handle array data
-          paymentData[key].forEach((item) => {
-            formData.append(`${key}`, item); // Append each item of the array
+          paymentData[key].forEach((item, index) => {
+            const imageFile = item?.id
+              ? new File([item?.file], item?.file?.name, {
+                  type: getFileExtension(item?.file?.name),
+                })
+              : {};
+            formData.append(`${key}[${index}]`, item?.id ? imageFile : item); // Append each item of the array
           });
         } else if (
           typeof paymentData[key] === "object" &&
-          paymentData[key] !== null
+          paymentData[key] !== null &&
+          !(paymentData[key] instanceof File)
         ) {
-          // Handle nested object
-          formData.append(key, JSON.stringify(paymentData[key]));
+          // Handle nested object (excluding File objects)
+          formData.append(key, paymentData[key]);
+        } else if (paymentData[key] instanceof File) {
+          // Handle files (like scripts, images, etc.)
+          formData.append(key, paymentData[key]);
         } else {
-          // Append regular key-value pair
+          // Append regular key-value pair (like strings or numbers)
           formData.append(key, paymentData[key]);
         }
       }
     }
+
+    // Handle the 'music' field
+    if (paymentData.music) {
+      const { music_path, file, name, url } = paymentData.music;
+      if (music_path || url) {
+        const musicFile = new File([url ?? music_path], name ?? file, {
+          type: "mp3",
+        });
+        formData.append("music", musicFile);
+      } else {
+        console.error("Invalid music file data provided.");
+      }
+    }
+
+    // Append user ID from local storage
+    formData.append("user_id", JSON.parse(userData)?.id ?? 1);
 
     console.log(
       "FormData before API call:",
@@ -149,7 +194,7 @@ export const placeOrderApi = async (paymentData) => {
     });
 
     console.log("API response:", response.data);
-    return response.data;
+    return response;
   } catch (error) {
     if (error.response) {
       console.error("Error response data:", error.response.data);
@@ -160,6 +205,19 @@ export const placeOrderApi = async (paymentData) => {
     } else {
       console.error("Error message:", error.message);
     }
+    throw error;
+  }
+};
+
+export const getAllOrdersApi = async () => {
+  const token = localStorage.getItem("wishToken");
+  console.log(token, "token");
+
+  try {
+    const response = await axiosInstance.get(`order/read/all`);
+    return response;
+  } catch (error) {
+    console.error("API Login request failed:", error.response);
     throw error;
   }
 };

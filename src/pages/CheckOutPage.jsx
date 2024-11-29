@@ -19,25 +19,52 @@ console.log("jksdbvklbsdklvbklsdbvlksbdlkvbsldk",state)
 
 
   return (
+    <div className="container mx-auto max-w-md text-center my-16">
     <Elements stripe={stripePromise}>
       <CheckoutForm
         amount={state}
-        handlePayment={(e) =>
-          placeOrderApi({
-            //user_id: 1,
-            category_id: state.categoryId,
-            "videos[]": state.videos,
-            "pictures[]": state.images,
-            script: state.scripts,
-            amount: state.price,
-            payment_id: e,
-            music_id: state.audio.id,
-            music: state.audio,
-          })
+        handlePayment={async(e) => {
+          console.table("jksdbvklbsdklvbklsdbvlksbdlkvbsldk", state);
+
+          //placeOrderApi({
+          //  //user_id: 1,
+          //  category_id: state.categoryId,
+          //  "videos[]": state.videos,
+          //  "pictures[]": state.images,
+          //  script: state.scripts,
+          //  amount: state.price,
+          //  payment_id: e,
+          //  music_id: state.audio.id,
+          //  music: state.audio,
+          //  category_video_id: state.videoId,
+          //  titles: state.title,
+          //  taglines: state.tags,
+          //  instruction: state.instructions,
+          //  video_proportion: state.proportion,
+          //});
+     const response =  await  placeOrderApi({
+          category_id: state.categoryId,
+          videos: state.videos,
+          pictures: state.images,
+          script: state.scripts, // Ensure this is a File object if it's a file
+          amount: state.price,
+          payment_id: e,
+          music_id: state.audio.music_path ? state.audio.id:null,
+          music: state.audio.music_path ? null : state.audio,
+          category_video_id: state.videoId,
+          titles:state.titles,
+          taglines: state.tags,
+          instruction: state.instructions,
+          video_proportion: state.proportion,
+     });
+          if (response.status == 200) alert("Order Created successfully")
+          else alert("error on creating order")
+        }
         }
         // buttonDis={totalPrice}
       />
     </Elements>
+    </div>
   );
 };
 

@@ -1,7 +1,9 @@
 const ImagesView = ({handleImageUpload,MAX_IMAGES,images,handleRemoveImage}) => {
     return (
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">Upload Images</h2>
+      <div className="mb-16">
+        <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+
+          Upload Images</h2>
 
         <div className="mb-4">
           <input
@@ -13,12 +15,12 @@ const ImagesView = ({handleImageUpload,MAX_IMAGES,images,handleRemoveImage}) => 
           />
         </div>
 
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-base text-muted mb-4">
           You can upload up to {MAX_IMAGES} images. Total size must be less than
           2GB.
         </p>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {images.map((image) => (
             <div key={image.id} className="relative">
               <img
@@ -28,11 +30,11 @@ const ImagesView = ({handleImageUpload,MAX_IMAGES,images,handleRemoveImage}) => 
               />
               <button
                 onClick={() => handleRemoveImage(image.id)}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
+                className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 hover:bg-red-700"
               >
                 ✕
               </button>
-              <p className="text-xs text-center mt-1">{image.name}</p>
+              <p className="text-sm text-center mt-1">{image.name}</p>
             </div>
           ))}
         </div>

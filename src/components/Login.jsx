@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from '../store/authSlice';
 
-const Login = () => {
+const Login = ({isGoBack}) => {
     const [isSigning, setIsSigning] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -21,7 +21,8 @@ const Login = () => {
     setIsSigning(true); // Assuming you have setIsSigning state
     try {
       const loginResponse = await dispatch(loginUser(data)).unwrap();
-      console.log("Login Response:", loginResponse);
+      //if (isGoBack) window.history.back();
+        console.log("Login Response:", loginResponse);
       // Handle success, navigate user or update UI
     } catch (error) {
       console.error("Login failed:", error);

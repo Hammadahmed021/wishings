@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams ,useNavigate} from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
@@ -9,6 +9,10 @@ import ImagesView from "../components/ImageView";
 import VideoView from "../components/VideoView";
 import SummaryView from "../components/SummaryView";
 import ScriptView from "../components/ScriptView";
+import VideoTitleInput from "../components/TitleInput";
+import VideoTagsInput from "../components/TagsFroVideo";
+import VideoInstructionsInput from "../components/VideoInstructionInput";
+import VideoProportionSelector from "../components/VideoProportionSelect";
 
 //import
 
@@ -19,7 +23,7 @@ const TemplatePage = () => {
 
   console.log("statestatestatestatestatestate", state);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -153,8 +157,8 @@ const TemplatePage = () => {
 
   function CategorySelect() {
     return (
-      <div className="flex flex-col space-y-2 w-64">
-        <label htmlFor="category" className="text-gray-700 font-medium">
+      <div className="flex flex-col ">
+        <label htmlFor="category" className="text-gray-700 font-medium font-poppins">
           Category Name: {state?.categoryName}
         </label>
         {/*<select
@@ -202,7 +206,7 @@ const TemplatePage = () => {
       id: URL.createObjectURL(file), // temporary URL for preview
       file,
       size: file.size,
-      name: file.name,
+      name: file?.name,
     }));
 
     setVideos((prevVideos) => [...prevVideos, ...newVideos]);
@@ -257,7 +261,29 @@ const TemplatePage = () => {
   // Calculate the word count of the script text
   const wordCount = scriptText.trim().split(/\s+/).filter(Boolean).length;
 
-  
+
+  // hadle title 
+
+  const [titles, setTitles] = useState([""]); // Array to store multiple titles
+
+  // Handle input change for a specific title
+  const handleTitleChange = (index, value) => {
+    const newTitles = [...titles];
+    newTitles[index] = value;
+    setTitles(newTitles);
+  };
+
+  // Add a new title
+  const addTitle = () => {
+    setTitles([...titles, ""]);
+  };
+
+  // Remove a title
+  const removeTitle = (index) => {
+    const newTitles = titles.filter((_, i) => i !== index);
+    setTitles(newTitles);
+  };
+
   // Validation function
   const validateAllFields = () => {
     if (images.length === 0) {
@@ -276,7 +302,23 @@ const TemplatePage = () => {
       alert("Please upload a script PDF or type a script.");
       return false;
     }
-
+    navigate("/summary", {
+      state: {
+        categoryId: state.category_id,
+        calculatePrice: priceState,
+        images: images,
+        pdfFile: pdfFile,
+        scriptText,
+        selectedFile,
+        selectedTime,
+        state,
+        videos,
+        instructions,
+        proportion,
+        titles,
+        tags,
+      },
+    });
     // If all validations pass, show summary modal
     setShowModal(true);
     return true;
@@ -284,56 +326,108 @@ const TemplatePage = () => {
 
   // Summary Function
 
-  
+
 
   // Time wheel function
 
-  const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // Creates intervals of 30 seconds up to 600 seconds
 
-  const [selectedTime, setSelectedTime] = useState(30); // Default selection is 60 seconds
+  const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // 30s to 600s intervals
+  const [selectedTime, setSelectedTime] = useState(30); // Default time
+  const [priceState, setPriceState] = useState(49); // Default price
   const basePrice = 49;
-const additionalCostPerInterval = 30;
+  const additionalCostPerInterval = 30;
 
   // Calculate price based on the selected time
-  const calculatePrice = () =>
-    basePrice + (selectedTime / 30 - 1) * additionalCostPerInterval;
+  const calculatePrice = (time) => {
+    const timeDifference = (time / 30) - 1;
+    const newPrice = basePrice + timeDifference * additionalCostPerInterval;
+    setPriceState(newPrice);
+  };
 
   const TimeWheelView = () => {
     return (
-      <div style={{ textAlign: "center", padding: "20px" }}>
-        <h2>Time Selection Wheel</h2>
-        <div style={{ display: "flex", overflowX: "scroll" }}>
-          {timeOptions.map((time) => (
-            <button
-              key={time}
-              onClick={() => setSelectedTime(time)}
-              style={{
-                margin: "5px",
-                padding: "10px 20px",
-                backgroundColor: selectedTime === time ? "#4caf50" : "#f1f1f1",
-                borderRadius: "50%",
-                color: selectedTime === time ? "white" : "black",
-              }}
-            >
-              {time} sec
-            </button>
-          ))}
-        </div>
-        <h3>Selected Time: {selectedTime} sec</h3>
-        <h3>Price: ${calculatePrice()}</h3>
+      <div className="text-start mb-16">
+      <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+        Time Selection Wheel
+      </h2>
+
+      {/* Time Wheel */}
+      <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-muted">
+        {timeOptions.map((time) => (
+          <button
+            key={time}
+            onClick={() => {
+              setSelectedTime(time);
+              calculatePrice(time);
+            }}
+            className={`bg-gray-200 font-thin px-1 text-xs flex items-center justify-center rounded-lg border transition-all duration-200 ${
+              selectedTime === time
+                ? 'bg-secondary text-white'
+                : 'bg-gray-100 text-black hover:bg-blue-300 hover:text-white'
+            }`}
+          >
+            <span className="text-base sm:text-sm">{time} sec</span>
+          </button>
+        ))}
       </div>
+
+      {/* Selected Time and Price */}
+      <div className="mt-8 flex items-center justify-start gap-4">
+        <h3 className="text-xl sm:text-lg font-normal text-black">
+          Selected Time: <span className="text-blue-500 font-medium">{selectedTime} sec</span>
+        </h3>
+        <h3 className="text-xl sm:text-lg font-normal text-black">
+          Price: <span className="text-green-500 font-medium">${priceState.toFixed(2)}</span>
+        </h3>
+      </div>
+    </div>
+
     );
   };
 
+  // add tags for my video
+
+  const [tags, setTags] = useState([]);
+  const [currentTag, setCurrentTag] = useState("");
+
+  const handleTagsInputChange = (e) => {
+    setCurrentTag(e.target.value);
+  };
+
+  const addTag = (e) => {
+    //e.preventDefault();
+    if (currentTag.trim() && !tags.includes(currentTag)) {
+      setTags([...tags, currentTag.trim()]);
+    }
+    setCurrentTag("");
+  };
+
+  const removeTag = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
 
 
+  // add instruction for my video 
 
+  const [instructions, setInstructions] = useState("");
 
+  const handleInstructionInputChange = (e) => {
+    setInstructions(e.target.value);
+  };
+
+  // proportions selection 
+
+  const [proportion, setProportion] = useState("");
+
+  const handleSelection = (selectedProportion) => {
+    setProportion(selectedProportion);
+  };
 
   // Fetch or display data using the template id
   return (
-    <div className="template-page">
-      <h1 className="text-5xl">Template ID: {id}</h1>
+    <div className="container mx-auto py-16 p-4">
+      <h1 className="text-5xl font-poppins mb-8">
+        Template ID: {id}</h1>
       {/* Display template content */}
       <CategorySelect />
       <ScriptView
@@ -345,6 +439,27 @@ const additionalCostPerInterval = 30;
         removePdfFile={removePdfFile}
         scriptText={scriptText}
         wordCount={wordCount}
+      />
+      <VideoTagsInput
+        addTag={(tag) => addTag(tag)}
+        currentTag={currentTag}
+        handleInputChange={(input) => handleTagsInputChange(input)}
+        removeTag={(e) => removeTag(e)}
+        tags={tags}
+      />
+      <VideoInstructionsInput
+        instructions={instructions}
+        handleInputChange={(e) => handleInstructionInputChange(e)}
+      />
+      <VideoTitleInput
+        titles={titles}
+        handleTitleChange={(e, v) => handleTitleChange(e, v)}
+        addTitle={(e) => addTitle(e)}
+        removeTitle={e => removeTitle(e)}
+      />
+      <VideoProportionSelector
+        proportion={proportion}
+        handleSelection={(e) => handleSelection(e)}
       />
       <AudioFilesView
         audioFiles={audioFiles}
@@ -364,11 +479,11 @@ const additionalCostPerInterval = 30;
         handleVideoUpload={(e) => handleVideoUpload(e)}
         videos={videos}
       />
-      <SummaryView
+      {/*<SummaryView
         categoryId={state.category_id}
         calculatePrice={calculatePrice}
         closeModal={closeModal}
-        images={images}
+        images={imagess}
         navigate={navigate}
         pdfFile={pdfFile}
         scriptText={scriptText}
@@ -377,14 +492,18 @@ const additionalCostPerInterval = 30;
         showModal={showModal}
         state={state}
         videos={videos}
-      />
+        instructions={instructions}
+        proportion={proportion}
+        title={title}
+        tags={tags}
+      />*/}
       <TimeWheelView />
       {/* Validate and show summary button */}
       <button
         onClick={validateAllFields}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary text-lg"
       >
-        Show Summary and Proceed to Payment
+        View summary
       </button>
     </div>
   );

@@ -19,6 +19,7 @@ const AuthLayout = ({ children, authentication = true }) => {
     } else if (redirectState && redirectState.fromReservation && authStatus) {
       // If redirected from reservation and user is logged in, navigate back to reservation
       localStorage.removeItem("redirectState");
+      console.log("pathnamepathnamepathnamepathnamepathname",redirectState.location);
       navigate(redirectState.location.pathname, { state: redirectState.location.state });
     }
     

@@ -36,7 +36,7 @@ const CheckoutForm = ({ amount, handlePayment, buttonDis }) => {
     console.log(amount, "amount >>>>>>>>>>>");
 
     const paymentData = {
-      amount: amountInCents,
+      amount: conv,
       // hotel_id: amount.hotel_id,
     };
 
