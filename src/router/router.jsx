@@ -7,6 +7,7 @@ import {
   SignIn,
   Profile,
   CheckOutPage,
+  OrderDetail,
 } from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
@@ -71,6 +72,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication={true} >
             <AllOrderPage/>
+          </AuthLayout>
+        )
+      },
+      {
+        path: "/order/:id",
+        element: (
+          <AuthLayout authentication={true} >
+            <OrderDetail/>
           </AuthLayout>
         )
       },
