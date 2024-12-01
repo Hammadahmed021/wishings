@@ -31,6 +31,7 @@ const SummaryView = ({
     setToken(token);
   }, []);
 
+
   const dispatch = useDispatch();
 
   const handleSignup = async (userData) => {

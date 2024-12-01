@@ -48,6 +48,8 @@ const SummaryPage = () => {
             <CheckoutForm
               amount={{price:state.calculatePrice}}
               handlePayment={async (e) => {
+console.log("lsdbvklbdsklvblksdbklvbsdkbvlskd", state);
+
                 const response = await placeOrderApi({
                   category_id: state.categoryId,
                   videos: state.videos,
@@ -61,7 +63,7 @@ const SummaryPage = () => {
                   music: state?.selectedFile?.music_path
                     ? null
                     : state?.selectedFile,
-                  category_video_id: state.id,
+                  category_video_id: state?.state.id,
                   titles: state.titles,
                   taglines: state.tags,
                   instruction: state.instructions,
@@ -69,8 +71,9 @@ const SummaryPage = () => {
                 });
                 if (response.status == 200) {
                   setIsPaymentModal(false);
-
                   alert("Order Created successfully");
+navigate("/ordes", { replace: true });
+
                 } else alert("error on creating order");
               }}
               // buttonDis={totalPrice}
