@@ -221,3 +221,15 @@ export const getAllOrdersApi = async () => {
     throw error;
   }
 };
+export const getOrderDetailApi = async (id) => {
+  const token = localStorage.getItem("wishToken");
+  console.log(token, "token");
+
+  try {
+    const response = await axiosInstance.get(`/order/read/${id}`);
+    return response;
+  } catch (error) {
+    console.error("API Login request failed:", error.response);
+    throw error;
+  }
+};

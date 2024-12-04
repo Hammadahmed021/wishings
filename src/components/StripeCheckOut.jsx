@@ -33,7 +33,7 @@ const CheckoutForm = ({ amount, handlePayment, buttonDis }) => {
 
     const amountInCents = Math.round(conv * 100);
 
-    console.log(amount, "amount >>>>>>>>>>>");
+    console.log(amount.price, "amount >>>>>>>>>>>");
 
     const paymentData = {
       amount: conv,

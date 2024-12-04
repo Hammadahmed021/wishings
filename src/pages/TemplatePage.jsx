@@ -13,6 +13,7 @@ import VideoTitleInput from "../components/TitleInput";
 import VideoTagsInput from "../components/TagsFroVideo";
 import VideoInstructionsInput from "../components/VideoInstructionInput";
 import VideoProportionSelector from "../components/VideoProportionSelect";
+import VideoDisplay from "../components/VideoShowComp";
 
 //import
 
@@ -417,11 +418,15 @@ const TemplatePage = () => {
 
   // proportions selection 
 
-  const [proportion, setProportion] = useState("");
+  const [proportion, setProportion] = useState("Portrait");
 
   const handleSelection = (selectedProportion) => {
     setProportion(selectedProportion);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   // Fetch or display data using the template id
   return (
@@ -461,6 +466,7 @@ const TemplatePage = () => {
         proportion={proportion}
         handleSelection={(e) => handleSelection(e)}
       />
+     
       <AudioFilesView
         audioFiles={audioFiles}
         handleSelect={(e) => handleSelect(e)}
