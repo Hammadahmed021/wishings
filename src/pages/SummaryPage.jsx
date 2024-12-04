@@ -11,6 +11,11 @@ import { placeOrderApi } from "../utils/Api";
 import { useState } from "react";
 
 const SummaryPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const location = useLocation()
   const navigate = useNavigate()
   const [isPaymentModal,setIsPaymentModal] = useState(false);
