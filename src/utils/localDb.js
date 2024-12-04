@@ -32,15 +32,15 @@ export const navLinks = [
       { name: "Custom Solutions", url: "#" },
     ],
   },
-  {
-    title: "Portfolio",
-    path: "/Wishing/portfolio",
-    links: [
-      { name: "Latest Posts", url: "#" },
-      { name: "Categories", url: "#" },
-      { name: "Archives", url: "#" },
-    ],
-  },
+  // {
+  //   title: "Portfolio",
+  //   path: "/Wishing/portfolio",
+  //   links: [
+  //     { name: "Latest Posts", url: "#" },
+  //     { name: "Categories", url: "#" },
+  //     { name: "Archives", url: "#" },
+  //   ],
+  // },
   {
     title: "Blog",
     path: "/Wishing/blog",
@@ -387,3 +387,23 @@ export const statsCardData = [
     "sign": "+"
   }
 ];
+
+
+  // Mock Blog Data
+ export const blogs = [
+    {
+      imageUrl: 'https://images.pexels.com/photos/18111149/pexels-photo-18111149/free-photo-of-yachts-moored-in-harbor-to-jetty.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 
+      title: 'How to Learn React',
+      date: 'December 5, 2024',
+    },
+    {
+      imageUrl: 'https://images.pexels.com/photos/18111149/pexels-photo-18111149/free-photo-of-yachts-moored-in-harbor-to-jetty.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 
+      title: 'Understanding JavaScript Closures',
+      date: 'November 30, 2024',
+    },
+    {
+      imageUrl: 'https://images.pexels.com/photos/18111149/pexels-photo-18111149/free-photo-of-yachts-moored-in-harbor-to-jetty.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 
+      title: 'CSS Grid: A Complete Guide',
+      date: 'November 25, 2024',
+    },
+  ];
