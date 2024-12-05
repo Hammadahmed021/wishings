@@ -243,7 +243,7 @@ const Header = () => {
                 {/* Conditional rendering for Blog dropdown */}
                 {section.title === "Blog" ? (
                   <div
-                    className={`absolute left-0 w-auto p-4 top-12 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${
+                    className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${
                       activeDropdown === index
                         ? "opacity-100 visible"
                         : "opacity-0 invisible"
@@ -275,7 +275,7 @@ const Header = () => {
                   /* Default dropdown for other titles */
                   section.title !== "Home" && (
                     <div
-                      className={`absolute left-0 w-48 p-2 top-16 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
+                      className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
                         activeDropdown === index
                           ? "opacity-100 visible"
                           : "opacity-0 invisible"

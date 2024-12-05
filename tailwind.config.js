@@ -96,5 +96,6 @@ export default {
   },
   plugins: [
     require("tailwindcss-bg-patterns"),
+    require("tailwind-scrollbar")({ nocompatible: true }), // Optional: dark mode support
   ],
 };
