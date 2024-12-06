@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
@@ -96,6 +97,7 @@ export default {
   },
   plugins: [
     require("tailwindcss-bg-patterns"),
+    require("tailwind-scrollbar"),
     require("tailwind-scrollbar")({ nocompatible: true }), // Optional: dark mode support
   ],
 };

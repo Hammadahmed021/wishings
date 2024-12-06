@@ -1,30 +1,30 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { LanguageDropdown } from "../Footer/LanguageDropdown.jsx";
 import WishingsLogo from "../../../assets/WishingsLogo.svg";
 import * as footerIcon from "../../../assets/icons/footerIcons/footerIcons.js";
 import { footerLinks, footerAddress } from "../../../utils/localDb.js";
 import * as footerImg from "../../../assets/images/footerImages/index.js";
 import { FaLocationDot } from "react-icons/fa6";
-import { useRef, useState, useEffect } from "react";
+
 const iconMapping = {
-  FaLocationDot: <FaLocationDot className="text-primary text-large mr-4" />,
+  FaLocationDot: <FaLocationDot className="text-primary text-large mr-4 flex-shrink-0" />,
 };
 
 const Footer = () => {
-  const sectionRef = useRef(null);
-  const [isOverflowing, setIsOverflowing] = useState(false);
+  const sectionRefs = useRef([]); // Separate refs for each section
+  const [overflowStates, setOverflowStates] = useState([]);
 
-  // Check if the section is overflowing
+  // Check if each section is overflowing
   useEffect(() => {
     const checkOverflow = () => {
-      if (sectionRef.current) {
-        setIsOverflowing(
-          sectionRef.current.scrollHeight > sectionRef.current.clientHeight
-        );
-      }
+      const states = sectionRefs.current.map((ref) =>
+        ref ? ref.scrollHeight > ref.clientHeight : false
+      );
+      setOverflowStates(states);
     };
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow); // Update on window resize
+
+    checkOverflow(); // Initial check
+    window.addEventListener("resize", checkOverflow); // Recheck on resize
 
     return () => {
       window.removeEventListener("resize", checkOverflow);
@@ -32,9 +32,9 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="pt-12 px-12">
-      <div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-10 gap-x-10 xl:gap-x-20">
+    <footer className="pt-12">
+      <div className="2xl:container mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-y-10 gap-x-10 xl:gap-x-20 px-4 lg:px-6">
           {/* First Column: Logo, description, and social icons */}
           <div className="flex col-span-1 lg:col-span-2 flex-col gap-6">
             <img src={WishingsLogo} alt="Wishings Logo" className="max-w-72" />
@@ -63,15 +63,12 @@ const Footer = () => {
 
           {/* Link Columns with Fixed Height and Scroll */}
           {footerLinks.map((section, index) => (
-            <div className="font-roboto">
+            <div className="font-roboto " key={index}>
               <h4 className="text-medium font-bold mb-4">{section.title}</h4>
               <div
-                key={index}
-                ref={sectionRef}
-                className={`flex flex-col font-roboto overflow-y-${
-                  isOverflowing ? "auto" : "hidden"
-                } 
-              h-40 min-h-40 max-h-[16rem] lg:h-56
+                ref={(el) => (sectionRefs.current[index] = el)} // Assign individual refs
+                className={`flex flex-col font-roboto overflow-y-auto 
+              h-40 min-h-40 max-h-[16rem] lg:h-56 
               [&::-webkit-scrollbar]:w-1 
               [&::-webkit-scrollbar-track]:rounded-full 
               [&::-webkit-scrollbar-track]:bg-gray-100 
@@ -101,7 +98,7 @@ const Footer = () => {
         <div className="border-t-2 border-#e5e7eb my-6"></div>
 
         {/* Address Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-y-6 gap-x-3 ">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-y-6 gap-x-3 px-4 lg:px-6">
           {footerAddress.map((item) => (
             <div key={item.id} className="max-w-lg text-left">
               <h2 className="text-medium font-bold mb-4">{item.heading}</h2>
@@ -116,8 +113,8 @@ const Footer = () => {
         </div>
 
         <div className="border-t-2 border-#e5e7eb mt-6"></div>
-        <div className="flex flex-col md:flex-row justify-between items-start py-10 gap-y-6">
-          <div className="flex flex-wrap w-auto justify-between gap-y-3 gap-x-6   bg-black">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-10 gap-y-6 bg-primary px-4 lg:px-6">
+          <div className="flex flex-wrap w-auto h-auto justify-between gap-y-6 gap-x-6 ">
             <img
               src={footerImg.google}
               alt="Image 1"
@@ -140,7 +137,7 @@ const Footer = () => {
             />
           </div>
 
-          <div className="text-right text-small text-gray-600">
+          <div className="text-left text-small text-white">
             <p>&copy; 2024 Wishings. All rights reserved.</p>
           </div>
         </div>
