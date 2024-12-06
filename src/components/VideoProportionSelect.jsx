@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import VideoDisplay from "./VideoShowComp";
 
 const VideoProportionSelector = ({proportion,handleSelection}) => {
   
@@ -31,7 +32,13 @@ const VideoProportionSelector = ({proportion,handleSelection}) => {
             <span className="font-medium">{proportion}</span>
           </p>
         )}
+        <span className="block mt-4">
+
+      <VideoDisplay videoSrc="https://www.w3schools.com/html/mov_bbb.mp4" videoType={proportion} />
+      </span>
+
       </div>
+
     </div>
   );
 };

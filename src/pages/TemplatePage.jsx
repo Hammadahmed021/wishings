@@ -13,6 +13,7 @@ import VideoTitleInput from "../components/TitleInput";
 import VideoTagsInput from "../components/TagsFroVideo";
 import VideoInstructionsInput from "../components/VideoInstructionInput";
 import VideoProportionSelector from "../components/VideoProportionSelect";
+import VideoDisplay from "../components/VideoShowComp";
 
 //import
 
@@ -264,24 +265,32 @@ const TemplatePage = () => {
 
   // hadle title 
 
-  const [titles, setTitles] = useState([""]); // Array to store multiple titles
+  const [titles, setTitles] = useState([]);// Array to store multiple titles
+  const [currentTitle, setCurrentTitle] = useState("");
 
   // Handle input change for a specific title
-  const handleTitleChange = (index, value) => {
-    const newTitles = [...titles];
-    newTitles[index] = value;
-    setTitles(newTitles);
+  const handleTitleChange = (e) => {
+    setCurrentTitle(e.target.value);
+    // const newTitles = [...titles];
+    // newTitles[index] = value;
+    // setTitles(newTitles);
   };
 
   // Add a new title
   const addTitle = () => {
-    setTitles([...titles, ""]);
+       //e.preventDefault();
+       if (currentTitle.trim() && !titles.includes(currentTitle)) {
+        setTitles([...titles, currentTitle.trim()]);
+      }
+      setCurrentTitle("");
+    // setTitles([...titles, ""]);
   };
 
   // Remove a title
-  const removeTitle = (index) => {
-    const newTitles = titles.filter((_, i) => i !== index);
-    setTitles(newTitles);
+  const removeTitle = (titleToRemove) => {
+    setTitles(titles.filter((title) => title !== titleToRemove));
+    // const newTitles = titles.filter((_, i) => i !== index);
+    // setTitles(newTitles);
   };
 
   // Validation function
@@ -417,11 +426,15 @@ const TemplatePage = () => {
 
   // proportions selection 
 
-  const [proportion, setProportion] = useState("");
+  const [proportion, setProportion] = useState("Portrait");
 
   const handleSelection = (selectedProportion) => {
     setProportion(selectedProportion);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   // Fetch or display data using the template id
   return (
@@ -453,14 +466,16 @@ const TemplatePage = () => {
       />
       <VideoTitleInput
         titles={titles}
-        handleTitleChange={(e, v) => handleTitleChange(e, v)}
+        handleTitleChange={(e) => handleTitleChange(e)}
         addTitle={(e) => addTitle(e)}
         removeTitle={e => removeTitle(e)}
+        currentTitle={currentTitle}
       />
       <VideoProportionSelector
         proportion={proportion}
         handleSelection={(e) => handleSelection(e)}
       />
+     
       <AudioFilesView
         audioFiles={audioFiles}
         handleSelect={(e) => handleSelect(e)}
