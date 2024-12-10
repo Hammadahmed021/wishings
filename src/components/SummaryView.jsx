@@ -26,11 +26,11 @@ const SummaryView = ({
   const [password, setPassword] = useState(null);
   const [isGuest, setIsGuest] = useState(false);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("wishToken");
     setToken(token);
   }, []);
-
 
   const dispatch = useDispatch();
 
@@ -45,27 +45,30 @@ const SummaryView = ({
     }
   };
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const emailValidationFunction = () => {
+    if (isGuest) {
+      if (emailRegex.test(email)) {
+        return true;
+      } else {
+        alert("Please type valid email");
+        return false;
+      }
+    }
+  };
+
   const handleLoginSubmit = async () => {
     if (name != null && email != null && password != null) {
       const response = await handleSignup({ name, email, password });
       if (response) {
-        showPaymentModal()
-        //navigate("/checkout", {
-        //  state: {
-        //    price: calculatePrice,
-        //    selectedTime,
-        //    images,
-        //    videos,
-        //    audio: selectedFile,
-        //    scripts: pdfFile ?? scriptText,
-        //    categoryId,
-        //    videoId: state?.id,
-        //    instructions,
-        //    tags,
-        //    titles,
-        //    proportion,
-        //  },
-        //});
+        if (isGuest) {
+          if (emailValidationFunction()) {
+            showPaymentModal(email);
+          }
+        } else {
+          showPaymentModal();
+        }
       }
     } else {
       alert("Please fill in all fields to proceed.");
@@ -127,11 +130,13 @@ const SummaryView = ({
               </h3>
               <button
                 onClick={async () => {
+                  setLoading(true);
                   const loginResponse = await dispatch(
                     anonymousUser()
                   ).unwrap();
                   setToken(loginResponse?.token);
                   setIsGuest(true);
+                  setLoading(false);
                   setTimeout(async () => {
                     await Logout(); // Call Firebase signOut function
                     dispatch(logout()); // Dispatch your logout action
@@ -139,16 +144,27 @@ const SummaryView = ({
                 }}
                 className="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition duration-300"
               >
-                Continue as a Guest
+                {loading ? "Loading..." : "Continue as a Guest"}
               </button>
             </div>
           </div>
         </div>
       ) : (
-        <p className="text-lg font-medium text-gray-600">
-          You are logged in{" "}
-          {isGuest && "as a guest after 5 minute you will be logout "}
-        </p>
+        <div>
+          <p className="text-lg font-medium text-gray-600">
+            You are logged in{" "}
+            {isGuest && "as a guest after 5 minute you will be logout "}
+          </p>
+          {isGuest && (
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          )}
+        </div>
       )}
 
       {/* Summary Details */}
@@ -236,26 +252,15 @@ const SummaryView = ({
         <button
           onClick={async () => {
             if (!token) {
-              // console.log("ljksdbvkljbsksdblksdblkvsblkbsdklv",token)
               handleLoginSubmit();
             } else {
-              showPaymentModal()
-              //navigate("/checkout", {
-              //  state: {
-              //    price: calculatePrice,
-              //    selectedTime,
-              //    images,
-              //    videos,
-              //    audio: selectedFile,
-              //    scripts: pdfFile ?? scriptText,
-              //    categoryId,
-              //    videoId: state?.id,
-              //    instructions,
-              //    tags,
-              //    titles,
-              //    proportion,
-              //  },
-              //});
+              if (isGuest) {
+                if (emailValidationFunction()) {
+                  showPaymentModal(email);
+                }
+              } else {
+                showPaymentModal();
+              }
             }
           }}
           className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary text-lg"

@@ -231,7 +231,7 @@ const Header = () => {
                   }
                 >
                   {section.title}
-                  {section.title !== "Home" && (
+                  {section.title !== "Home" && section.title !== "Contact" &&(
                     <MdExpandMore
                       className={`w-5 h-5 ml-1 transition-transform duration-300 ${
                         activeDropdown === index ? "rotate-180" : "rotate-0"
@@ -273,7 +273,7 @@ const Header = () => {
                   </div>
                 ) : (
                   /* Default dropdown for other titles */
-                  section.title !== "Home" && (
+                  section.title !== "Home" && section.title !== "Contact" &&(
                     <div
                       className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
                         activeDropdown === index
