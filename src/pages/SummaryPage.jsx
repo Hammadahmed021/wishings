@@ -11,14 +11,10 @@ import { placeOrderApi } from "../utils/Api";
 import { useState } from "react";
 
 const SummaryPage = () => {
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
   const location = useLocation()
   const navigate = useNavigate()
   const [isPaymentModal,setIsPaymentModal] = useState(false);
+  const [guestEmail,setGuestEmail]=useState(null)
   const {state}= location
   return (
     <Elements stripe={stripePromise}>
@@ -38,7 +34,9 @@ const SummaryPage = () => {
         titles={state?.titles ?? []}
         tags={state?.tags ?? []}
         allData={state}
-        showPaymentModal={() => setIsPaymentModal(true)}
+        showPaymentModal={(e) =>{ setIsPaymentModal(true)
+          setGuestEmail(e)
+        }}
       />
       {isPaymentModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -54,7 +52,7 @@ const SummaryPage = () => {
               amount={{price:state.calculatePrice}}
               handlePayment={async (e) => {
 console.log("lsdbvklbdsklvblksdbklvbsdkbvlskd", state);
-
+const ifGuestEmail = guestEmail ? {guestEmail}:{}
                 const response = await placeOrderApi({
                   category_id: state.categoryId,
                   videos: state.videos,
@@ -73,11 +71,12 @@ console.log("lsdbvklbdsklvblksdbklvbsdkbvlskd", state);
                   taglines: state.tags,
                   instruction: state.instructions,
                   video_proportion: state.proportion,
+                  ...ifGuestEmail
                 });
                 if (response.status == 200) {
                   setIsPaymentModal(false);
                   alert("Order Created successfully");
-navigate("/ordes", { replace: true });
+navigate("/thankyou", { replace: true });
 
                 } else alert("error on creating order");
               }}

@@ -214,7 +214,7 @@ export const getAllOrdersApi = async () => {
   console.log(token, "token");
 
   try {
-    const response = await axiosInstance.get(`order/read/all`);
+    const response = await axiosInstance.get(`/user/orders`);
     return response;
   } catch (error) {
     console.error("API Login request failed:", error.response);

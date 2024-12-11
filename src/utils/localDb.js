@@ -1,5 +1,6 @@
 import * as icon from "../assets/icons/offerIcon.js";
 import * as blogImages from "../assets/images/blogImages/blogImages.js";
+import * as professional from "../assets/images/aboutImages/index.js";
 
 export const navLinks = [
   {
@@ -31,18 +32,27 @@ export const navLinks = [
       { name: "Custom Solutions", url: "#" },
     ],
   },
-  {
-    title: "Portfolio",
-    path: "/Wishing/portfolio",
-    links: [
-      { name: "Latest Posts", url: "#" },
-      { name: "Categories", url: "#" },
-      { name: "Archives", url: "#" },
-    ],
-  },
+  // {
+  //   title: "Portfolio",
+  //   path: "/Wishing/portfolio",
+  //   links: [
+  //     { name: "Latest Posts", url: "#" },
+  //     { name: "Categories", url: "#" },
+  //     { name: "Archives", url: "#" },
+  //   ],
+  // },
   {
     title: "Blog",
     path: "/Wishing/blog",
+    links: [
+      { name: "Support", url: "#" },
+      { name: "Sales", url: "#" },
+      { name: "Partnerships", url: "#" },
+    ],
+  },
+  {
+    title: "Contact",
+    path: "/Wishing/contact",
     links: [
       { name: "Support", url: "#" },
       { name: "Sales", url: "#" },
@@ -153,35 +163,35 @@ export const offers = [
 ];
 
 export const templates = {
-  "Birthday": [
+  Birthday: [
     { id: 1, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 2, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 3, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 4, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 5, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
   ],
-  "Convocation": [
+  Convocation: [
     { id: 1, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 2, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 3, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 4, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 5, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
   ],
-  "Christmas": [
+  Christmas: [
     { id: 1, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 2, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 3, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 4, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 5, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
   ],
-  "Wedding": [
+  Wedding: [
     { id: 1, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 2, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 3, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 4, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
     { id: 5, title: "abc", url: "https://www.w3schools.com/html/movie.mp4" },
   ],
-  "Engagement": [
+  Engagement: [
     { id: 1, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 2, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
     { id: 3, title: "abc", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
@@ -273,6 +283,41 @@ export const blogPosts = [
 
 export const footerLinks = [
   {
+    id: 2,
+    title: "TOOLS",
+    links: [
+      { name: "AI Text to Speech", url: "#" },
+      { name: "AI Auto Subtitle", url: "#" },
+      { name: "AI Text to Video", url: "#" },
+      { name: "Screen Recorder", url: "#" },
+      { name: "All Tools ➜", url: "#" },
+    ],
+  },
+  {
+    id: 3,
+    title: "SUPPORT",
+    links: [
+      { name: "Help Center", url: "#" },
+      { name: "Contact Us", url: "#" },
+      { name: "Tutorials", url: "#" },
+      { name: "Video Tutorials", url: "#" },
+    ],
+  },
+  {
+    id: 4,
+    title: "RESOURCES",
+    links: [
+      { name: "Blog", url: "#" },
+      { name: "Case Studies", url: "#" },
+      { name: "Compare", url: "#" },
+      { name: "Category", url: "#" },
+      { name: "Templates", url: "#" },
+      { name: "Stock Video", url: "#" },
+      { name: "Features", url: "#" },
+    ],
+  },
+  {
+    id: 1,
     title: "USE FLEXCLIP FOR",
     links: [
       { name: "Promo Video", url: "#" },
@@ -290,48 +335,176 @@ export const footerLinks = [
       { name: "View More ➜", url: "#" },
     ],
   },
+];
+
+export const footerAddress = [
   {
-    title: "TOOLS",
-    links: [
-      { name: "AI Text to Speech", url: "#" },
-      { name: "AI Auto Subtitle", url: "#" },
-      { name: "AI Text to Video", url: "#" },
-      { name: "Screen Recorder", url: "#" },
-      { name: "All Tools ➜", url: "#" },
-    ],
+    id: 1,
+    heading: "Global Reach",
+    icon: "FaLocationDot",
+    description:
+      "Our solutions connect you with users across the globe, ensuring a seamless experience everywhere.",
   },
   {
-    title: "SUPPORT",
-    links: [
-      { name: "Help Center", url: "#" },
-      { name: "Contact Us", url: "#" },
-      { name: "Tutorials", url: "#" },
-      { name: "Video Tutorials", url: "#" },
-    ],
+    id: 2,
+    heading: "Innovative Ideas",
+    icon: "FaLocationDot",
+    description:
+      "We bring innovative and creative ideas to life, solving complex challenges with simplicity.",
   },
   {
-    title: "RESOURCES",
-    links: [
-      { name: "Blog", url: "#" },
-      { name: "Case Studies", url: "#" },
-      { name: "Compare", url: "#" },
-      { name: "Category", url: "#" },
-      { name: "Templates", url: "#" },
-      { name: "Stock Video", url: "#" },
-      { name: "Features", url: "#" },
-    ],
+    id: 3,
+    heading: "Fast Deployment",
+    icon: "FaLocationDot",
+    description:
+      "Experience quick and efficient deployment with our streamlined processes and expert support.",
+  },
+];
+
+export const teamCardData = [
+  {
+    image: professional.person,
+    heading: "Card Title 1",
+    paragraph: "This is a description for card 1.",
   },
   {
-    title: "COMPANY",
-    links: [
-      { name: "About", url: "#" },
-      { name: "Updates", url: "#" },
-      { name: "Affiliate", url: "#" },
-      { name: "Partner", url: "#" },
-      { name: "Press Kit", url: "#" },
-      { name: "Pricing", url: "#" },
-      { name: "Education Discount", url: "#" },
-      { name: "Privacy", url: "#" },
-    ],
+    image: professional.person,
+    heading: "Card Title 2",
+    paragraph: "This is a description for card 2.",
+  },
+  {
+    image: professional.person,
+    heading: "Card Title 3",
+    paragraph: "This is a description for card 3.",
+  },
+  {
+    image: professional.person,
+    heading: "Card Title 4",
+    paragraph: "This is a description for card 4.",
+  },
+];
+
+export const statsCardData = [
+  {
+    heading: "Revenue",
+    paragraph: "This is our revenue for the year.",
+    endValue: 250000,
+    sign: "$",
+  },
+  {
+    heading: "Growth",
+    paragraph: "This is our revenue for the year.",
+    endValue: 35,
+    sign: "%",
+  },
+  {
+    heading: "Users",
+    paragraph: "This is our revenue for the year.",
+    endValue: 12000,
+    sign: "+",
+  },
+  {
+    heading: "Sales",
+    paragraph: "This is our revenue for the year.",
+    endValue: 850,
+    sign: "+",
+  },
+];
+
+// Mock Blog Data
+export const blogs = [
+  {
+    imageUrl:
+      "https://images.pexels.com/photos/18111149/pexels-photo-18111149/free-photo-of-yachts-moored-in-harbor-to-jetty.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "How to Learn React",
+    date: "December 5, 2024",
+  },
+  {
+    imageUrl:
+      "https://images.pexels.com/photos/18111149/pexels-photo-18111149/free-photo-of-yachts-moored-in-harbor-to-jetty.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "Understanding JavaScript Closures",
+    date: "November 30, 2024",
+  },
+  {
+    imageUrl:
+      "https://images.pexels.com/photos/18111149/pexels-photo-18111149/free-photo-of-yachts-moored-in-harbor-to-jetty.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "CSS Grid: A Complete Guide",
+    date: "November 25, 2024",
+  },
+];
+
+// Service Page Mock Data
+export const servicesData = [
+  {
+    title: "Web Design Services",
+    subtitle: "We create stunning websites.",
+    textSection: {
+      title: "What We Offer",
+      text: "Our team creates beautiful, responsive websites tailored to your business needs.",
+      image: "/images/web-design.jpg",
+    },
+    videoSection: {
+      title: "Video Tutorials",
+      videos: [
+        {
+          url: "/videos/tutorial1.mp4",
+          title: "How to Design a Website",
+          description: "Learn the basics of web design.",
+        },
+        {
+          url: "/videos/tutorial2.mp4",
+          title: "CSS Flexbox Layout",
+          description: "Master the art of flexible layouts.",
+        },
+        {
+          url: "/videos/tutorial3.mp4",
+          title: "HTML Basics",
+          description: "A beginner's guide to HTML.",
+        },
+        {
+          url: "/videos/tutorial4.mp4",
+          title: "JavaScript for Web Designers",
+          description: "Learn JavaScript to enhance your web designs.",
+        },
+      ],
+    },
+  },
+  {
+    title: "SEO Services",
+    subtitle: "Boost your website's visibility and ranking on search engines.",
+    textSection: {
+      title: "What We Offer",
+      text: "Our team provides comprehensive SEO services to improve your website's ranking on Google and other search engines, increasing traffic and enhancing online presence.",
+      image: "/images/seo.jpg",
+    },
+    videoSection: {
+      title: "SEO Tutorials",
+      videos: [
+        {
+          url: "/videos/seo-tutorial1.mp4",
+          title: "Introduction to SEO",
+          description:
+            "Learn the basics of Search Engine Optimization and why it's essential for your website.",
+        },
+        {
+          url: "/videos/seo-tutorial2.mp4",
+          title: "Keyword Research for SEO",
+          description:
+            "Discover how to choose the right keywords for your SEO strategy.",
+        },
+        {
+          url: "/videos/seo-tutorial3.mp4",
+          title: "On-Page SEO Techniques",
+          description:
+            "Optimize your website content for better search engine rankings.",
+        },
+        {
+          url: "/videos/seo-tutorial4.mp4",
+          title: "Link Building Strategies",
+          description:
+            "Learn how to build high-quality backlinks to improve your SEO.",
+        },
+      ],
+    },
   },
 ];

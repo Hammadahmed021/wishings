@@ -7,6 +7,8 @@ import {
   SignIn,
   Profile,
   CheckOutPage,
+  AboutUs,
+  Contact,
   OrderDetail,
 } from "../pages/index.js";
 import Layout from "../components/Layout";
@@ -14,6 +16,8 @@ import AuthLayout from "../components/AuthLayout.jsx";
 import App from "../App.jsx";
 import SummaryPage from "../pages/SummaryPage.jsx";
 import AllOrderPage from "../pages/AllOrderPae.jsx";
+import Thankyou from "../pages/ThankyouPage.jsx";
+import ServicePage from "../pages/ServicePage.jsx";
 
 // Determine base path based on environment
 const baseURL = import.meta.env.MODE === 'production'
@@ -32,6 +36,18 @@ const router = createBrowserRouter([
       {
         path: "/pages",
         element: <Pages />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/service/:serviceName",
+        element: <ServicePage/>,
       },
       {
         path: "/template/:id",
@@ -87,6 +103,11 @@ const router = createBrowserRouter([
         path: "/summary",
         element: 
             <SummaryPage />
+      },
+      {
+        path: "/thankyou",
+        element: 
+            <Thankyou />
       },
       // {
       //   path: "*",

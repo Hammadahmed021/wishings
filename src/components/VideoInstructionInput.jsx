@@ -12,14 +12,21 @@ const VideoInstructionsInput = ({ instructions, handleInputChange }) => {
         >
           Instructions for the Editor
         </label>
-        <input
+        <textarea
+          value={instructions}
+          onChange={(e) => handleInputChange(e)}
+                  placeholder="Write your instructions here"
+          rows="10"
+          className="border w-full p-2 font-roboto"
+        ></textarea>
+        {/* <input
           type="text"
           id="instructions"
           value={instructions}
           onChange={(e) => handleInputChange(e)}
           placeholder="Write your instructions here"
           className="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-        />
+        /> */}
         <p className="mt-4 text-lg text-black">
           Current Instructions:{" "}
           <span className="font-medium text-base">{instructions}</span>
