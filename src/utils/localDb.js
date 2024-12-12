@@ -33,8 +33,8 @@ export const navLinks = [
     ],
   },
   {
-    title: "Blog",
-    path: "/blog",
+    title: "Blogs",
+    path: "/blogs",
     links: [
       { name: "Support", url: "#" },
       { name: "Sales", url: "#" },

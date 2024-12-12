@@ -9,6 +9,7 @@ import {
   CheckOutPage,
   Contact,
   OrderDetail,
+  Blogs,
 } from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
@@ -40,10 +41,10 @@ const router = createBrowserRouter([
         path: "/service/:serviceName",
         element: <ServicePage/>,
       },
-      // {
-      //   path: "/blog",
-      //   element: <Blog />,
-      // },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
       {
         path: "/contact",
         element: <Contact />,
