@@ -5,7 +5,7 @@ import * as professional from "../assets/images/aboutImages/index.js";
 export const navLinks = [
   {
     title: "Home",
-    path: "/Wishing",
+    path: "/",
     links: [
       { name: "AI Text to Speech", url: "#" },
       { name: "AI Auto Subtitle", url: "#" },
@@ -16,7 +16,7 @@ export const navLinks = [
   },
   {
     title: "Pages",
-    path: "/Wishing/pages",
+    path: "/pages",
     links: [
       { name: "Our Story", url: "#" },
       { name: "Team", url: "#" },
@@ -25,25 +25,16 @@ export const navLinks = [
   },
   {
     title: "Services",
-    path: "/Wishing/services",
+    path: "/service/web-design-services",
     links: [
       { name: "Consulting", url: "#" },
       { name: "Support", url: "#" },
       { name: "Custom Solutions", url: "#" },
     ],
   },
-  // {
-  //   title: "Portfolio",
-  //   path: "/Wishing/portfolio",
-  //   links: [
-  //     { name: "Latest Posts", url: "#" },
-  //     { name: "Categories", url: "#" },
-  //     { name: "Archives", url: "#" },
-  //   ],
-  // },
   {
     title: "Blog",
-    path: "/Wishing/blog",
+    path: "/blog",
     links: [
       { name: "Support", url: "#" },
       { name: "Sales", url: "#" },
@@ -52,7 +43,7 @@ export const navLinks = [
   },
   {
     title: "Contact",
-    path: "/Wishing/contact",
+    path: "/contact",
     links: [
       { name: "Support", url: "#" },
       { name: "Sales", url: "#" },

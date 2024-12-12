@@ -7,7 +7,6 @@ import {
   SignIn,
   Profile,
   CheckOutPage,
-  AboutUs,
   Contact,
   OrderDetail,
 } from "../pages/index.js";
@@ -38,17 +37,18 @@ const router = createBrowserRouter([
         element: <Pages />,
       },
       {
-        path: "/about",
-        element: <AboutUs />,
+        path: "/service/:serviceName",
+        element: <ServicePage/>,
       },
+      // {
+      //   path: "/blog",
+      //   element: <Blog />,
+      // },
       {
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path: "/service/:serviceName",
-        element: <ServicePage/>,
-      },
+     
       {
         path: "/template/:id",
         element: <TemplatePage />,
