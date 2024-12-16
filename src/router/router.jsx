@@ -10,6 +10,7 @@ import {
   Contact,
   OrderDetail,
   Blogs,
+  BlogSingle,
 } from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogSingle />,
       },
       {
         path: "/contact",

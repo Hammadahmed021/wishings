@@ -237,7 +237,8 @@ export const blogPosts = [
     title: `New Study: Instagram Reels Outperform TikTok & Facebook Videos.`,
     author: `John Doe`,
     date: `25 January 2024`,
-    backgroundImage: blogImages.blog1,
+    description: "Short description of blog 6", content: "Full content of blog 6.",
+    image: blogImages.blog1,
   },
   {
     id: 2,
@@ -245,7 +246,8 @@ export const blogPosts = [
     title: `Creative Ways That Non-ProfitsCan Increase Donations Via Social Media During the Holidays.`,
     author: `Jane Smith`,
     date: `12 February 2024`,
-    backgroundImage: blogImages.blog2,
+    description: "Short description of blog 6", content: "Full content of blog 6.",
+    image: blogImages.blog2,
   },
   {
     id: 3,
@@ -253,8 +255,18 @@ export const blogPosts = [
     title: `Top SEO Trends for 2024: What You Need to Know.`,
     author: `Alex Johnson`,
     date: `10 March 2024`,
-    backgroundImage: blogImages.blog3,
+    description: "Short description of blog 6", content: "Full content of blog 6.",
+    image: blogImages.blog3,
   },
+  {
+    id: 4, category: `Marketing`, title: `Social Media Strategies`,
+    author: `Emily Davis`,
+    date: `20 March 2024`,
+    description: "Effective social media strategies for small businesses.",
+     content: "Full content of blog 4.",
+      image: blogImages.blog3,
+  },
+
 ];
 
 export const footerLinks = [
@@ -486,3 +498,7 @@ export const servicesData = [
     },
   },
 ];
+
+
+
+

@@ -10,3 +10,4 @@ export { default as Contact } from "./Contact.jsx";
 export { default as AllOrdersScreen } from "./AllOrderPae.jsx";
 export { default as OrderDetail } from "./OrderDetail.jsx";
 export { default as Blogs } from "./Blogs.jsx";
+export { default as BlogSingle } from "./BlogSingle.jsx";
