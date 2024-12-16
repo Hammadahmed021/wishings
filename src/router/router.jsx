@@ -7,9 +7,9 @@ import {
   SignIn,
   Profile,
   CheckOutPage,
-  AboutUs,
   Contact,
   OrderDetail,
+  Blogs,
 } from "../pages/index.js";
 import Layout from "../components/Layout";
 import AuthLayout from "../components/AuthLayout.jsx";
@@ -38,17 +38,18 @@ const router = createBrowserRouter([
         element: <Pages />,
       },
       {
-        path: "/about",
-        element: <AboutUs />,
+        path: "/service/:serviceName",
+        element: <ServicePage/>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
       },
       {
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path: "/service/:serviceName",
-        element: <ServicePage/>,
-      },
+     
       {
         path: "/template/:id",
         element: <TemplatePage />,

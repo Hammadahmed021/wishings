@@ -96,9 +96,12 @@ const Footer = () => {
 
         {/* Divider */}
         <div className="border-t-2 border-#e5e7eb my-6"></div>
+        <div className="text-center text-small text-black mb-6">
+            <p>&copy; 2024 Wishings. All rights reserved.</p>
+          </div>
 
         {/* Address Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-y-6 gap-x-3 px-4 lg:px-6">
+        {/* <div className="flex flex-col md:flex-row justify-between items-start gap-y-6 gap-x-3 px-4 lg:px-6">
           {footerAddress.map((item) => (
             <div key={item.id} className="max-w-lg text-left">
               <h2 className="text-medium font-bold mb-4">{item.heading}</h2>
@@ -137,10 +140,8 @@ const Footer = () => {
             />
           </div>
 
-          <div className="text-left text-small text-white">
-            <p>&copy; 2024 Wishings. All rights reserved.</p>
-          </div>
-        </div>
+          
+        </div> */}
       </div>
     </footer>
   );
