@@ -6,13 +6,7 @@ export const navLinks = [
   {
     title: "Home",
     path: "/",
-    links: [
-      { name: "AI Text to Speech", url: "#" },
-      { name: "AI Auto Subtitle", url: "#" },
-      { name: "AI Text to Video", url: "#" },
-      { name: "Screen Recorder", url: "#" },
-      { name: "All Tools ➜", url: "#" },
-    ],
+    links: []
   },
   {
     title: "Pages",
@@ -27,28 +21,19 @@ export const navLinks = [
     title: "Services",
     path: "/service/web-design-services",
     links: [
-      { name: "Consulting", url: "#" },
-      { name: "Support", url: "#" },
-      { name: "Custom Solutions", url: "#" },
+      { name: "Web Design", url: "/service/web-design-services" },
+      { name: "SEO Services", url: "/service/seo-services" },
     ],
   },
   {
     title: "Blogs",
     path: "/blogs",
-    links: [
-      { name: "Support", url: "#" },
-      { name: "Sales", url: "#" },
-      { name: "Partnerships", url: "#" },
-    ],
+    links: []
   },
   {
     title: "Contact",
     path: "/contact",
-    links: [
-      { name: "Support", url: "#" },
-      { name: "Sales", url: "#" },
-      { name: "Partnerships", url: "#" },
-    ],
+    links: []
   },
 ];
 
@@ -432,7 +417,8 @@ export const servicesData = [
     textSection: {
       title: "What We Offer",
       text: "Our team creates beautiful, responsive websites tailored to your business needs.",
-      image: "/images/web-design.jpg",
+      image: "/src/assets/images/aboutImages/person.jpg",
+
     },
     videoSection: {
       title: "Video Tutorials",
@@ -466,7 +452,8 @@ export const servicesData = [
     textSection: {
       title: "What We Offer",
       text: "Our team provides comprehensive SEO services to improve your website's ranking on Google and other search engines, increasing traffic and enhancing online presence.",
-      image: "/images/seo.jpg",
+      image: "/src/assets/images/aboutImages/person.jpg",
+
     },
     videoSection: {
       title: "SEO Tutorials",

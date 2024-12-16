@@ -106,6 +106,20 @@ const Header = () => {
     fetchCurrentUserData();
   }, []);
 
+
+  const blogs = [
+    {
+      title: "How to Improve Your Website",
+      date: "Dec 10, 2024",
+      imageUrl: "/images/blog1.jpg",
+    },
+    {
+      title: "Top SEO Tips for 2024",
+      date: "Dec 9, 2024",
+      imageUrl: "/images/blog2.jpg",
+    },
+  ];
+
   return (
     <header className="dark:bg-slate-600 dark:text-white">
       {/* First Row: Offer Banner */}
@@ -213,91 +227,94 @@ const Header = () => {
 
         {/* Navigation Links and CTA Buttons for Large Screens */}
         <div className="hidden lg:flex text-center justify-between">
-          {/* Nav Links */}
-          <nav className="flex gap-6 xl:gap-10 justify-center">
-            {navLinks.map((section, index) => (
-              <div
-                key={index}
-                className="relative group font-poppins capitalize"
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <NavLink
-                  to={section.path}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `flex items-center justify-between py-2 text-primary font-medium`
-                      : `flex items-center justify-between py-2 text-black font-medium hover:text-[#FEA500]`
-                  }
-                >
-                  {section.title}
-                  {section.title !== "Home" && section.title !== "Contact" &&(
-                    <MdExpandMore
-                      className={`w-5 h-5 ml-1 transition-transform duration-300 ${
-                        activeDropdown === index ? "rotate-180" : "rotate-0"
-                      }`}
-                    />
-                  )}
-                </NavLink>
+      {/* Navigation Links */}
+      <nav className="flex gap-6 xl:gap-10 justify-center">
+        {navLinks.map((section, index) => (
+          <div
+            key={index}
+            className="relative group font-poppins capitalize"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <NavLink
+              to={section.path}
+              className={({ isActive }) =>
+                isActive
+                  ? `flex items-center justify-between py-2 text-primary font-medium`
+                  : `flex items-center justify-between py-2 text-black font-medium hover:text-[#FEA500]`
+              }
+            >
+              {section.title}
+              {section.links.length > 0 && (
+                <MdExpandMore
+                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${
+                    activeDropdown === index ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              )}
+            </NavLink>
 
-                {/* Conditional rendering for Blog dropdown */}
-                {section.title === "Blog" ? (
-                  <div
-                    className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${
-                      activeDropdown === index
-                        ? "opacity-100 visible"
-                        : "opacity-0 invisible"
-                    }`}
-                    onMouseEnter={() => handleMouseEnter(index)}
-                  >
-                    <h3 className="text-small font-semibold mb-4">
-                      Our Latest Blogs
-                    </h3>
-                    <div className="flex gap-4 mb-4">
-                      {blogs.map((blog, subIndex) => (
-                        <div
-                          key={subIndex}
-                          className="flex-none w-48 p-2 border rounded-md shadow-md cursor-pointer"
-                        >
-                          <img
-                            src={blog.imageUrl}
-                            alt={blog.title}
-                            className="w-full h-32 object-cover rounded-md mb-2"
-                          />
-                          <h4 className="text-sm font-medium">{blog.title}</h4>
-                          <p className="text-xs text-gray-500">{blog.date}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <button>View More</button>
-                  </div>
-                ) : (
-                  /* Default dropdown for other titles */
-                  section.title !== "Home" && section.title !== "Contact" &&(
+            {/* Dropdown for Blog */}
+            {section.title === "Blog" ? (
+              <div
+                className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${
+                  activeDropdown === index
+                    ? "opacity-100 visible"
+                    : "opacity-0 invisible"
+                }`}
+                onMouseEnter={() => handleMouseEnter(index)}
+              >
+                <h3 className="text-small font-semibold mb-4">
+                  Our Latest Blogs
+                </h3>
+                <div className="flex gap-4 mb-4">
+                  {blogs.map((blog, subIndex) => (
                     <div
-                      className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
-                        activeDropdown === index
-                          ? "opacity-100 visible"
-                          : "opacity-0 invisible"
-                      }`}
-                      onMouseEnter={() => handleMouseEnter(index)}
+                      key={subIndex}
+                      className="flex-none w-48 p-2 border rounded-md shadow-md cursor-pointer"
                     >
-                      {section.links.map((link, subIndex) => (
-                        <a
-                          key={subIndex}
-                          href={link.url}
-                          className="block px-4 py-2 text-gray-700 hover:text-primary rounded-md"
-                        >
-                          {link.name}
-                        </a>
-                      ))}
+                      <img
+                        src={blog.imageUrl}
+                        alt={blog.title}
+                        className="w-full h-32 object-cover rounded-md mb-2"
+                      />
+                      <h4 className="text-sm font-medium">{blog.title}</h4>
+                      <p className="text-xs text-gray-500">{blog.date}</p>
                     </div>
-                  )
-                )}
+                  ))}
+                </div>
+                <button className="px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-primary-dark">
+                  View More
+                </button>
               </div>
-            ))}
-          </nav>
-        </div>
+            ) : (
+              // Default Dropdown for Services
+              section.links.length > 0 && (
+                <div
+                  className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
+                    activeDropdown === index
+                      ? "opacity-100 visible"
+                      : "opacity-0 invisible"
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                >
+                  {section.links.map((link, subIndex) => (
+                    <NavLink
+                      key={subIndex}
+                      to={link.url}
+                      className="block px-4 py-2 text-gray-700 hover:text-primary rounded-md"
+                    >
+                      {link.name}
+                    </NavLink>
+                  ))}
+                </div>
+              )
+            )}
+          </div>
+        ))}
+      </nav>
+    </div>
+
         <ul className="flex items-center">
           {authStatus ? (
             <li className="inline-flex space-x-2">
