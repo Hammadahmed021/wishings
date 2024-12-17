@@ -88,7 +88,7 @@ const VideoSlider = ({ videos, direction, onVideoClick, selectedCategory }) => {
           >
             <video
               src={video.video_path}
-              className="w-full h-full object-cover rounded-xl min-h-44 hover:cursor-pointer"
+              className="w-full h-full object-cover rounded-xl max-h-72 hover:cursor-pointer"
               autoPlay
               loop
               muted
@@ -147,6 +147,9 @@ const TemplateSlider = () => {
   useEffect(() => {
     getCategory()
   },[])
+
+  console.log(allCategory, 'allCategory');
+  
 
   const [selectedCategory, setSelectedCategory] = useState(allCategory[0]);
   const navigate = useNavigate();

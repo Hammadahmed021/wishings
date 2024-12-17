@@ -39,11 +39,9 @@ const Footer = () => {
           <div className="flex col-span-1 lg:col-span-2 flex-col gap-6">
             <img src={WishingsLogo} alt="Wishings Logo" className="max-w-72" />
             <p>
-              <small>
-                FlexClip is a simple yet powerful video maker and editor for
+                Wishings is a simple yet powerful video maker and editor for
                 everyone. We help users easily create compelling video content
                 for personal or business purposes without any learning curve.
-              </small>
             </p>
             <div className="flex gap-4">
               <a href="#" target="_blank" rel="noopener noreferrer">

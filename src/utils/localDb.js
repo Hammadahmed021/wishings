@@ -9,12 +9,16 @@ export const navLinks = [
     links: []
   },
   {
-    title: "Pages",
-    path: "/pages",
+    title: "About Us",
+    path: "/about",
+    links: []
+  },
+  {
+    title: "Other Services",
+    path: "/other/web-design-services",
     links: [
-      { name: "Our Story", url: "#" },
-      { name: "Team", url: "#" },
-      { name: "Careers", url: "#" },
+      { name: "Web Design", url: "/service/web-design-services" },
+      { name: "SEO Services", url: "/service/seo-services" },
     ],
   },
   {
@@ -263,8 +267,8 @@ export const blogPosts = [
     author: `Emily Davis`,
     date: `20 March 2024`,
     description: "Effective social media strategies for small businesses.",
-     content: "Full content of blog 4.",
-      image: blogImages.blog3,
+    content: "Full content of blog 4.",
+    image: blogImages.blog3,
   },
 
 ];

@@ -19,6 +19,7 @@ import SummaryPage from "../pages/SummaryPage.jsx";
 import AllOrderPage from "../pages/AllOrderPae.jsx";
 import Thankyou from "../pages/ThankyouPage.jsx";
 import ServicePage from "../pages/ServicePage.jsx";
+import AboutUs from "../pages/AboutUs.jsx";
 
 // Determine base path based on environment
 const baseURL = import.meta.env.MODE === 'production'
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/service/:serviceName",
+        element: <ServicePage/>,
+      },
+      {
+        path: "/other/:serviceName",
         element: <ServicePage/>,
       },
       {
@@ -115,10 +120,15 @@ const router = createBrowserRouter([
         element: 
             <Thankyou />
       },
-      // {
-      //   path: "*",
-      //   element: <NotFound />,
-      // },
+      {
+        path: "/about",
+        element: 
+            <AboutUs />
+      },
+      {
+        path: "*",
+        element: <div className="container mx-auto my-12 text-center">Not Found</div>,
+      },
     ],
   },
 ]);

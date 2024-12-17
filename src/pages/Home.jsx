@@ -12,7 +12,7 @@ const Home = () => {
       <Offer/>
       <SplitContent/>
       <Template/>
-      <Testimonial/>
+      {/* <Testimonial/> */}
       <CallToAction/>
       <FAQ/>
       <Blogs/>

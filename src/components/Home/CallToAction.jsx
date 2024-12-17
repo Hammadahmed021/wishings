@@ -4,7 +4,7 @@ import ctaOffer from "../../assets/ctaOffer.jpg";
 
 const CallToAction = () => {
   return (
-    <section className="bg-primary">
+    <section className="bg-primary mt-24">
       <div className="xl:container xl:m-auto  flex flex-col lg:flex-row py-6 gap-8 lg:py-20">
         <div className="flex flex-col gap-6 lg:gap-8 lg:w-1/2 pt-12 pb-6 px-10 lg:px-8 lg:py-0">
           <div>

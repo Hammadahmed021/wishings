@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BlogCard } from "../Home/BlogCard.jsx";
 import { blogPosts } from "../../utils/localDb";
 import { Button } from "../common/Button";
 
- const Blogs = () => {
+const Blogs = () => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = blogPosts.map((item) => item)
+      console.log(res, 'res');
+
+    }
+    fetchData()
+  }, [])
   return (
     <section>
       <div className="container mx-auto pt-5">
@@ -15,19 +24,20 @@ import { Button } from "../common/Button";
         </div>
         <div>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 py-8">
-            {blogPosts.map((blogPost) => (
+            {blogPosts?.slice(0, 3)?.map((blog) => (
               <BlogCard
-                key={blogPost.id}
-                image={blogPost.backgroundImage}
-                category={blogPost.category}
-                title={blogPost.title}
-                author={blogPost.author}
-                date={blogPost.date}
+                key={blog?.id}
+                id={blog?.id}
+                image={blog?.image}
+                category={blog?.category}
+                title={blog?.title}
+                author={blog?.author}
+                date={blog.date}
               />
             ))}
           </div>
           <div className="text-center mt-2 lg:mt-6">
-            <Button link="#" x={10} text="Read More" />
+            <Button link="/blogs" text="Read More" x={10} />
           </div>
         </div>
       </div>
