@@ -8,8 +8,11 @@ import {
   updateProfile,
   signInAnonymously,
   getAuth,
+  signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "../service/firebase";
+import { GoogleAuthProvider } from "firebase/auth/web-extension";
 
 const initialState = {
   status: false,
@@ -46,6 +49,48 @@ export const signupUser = createAsyncThunk(
       };
 
       const response = await Signup(signupData);
+      console.log(response, "getting response auth slice");
+
+      localStorage.setItem("wishToken", response?.user?.token);
+
+      return {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        token,
+        ...response,
+      };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const googleUser = createAsyncThunk(
+  "auth/google",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const provider =  new GoogleAuthProvider();
+            const userCredential = await signInWithRedirect(auth, provider);
+      const user = userCredential.user;
+      console.log(user, "user >>>");
+
+      const token = await getIdToken(user);
+      console.log(token, "token >>>>");
+
+      if (user) {
+        updateProfile(user, {
+          displayName: "fname",
+        });
+      }
+
+            const response = await ApiLogin({ token });
+      //const signupData = {
+      //  fname,
+      //  token,
+      //};
+
+      //const response = await Signup(signupData);
       console.log(response, "getting response auth slice");
 
       localStorage.setItem("wishToken", response?.user?.token);
