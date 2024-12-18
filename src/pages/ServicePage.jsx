@@ -42,13 +42,14 @@ const ServicePage = () => {
   if (!serviceData) return <div className="text-center">Service not found</div>;
 
   return (
-    <div className="xl:container xl:mx-auto">
-      <section className=" text-black  py-16 text-center">
-        <h1 className="text-4xl font-bold">{serviceData.title}</h1>
-        <p className="mt-4">{serviceData.subtitle}</p>
-      </section>
+    <>
+      <div className="xl:container xl:mx-auto">
+        <section className=" text-black  py-16 text-center">
+          <h2 className="text-h2 text-center pt-3 font-roboto">{serviceData.title}</h2>
 
-      {/* <section className="flex flex-col md:flex-row items-center justify-between py-12 px-6">
+        </section>
+
+        {/* <section className="flex flex-col md:flex-row items-center justify-between py-12 px-6">
         <div className="md:w-1/2">
           <h2 className="text-2xl font-semibold">{serviceData.textSection.title}</h2>
           <p className="mt-4 text-lg">{serviceData.textSection.text}</p>
@@ -61,45 +62,49 @@ const ServicePage = () => {
           />
         </div>
       </section> */}
-      <TextImageSection
-        heading={serviceData.textSection.title}
-        paragraph={serviceData.textSection.text}
-        bullets={[
-          {
-            heading: "Excellence",
-            paragraph: "We deliver the best in everything we do.",
-          },
-          {
-            heading: "Integrity",
-            paragraph: "We uphold the highest standards of integrity.",
-          },
-        ]}
-        image={serviceData.textSection.image}
-        reverse={false}
-      />
+        <TextImageSection
+          subtitle={serviceData?.subtitle}
+          heading={serviceData.textSection.title}
+          paragraph={serviceData.textSection.text}
+          // bullets={[
+          //   {
+          //     heading: "Excellence",
+          //     paragraph: "We deliver the best in everything we do.",
+          //   },
+          //   {
+          //     heading: "Integrity",
+          //     paragraph: "We uphold the highest standards of integrity.",
+          //   },
+          // ]}
+          image={serviceData.textSection.image}
+          reverse={false}
+        />
 
-      <section className="py-12">
-        <h2 className="text-large font-semibold text-center">
-          {serviceData.videoSection.title}
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mt-8 gap-y-14">
-          {serviceData.videoSection.videos.map((video, index) => (
-            <div key={index} className="rounded-lg">
-              <video
-                src={video.url}
-                controls
-                className="w-full h-[600px] rounded-lg mb-4"
-              />
-              <h3 className="text-large font-semibold">{video.title}</h3>
-              <p className="text-medium text-gray-600 mt-2">{video.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section>
-        <GetInTouch/>
-      </section>
-    </div>
+        <section className="py-16">
+          <h2 className="text-h3 text-center font-bold text-black mb-16 mt-6">
+            {serviceData.videoSection.title}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 gap-y-14">
+            {serviceData.videoSection.videos.map((video, index) => (
+              <div key={index} className="rounded-lg">
+                <video
+                  src={video.url}
+                  controls
+                  className="w-full h-[400px] rounded-lg mb-4"
+                />
+                <h3 className="text-large font-semibold">{video.title}</h3>
+                <p className="text-medium text-gray-600 mt-2">{video.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+        </section>
+      </div>
+      <div className="mb-8">
+        <GetInTouch />
+      </div>
+    </>
   );
 };
 

@@ -23,10 +23,20 @@ export const navLinks = [
   },
   {
     title: "Services",
-    path: "/service/web-design-services",
+    path: "/service/birthday",
     links: [
-      { name: "Web Design", url: "/service/web-design-services" },
-      { name: "SEO Services", url: "/service/seo-services" },
+      { name: "Birthday", url: "/service/birthday" },
+      { name: "Convocation", url: "/service/convocation" },
+      { name: "Christmas", url: "/service/christmas" },
+      { name: "New year", url: "/service/new-year" },
+      { name: "Wedding", url: "/service/wedding" },
+      { name: "Wedding Proposal", url: "/service/wedding-proposal" },
+      { name: "Engagement", url: "/service/engagement" },
+      { name: "Valentine Day", url: "/service/valentine" },
+      { name: "Thanksgiving", url: "/service/thanksgiving" },
+      { name: "Family Memory", url: "/service/family-memory" },
+      { name: "Anniversary", url: "/service/anniversary" },
+      { name: "Death Memory", url: "/service/death-memory" },
     ],
   },
   {
@@ -77,55 +87,55 @@ export const offers = [
     description:
       "Spread holiday joy with a festive Christmas video, perfect for sending warm wishes to friends and family.",
   },
-  // {
-  //   id: 6,
-  //   icon: icon.videoplayer,
-  //   title: "Tutorial Video",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
-  // {
-  //   id: 7,
-  //   icon: icon.fastforward,
-  //   title: "Offer 7",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
-  // {
-  //   id: 8,
-  //   icon: icon.fastforward,
-  //   title: "Offer 8",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
-  // {
-  //   id: 9,
-  //   icon: icon.fastforward,
-  //   title: "Offer 9",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
-  // {
-  //   id: 10,
-  //   icon: icon.fastforward,
-  //   title: "Offer 10",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
-  // {
-  //   id: 11,
-  //   icon: icon.fastforward,
-  //   title: "Offer 11",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
-  // {
-  //   id: 12,
-  //   icon: icon.fastforward,
-  //   title: "Offer 12",
-  //   description:
-  //     "Identify relevant and high-impact keywords for your industry.",
-  // },
+  {
+    id: 6,
+    icon: icon.videoplayer,
+    title: "New Year",
+    description:
+      "Welcome the New Year with joy and inspiration! Our personalized videos are perfect for sharing resolutions, celebrations, and heartfelt wishes with your loved ones as you embark on a fresh start together.",
+  },
+  {
+    id: 7,
+    icon: icon.fastforward,
+    title: "Valentine’s Day",
+    description:
+      "Say “I love you” in a way they’ll never forget! Celebrate your love story with a personalized Valentine’s Day video that captures your special moments and conveys your deepest emotions.",
+  },
+  {
+    id: 8,
+    icon: icon.fastforward,
+    title: "Thanksgiving",
+    description:
+      "Express your gratitude this Thanksgiving with a personalized video message. Celebrate the season of thankfulness by sharing warm wishes, cherished family moments, and heartfelt memories.",
+  },
+  {
+    id: 9,
+    icon: icon.fastforward,
+    title: "Family Memory",
+    description:
+      "Create a timeless memory of your family's most cherished feelings. Our personalized films capture your memories for future generations, whether it's a reunion, a trip, or a simple moment of happiness.",
+  },
+  {
+    id: 10,
+    icon: icon.fastforward,
+    title: "Anniversary Video",
+    description:
+      "Celebrate the journey of love with a stunning anniversary video. Relive your cherished memories, milestones, and heartfelt messages to make your special day even more memorable.",
+  },
+  {
+    id: 11,
+    icon: icon.fastforward,
+    title: "Funeral Memories",
+    description:
+      "Honor and remember your loved ones with a beautifull tribute video. Share their legacy, celebrate their life, and cherish the memories they’ve left behind.",
+  },
+  {
+    id: 12,
+    icon: icon.fastforward,
+    title: "Wedding Proposal",
+    description:
+      `Create the ultimate “yes” moment with a personalized wedding proposal video. Let us help you plan a magical and unforgettable way to pop the question!`,
+  },
   // {
   //   id: 13,
   //   icon: icon.fastforward,
@@ -275,29 +285,36 @@ export const blogPosts = [
 
 export const footerLinks = [
   {
-    id: 2,
-    title: "TOOLS",
+    id: 1,
+    title: "USEFUL LINKS",
     links: [
-      { name: "AI Text to Speech", url: "#" },
-      { name: "AI Auto Subtitle", url: "#" },
-      { name: "AI Text to Video", url: "#" },
-      { name: "Screen Recorder", url: "#" },
-      { name: "All Tools ➜", url: "#" },
+      { name: "Home", url: "/" },
+      { name: "About", url: "/about" },
+      { name: "Blogs", url: "/blogs" },
+      { name: "Contact", url: "/contact" },
+    ],
+  },
+  {
+    id: 2,
+    title: "ALL SERVICES",
+    links: [
+      { name: "Birthday", url: "/service/birthday" },
+      { name: "Convocation", url: "/service/convocation" },
+      { name: "Christmas", url: "/service/christmas" },
+      { name: "New year", url: "/service/new-year" },
+      { name: "Wedding", url: "/service/wedding" },
+      { name: "Wedding Proposal", url: "/service/wedding-proposal" },
+      { name: "Engagement", url: "/service/engagement" },
+      { name: "Valentine Day", url: "/service/valentine" },
+      { name: "Thanksgiving", url: "/service/thanksgiving" },
+      { name: "Family Memory", url: "/service/family-memory" },
+      { name: "Anniversary", url: "/service/anniversary" },
+      { name: "Death Memory", url: "/service/death-memory" },
     ],
   },
   {
     id: 3,
-    title: "SUPPORT",
-    links: [
-      { name: "Help Center", url: "#" },
-      { name: "Contact Us", url: "#" },
-      { name: "Tutorials", url: "#" },
-      { name: "Video Tutorials", url: "#" },
-    ],
-  },
-  {
-    id: 4,
-    title: "RESOURCES",
+    title: "OTHER SERVICES",
     links: [
       { name: "Blog", url: "#" },
       { name: "Case Studies", url: "#" },
@@ -305,26 +322,15 @@ export const footerLinks = [
       { name: "Category", url: "#" },
       { name: "Templates", url: "#" },
       { name: "Stock Video", url: "#" },
-      { name: "Features", url: "#" },
     ],
   },
   {
-    id: 1,
-    title: "USE FLEXCLIP FOR",
+    id: 4,
+    title: "SUPPORT",
     links: [
-      { name: "Promo Video", url: "#" },
-      { name: "Marketing Video", url: "#" },
-      { name: "News Video", url: "#" },
-      { name: "Trailer Video", url: "#" },
-      { name: "Intro Video", url: "#" },
-      { name: "Wedding Video", url: "#" },
-      { name: "Lyric Video", url: "#" },
-      { name: "Birthday Video", url: "#" },
-      { name: "Invitation Video", url: "#" },
-      { name: "Slideshow Maker", url: "#" },
-      { name: "Video Editor", url: "#" },
-      { name: "Movie Maker", url: "#" },
-      { name: "View More ➜", url: "#" },
+      { name: "Support", url: "#" },
+      { name: "Privacy Policy", url: "#" },
+      { name: "Terms of use", url: "#" },
     ],
   },
 ];
@@ -428,16 +434,16 @@ export const blogs = [
 // Service Page Mock Data
 export const servicesData = [
   {
-    title: "Web Design Services",
+    title: "Birthday",
     subtitle: "We create stunning websites.",
     textSection: {
       title: "What We Offer",
-      text: "Our team creates beautiful, responsive websites tailored to your business needs.",
+      text: "Our team creates beautiful, responsive websites tailored to your business needs. Our team creates beautiful, responsive websites tailored to your business needs.",
       image: "/src/assets/images/aboutImages/person.jpg",
 
     },
     videoSection: {
-      title: "Video Tutorials",
+      title: "Explore Top Videos",
       videos: [
         {
           url: "/videos/tutorial1.mp4",
@@ -463,7 +469,7 @@ export const servicesData = [
     },
   },
   {
-    title: "SEO Services",
+    title: "Convocation",
     subtitle: "Boost your website's visibility and ranking on search engines.",
     textSection: {
       title: "What We Offer",

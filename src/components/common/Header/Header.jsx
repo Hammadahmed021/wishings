@@ -227,93 +227,102 @@ const Header = () => {
 
         {/* Navigation Links and CTA Buttons for Large Screens */}
         <div className="hidden lg:flex text-center justify-between">
-      {/* Navigation Links */}
-      <nav className="flex gap-6 xl:gap-10 justify-center">
-        {navLinks.map((section, index) => (
-          <div
-            key={index}
-            className="relative group font-poppins capitalize"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <NavLink
-              to={section.path}
-              className={({ isActive }) =>
-                isActive
-                  ? `flex items-center justify-between py-2 text-primary font-medium`
-                  : `flex items-center justify-between py-2 text-black font-medium hover:text-[#FEA500]`
-              }
-            >
-              {section.title}
-              {section.links.length > 0 && (
-                <MdExpandMore
-                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${
-                    activeDropdown === index ? "rotate-180" : "rotate-0"
-                  }`}
-                />
-              )}
-            </NavLink>
-
-            {/* Dropdown for Blog */}
-            {section.title === "Blog" ? (
+          {/* Navigation Links */}
+          <nav className="flex gap-6 xl:gap-10 justify-center">
+            {navLinks.map((section, index) => (
               <div
-                className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${
-                  activeDropdown === index
-                    ? "opacity-100 visible"
-                    : "opacity-0 invisible"
-                }`}
+                key={index}
+                className="relative group font-poppins capitalize"
                 onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
               >
-                <h3 className="text-small font-semibold mb-4">
-                  Our Latest Blogs
-                </h3>
-                <div className="flex gap-4 mb-4">
-                  {blogs.map((blog, subIndex) => (
-                    <div
-                      key={subIndex}
-                      className="flex-none w-48 p-2 border rounded-md shadow-md cursor-pointer"
-                    >
-                      <img
-                        src={blog.imageUrl}
-                        alt={blog.title}
-                        className="w-full h-32 object-cover rounded-md mb-2"
-                      />
-                      <h4 className="text-sm font-medium">{blog.title}</h4>
-                      <p className="text-xs text-gray-500">{blog.date}</p>
-                    </div>
-                  ))}
-                </div>
-                <button className="px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-primary-dark">
-                  View More
-                </button>
-              </div>
-            ) : (
-              // Default Dropdown for Services
-              section.links.length > 0 && (
-                <div
-                  className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
-                    activeDropdown === index
+                <NavLink
+                  to={section.path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? `flex items-center justify-between py-2 text-primary font-medium`
+                      : `flex items-center justify-between py-2 text-black font-medium hover:text-[#FEA500]`
+                  }
+                >
+                  {section.title}
+                  {section.links.length > 0 && (
+                    <MdExpandMore
+                      className={`w-5 h-5 ml-1 transition-transform duration-300 ${activeDropdown === index ? "rotate-180" : "rotate-0"
+                        }`}
+                    />
+                  )}
+                </NavLink>
+
+                {/* Dropdown for Blog */}
+                {section.title === "Blog" ? (
+                  <div
+                    className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${activeDropdown === index
                       ? "opacity-100 visible"
                       : "opacity-0 invisible"
-                  }`}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                >
-                  {section.links.map((link, subIndex) => (
-                    <NavLink
-                      key={subIndex}
-                      to={link.url}
-                      className="block px-4 py-2 text-gray-700 hover:text-primary rounded-md"
+                      }`}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                  >
+                    <h3 className="text-small font-semibold mb-4">
+                      Our Latest Blogs
+                    </h3>
+                    <div className="flex gap-4 mb-4">
+                      {blogs.map((blog, subIndex) => (
+                        <div
+                          key={subIndex}
+                          className="flex-none w-48 p-2 border rounded-md shadow-md cursor-pointer"
+                        >
+                          <img
+                            src={blog.imageUrl}
+                            alt={blog.title}
+                            className="w-full h-32 object-cover rounded-md mb-2"
+                          />
+                          <h4 className="text-sm font-medium">{blog.title}</h4>
+                          <p className="text-xs text-gray-500">{blog.date}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <button className="px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-primary-dark">
+                      View More
+                    </button>
+                  </div>
+                ) : (
+                  // Default Dropdown for Services
+                  section.links.length > 0 && (
+                    <div
+                      className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${activeDropdown === index
+                        ? "opacity-100 visible"
+                        : "opacity-0 invisible"
+                        }`}
+                      onMouseEnter={() => handleMouseEnter(index)}
                     >
-                      {link.name}
-                    </NavLink>
-                  ))}
-                </div>
-              )
-            )}
-          </div>
-        ))}
-      </nav>
-    </div>
+                      <span className={`flex flex-col font-roboto overflow-y-auto 
+                 min-h-16 max-h-[18rem]
+              [&::-webkit-scrollbar]:w-1 
+              [&::-webkit-scrollbar-track]:rounded-full 
+              [&::-webkit-scrollbar-track]:bg-gray-100 
+              [&::-webkit-scrollbar-thumb]:bg-primary 
+              [&::-webkit-scrollbar-thumb]:rounded-full 
+              dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
+              dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}>
+
+                        {section.links.map((link, subIndex) => (
+                          <NavLink
+                            key={subIndex}
+                            to={link.url}
+                            className="block px-4 py-2 text-gray-700 hover:text-primary rounded-md"
+                          >
+                            {link.name}
+                          </NavLink>
+                        ))}
+                      </span>
+
+                    </div>
+                  )
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
 
         <ul className="flex items-center">
           {authStatus ? (
@@ -383,9 +392,8 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`lg:hidden ${
-          isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50 dark:bg-slate-600 dark:border-slate-600`}
+        className={`lg:hidden ${isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50 dark:bg-slate-600 dark:border-slate-600`}
       >
         {/* Nav Links */}
         <nav className="flex flex-col gap-0 ">
@@ -404,18 +412,16 @@ const Header = () => {
                 </NavLink>
                 <MdExpandMore
                   onClick={() => toggleDropdown(index)}
-                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${
-                    activeDropdown === index ? "rotate-180" : "rotate-0"
-                  }`}
+                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${activeDropdown === index ? "rotate-180" : "rotate-0"
+                    }`}
                 />
               </div>
               {/* Dropdown Menu */}
               <div
-                className={`${
-                  activeDropdown === index
-                    ? "max-h-40 opacity-100"
-                    : "max-h-0 opacity-0"
-                } overflow-hidden transition-all duration-300 ease-in-out`}
+                className={`${activeDropdown === index
+                  ? "max-h-40 opacity-100"
+                  : "max-h-0 opacity-0"
+                  } overflow-hidden transition-all duration-300 ease-in-out`}
               >
                 {section.links.map((link, subIndex) => (
                   <a

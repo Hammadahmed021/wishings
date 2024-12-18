@@ -159,9 +159,9 @@ const TemplatePage = () => {
   function CategorySelect() {
     return (
       <div className="flex flex-col ">
-        <label htmlFor="category" className="text-gray-700 font-medium font-poppins">
+        <h2 htmlFor="category" className="text-gray-800 font-medium font-poppins text-3xl">
           Category Name: {state?.categoryName}
-        </label>
+        </h2>
         {/*<select
           id="category"
           name="category"
@@ -356,43 +356,43 @@ const TemplatePage = () => {
   const TimeWheelView = () => {
     return (
       <div className="text-start mb-16">
-      <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
-        Time Selection Wheel
-      </h2>
-
-      {/* Time Wheel */}
-      <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-muted">
-        {timeOptions.map((time) => (
-          <button
-            key={time}
-            onClick={() => {
-              setSelectedTime(time);
-              calculatePrice(time);
-            }}
-            className={`bg-gray-200 font-thin px-1 text-xs flex items-center justify-center rounded-lg border transition-all duration-200 ${
-              selectedTime === time
-                ? 'bg-secondary text-white'
-                : 'bg-gray-100 text-black hover:bg-blue-300 hover:text-white'
-            }`}
-          >
-            <span className="text-base sm:text-sm">{time} sec</span>
-          </button>
-        ))}
+        <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
+          Time Selection Wheel
+        </h2>
+  
+        {/* Time Wheel */}
+        <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-gray-200">
+          {timeOptions.map((time) => (
+            <button
+              key={time}
+              onClick={() => {
+                setSelectedTime(time);
+                calculatePrice(time);
+              }}
+              className={`font-thin px-3 py-2 text-sm flex items-center justify-center rounded-lg border shadow-md transition-all duration-200 ${
+                selectedTime === time
+                  ? 'bg-secondary text-white border-secondary'
+                  : 'bg-gray-100 text-black border-gray-300 hover:bg-primary hover:text-white hover:shadow-lg'
+              }`}
+            >
+              <span className="text-base sm:text-sm font-medium">{time} sec</span>
+            </button>
+          ))}
+        </div>
+  
+        {/* Selected Time and Price */}
+        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4">
+          <h3 className="text-xl sm:text-lg font-normal text-black">
+            Selected Time: <span className="text-primary font-semibold">{selectedTime} sec</span>
+          </h3>
+          <h3 className="text-xl sm:text-lg font-normal text-black">
+            Price: <span className="text-primary font-semibold">${priceState.toFixed(2)}</span>
+          </h3>
+        </div>
       </div>
-
-      {/* Selected Time and Price */}
-      <div className="mt-8 flex items-center justify-start gap-4">
-        <h3 className="text-xl sm:text-lg font-normal text-black">
-          Selected Time: <span className="text-blue-500 font-medium">{selectedTime} sec</span>
-        </h3>
-        <h3 className="text-xl sm:text-lg font-normal text-black">
-          Price: <span className="text-green-500 font-medium">${priceState.toFixed(2)}</span>
-        </h3>
-      </div>
-    </div>
-
     );
   };
+  
 
   // add tags for my video
 
@@ -439,8 +439,8 @@ const TemplatePage = () => {
   // Fetch or display data using the template id
   return (
     <div className="container mx-auto py-16 p-4">
-      <h1 className="text-5xl font-poppins mb-8">
-        Template ID: {id}</h1>
+      {/* <h1 className="text-5xl font-poppins mb-8">
+        Template ID: {id}</h1> */}
       {/* Display template content */}
       <CategorySelect />
       <ScriptView

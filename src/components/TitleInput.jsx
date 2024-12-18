@@ -24,7 +24,7 @@ const VideoTitleInput = ({
               addTitle(currentTitle);
             }
           }}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-2 w-full md:w-[40%]"
         >
           <input
             type="text"
