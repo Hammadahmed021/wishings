@@ -29,16 +29,15 @@ export default function Signup() {
     } catch (error) {
       console.error("API Signup failed:", error);
       // Check the specific error code and display the appropriate error message
-      if (error = "auth/email-already-in-use") {
+      if ((error = "auth/email-already-in-use")) {
         setShowError("User already exists with this email.");
       }
-
     } finally {
       setIsSigning(false);
     }
   };
 
-  const googleLoginFun = async(userData) => {
+  const googleLoginFun = async (userData) => {
     console.log(userData, "signup form");
     setIsSigning(true);
     setShowError(""); // Clear any previous error message
@@ -50,14 +49,13 @@ export default function Signup() {
     } catch (error) {
       console.error("API Signup failed:", error);
       // Check the specific error code and display the appropriate error message
-      if (error = "auth/email-already-in-use") {
+      if ((error = "auth/email-already-in-use")) {
         setShowError("User already exists with this email.");
       }
-
     } finally {
       setIsSigning(false);
     }
-  }
+  };
 
   const password = watch("password");
 
@@ -245,25 +243,29 @@ export default function Signup() {
           </div>
         </div>
       </form>
-      <button color="blue" onClick={async () => {
-         setIsSigning(true);
-         setShowError(""); // Clear any previous error message
-         try {
-           const response = await dispatch(googleUser()).unwrap();
-           console.log("Signup response:", response);
-           // Navigate to home or another page
-           // navigate("/");
-         } catch (error) {
-           console.error("API Signup failed:", error);
-           // Check the specific error code and display the appropriate error message
-           if ((error = "auth/email-already-in-use")) {
-             setShowError("User already exists with this email.");
-           }
-         } finally {
-           setIsSigning(false);
-         }
-      }} className="w-60 h-12">
-        Login with Google fun
+      <button
+        color="blue"
+        onClick={async () => {
+          setIsSigning(true);
+          setShowError(""); // Clear any previous error message
+          try {
+            const response = await dispatch(googleUser()).unwrap();
+            console.log("Signup response:", response);
+            // Navigate to home or another page
+            // navigate("/");
+          } catch (error) {
+            console.error("API Signup failed:", error);
+            // Check the specific error code and display the appropriate error message
+            if ((error = "auth/email-already-in-use")) {
+              setShowError("User already exists with this email.");
+            }
+          } finally {
+            setIsSigning(false);
+          }
+        }}
+        className="w-60 h-12"
+      >
+        Login with Google
       </button>
     </div>
   );
