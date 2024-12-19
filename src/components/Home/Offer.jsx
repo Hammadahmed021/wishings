@@ -80,9 +80,10 @@ const OfferSlider = () => {
           <h2 className="text-h2 text-center pt-3 font-roboto">Personalized Videos for Every Occasion</h2>
 
           {/* Slick Slider */}
-          <Slider {...settings}>
+          {/* <Slider {...settings}> */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
             {offerGroups.map((group, groupIndex) => (
-              <div key={groupIndex} className="align-top	py-5">
+              <div key={groupIndex} className="align-top">
                 {group.map((offer) => (
                   <div key={offer.id} className="px-2 pt-10 md:px-6 md:py-8 ">
                     <img src={offer.icon} alt="icon" />
@@ -96,7 +97,8 @@ const OfferSlider = () => {
                 ))}
               </div>
             ))}
-          </Slider>
+            </div>
+          {/* </Slider> */}
         </div>
       </div>
     </section>

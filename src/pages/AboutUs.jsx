@@ -54,12 +54,12 @@ const AboutUs = () => {
           />
         </div>
       </div>
-      <div className="bg-accent py-10 md:py-20 px-6">
+      {/* <div className="bg-accent py-10 md:py-20 px-6">
         <TeamCardGrid />
-      </div>
+      </div> */}
 
       <FAQ />
-      <Testimonial />
+      {/* <Testimonial /> */}
       <NewsletterSubscribe />
     </>
   );

@@ -39,9 +39,9 @@ const Footer = () => {
           <div className="flex col-span-1 lg:col-span-2 flex-col gap-6">
             <img src={WishingsLogo} alt="Wishings Logo" className="max-w-72" />
             <p>
-                Wishings is a simple yet powerful video maker and editor for
-                everyone. We help users easily create compelling video content
-                for personal or business purposes without any learning curve.
+              Wishings is a simple yet powerful video maker and editor for
+              everyone. We help users easily create compelling video content
+              for personal or business purposes without any learning curve.
             </p>
             <div className="flex gap-4">
               <a href="#" target="_blank" rel="noopener noreferrer">
@@ -94,9 +94,10 @@ const Footer = () => {
 
         {/* Divider */}
         <div className="border-t-2 border-#e5e7eb my-6"></div>
-        <div className="text-center text-small text-black mb-6">
-            <p>&copy; 2024 Wishings. All rights reserved.</p>
-          </div>
+        <div className="flex justify-between items-center text-small text-black mb-6">
+          <p>&copy; 2024 Wishings. All rights reserved.</p>
+          <p>Powered by <a className="hover:underline duration-200 transition-all" target="_blank" href="https://splitarts.com/">Splitarts Technologies</a>.</p>
+        </div>
 
         {/* Address Section */}
         {/* <div className="flex flex-col md:flex-row justify-between items-start gap-y-6 gap-x-3 px-4 lg:px-6">
