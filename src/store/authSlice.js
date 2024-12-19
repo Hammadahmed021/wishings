@@ -10,9 +10,10 @@ import {
   getAuth,
   signInWithPopup,
   signInWithRedirect,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../service/firebase";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
+// import { GoogleAuthProvider } from "firebase/auth/web-extension";
 
 const initialState = {
   status: false,
@@ -70,12 +71,14 @@ export const googleUser = createAsyncThunk(
   "auth/google",
   async (userData, { rejectWithValue }) => {
     try {
-      const provider =  new GoogleAuthProvider();
-            const userCredential = await signInWithRedirect(auth, provider);
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const userCredential = GoogleAuthProvider.credentialFromResult(result);
+      // const userCredential = {};
       const user = userCredential.user;
       console.log(user, "user >>>");
 
-      const token = await getIdToken(user);
+      const token = await result.user.getIdToken();
       console.log(token, "token >>>>");
 
       if (user) {
@@ -84,7 +87,7 @@ export const googleUser = createAsyncThunk(
         });
       }
 
-            const response = await ApiLogin({ token });
+      const response = await ApiLogin({ token });
       //const signupData = {
       //  fname,
       //  token,
@@ -96,13 +99,14 @@ export const googleUser = createAsyncThunk(
       localStorage.setItem("wishToken", response?.user?.token);
 
       return {
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName,
+        uid: response?.user.uid,
+        email: response?.user?.email,
+        displayName: response?.user.displayName,
         token,
         ...response,
       };
     } catch (error) {
+      console.log("kajdscgisdbvlkbsdlvbsdlkvblksdbv", error);
       return rejectWithValue(error.message);
     }
   }
