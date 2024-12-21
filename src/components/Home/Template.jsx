@@ -141,7 +141,7 @@ const TemplateSlider = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 -mt-8 md:mt-20 lg:-mt-1 2xl:-mt-24">
+    <div className="container mx-auto px-4 md:mt-20">
       <h3 className="text-h3 text-center pt-3 font-roboto pb-8 xl:pb-12">
         Start Fast with <span className="text-primary">6000+</span> Templates
       </h3>

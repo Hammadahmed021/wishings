@@ -1,7 +1,7 @@
 import React from "react";
 import checkicon from "../../assets/checkicon.svg";
 import { Button } from "../common/Button";
-import ourstory from "../../assets/ourstory.png";
+import test from "../../assets/test.jpg";
 
 const SplitContent = () => {
   return (
@@ -45,7 +45,7 @@ const SplitContent = () => {
         </div>
         <div className="basis-1/2 xl:basis-5/12 ">
           <img
-            src={ourstory}
+            src={test}
             alt="ourstory"
             className="max-h-full lg:max-h-[500px] xl:max-h-[85%] 2xl:max-h-[70%]"
           />
