@@ -36,6 +36,8 @@ const VideoDisplay = ({ videoSrc, videoType, setVideoType }) => {
             : 'w-full h-full'
         }`}
         controls
+        autoPlay
+        muted
         src={videoSrc}
       />
     </div>

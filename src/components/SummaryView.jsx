@@ -214,7 +214,10 @@ const SummaryView = ({
         <div className="border-b pb-4">
           <h4 className="text-2xl font-medium font-poppins">Audios:</h4>
           <ul className="list-disc pl-6 text-gray-700">
-            <li>{selectedFile.name ?? selectedFile.title}</li>
+            {selectedFile?.map(res => {
+           return <li>{res.name ?? res.title}</li>;
+                           
+            })}
           </ul>
         </div>
 

@@ -135,7 +135,8 @@ const TemplateSlider = () => {
 
 
   const getCategory =async () => {
-    const {status,data} = await getCategoryWithVideos()
+    const { status, data } = await getCategoryWithVideos()
+    console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv",data)
     if (status == 200) {
       setSelectedCategory(data?.categories[0] ?? []);
       setAllCategory(data?.categories ?? []);

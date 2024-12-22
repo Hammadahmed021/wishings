@@ -63,7 +63,7 @@ const ifGuestEmail = guestEmail ? {guestEmail}:{}
                   music_id: state.selectedFile.music_path
                     ? state?.selectedFile?.id
                     : null,
-                  music: state?.selectedFile?.music_path
+                  musics: state?.selectedFile[0]?.music_path
                     ? null
                     : state?.selectedFile,
                   category_video_id: state?.state.id,

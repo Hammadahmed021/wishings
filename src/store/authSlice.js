@@ -76,24 +76,24 @@ export const googleUser = createAsyncThunk(
       const userCredential = GoogleAuthProvider.credentialFromResult(result);
       // const userCredential = {};
       const user = userCredential.user;
-      console.log(user, "user >>>");
+      console.log(result.user, "usersgdsfgdsfgdsfgdfg >>>");
 
       const token = await result.user.getIdToken();
       console.log(token, "token >>>>");
 
       if (user) {
         updateProfile(user, {
-          displayName: "fname",
+          displayName: result.user.firebase_user?.displayName,
         });
       }
 
-      const response = await ApiLogin({ token });
-      //const signupData = {
-      //  fname,
-      //  token,
-      //};
+      //const response = await ApiLogin({ token });
+      const signupData = {
+        fname: result.user.firebase_user?.displayName,
+        token,
+      };
 
-      //const response = await Signup(signupData);
+      const response = await Signup(signupData);
       console.log(response, "getting response auth slice");
 
       localStorage.setItem("wishToken", response?.user?.token);
@@ -241,6 +241,11 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(googleUser.fulfilled, (state, action) => {
+               state.status = true;
+               state.userData = action.payload;
+               state.loading = false;
       });
   },
 });
