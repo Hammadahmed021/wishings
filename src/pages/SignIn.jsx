@@ -2,9 +2,12 @@ import React from 'react';
 import { Login } from '../components';
 import { Link, useLocation } from 'react-router-dom';
 import logo from "../assets/logo.png";
+import { googleUser } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
 
 function SignIn() {
-const location= useLocation()
+  const location = useLocation()
+  const dispatch =useDispatch()
 
   return (
    
@@ -21,7 +24,23 @@ const location= useLocation()
          <Link to={'/signup'} className='absolute top-2 right-4 text-base hover:underline'>Sign Up</Link>
        </div>
        <Login isGoBack={Boolean(location?.state?.navigate)} />
-     </div>
+      </div>
+      <button onClick={async() => {
+         try {
+           const response = await dispatch(googleUser()).unwrap();
+           console.log("Signup response:", response);
+           // Navigate to home or another page
+            //navigate("/");
+         } catch (error) {
+           console.error("API Signup failed:", error);
+           // Check the specific error code and display the appropriate error message
+           if ((error = "auth/email-already-in-use")) {
+           }
+         } finally {
+         }
+      }} >
+        google
+      </button>
    </div>
   );
 }
