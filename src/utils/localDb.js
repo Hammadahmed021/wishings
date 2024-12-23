@@ -24,11 +24,11 @@ export const navLinks = [
       { name: "Wedding", url: "/service/wedding" },
       { name: "Wedding Proposal", url: "/service/wedding-proposal" },
       { name: "Engagement", url: "/service/engagement" },
-      { name: "Valentine Day", url: "/service/valentine" },
+      { name: "Valentine Day", url: "/service/valentine-day" },
       { name: "Thanksgiving", url: "/service/thanksgiving" },
-      { name: "Family Memory", url: "/service/family-memory" },
+      { name: "Family Memory", url: "/service/family-memories" },
       { name: "Anniversary", url: "/service/anniversary" },
-      { name: "Death Memory", url: "/service/death-memory" },
+      { name: "Death Memories", url: "/service/death-memories" },
     ],
   },
   {
@@ -437,112 +437,179 @@ export const blogs = [
 export const servicesData = [
   {
     title: "Birthday",
-    subtitle: "We create stunning websites.",
+    subtitle: "Celebrate Birthdays with Unforgettable Video Surprises!",
     textSection: {
       title: "What We Offer",
-      text: "Our team creates beautiful, responsive websites tailored to your business needs. Our team creates beautiful, responsive websites tailored to your business needs.",
+      text: "Birthdays are special, but finding the perfect gift? That’s a whole different story. Enter Wishings! We create one-of-a-kind personalized birthday videos that are as unique as the birthday star. Whether you’re celebrating your best friend, sibling, or that one coworker who always steals your snacks, We’re here to make it happen! Just pick a template, share your photos and messages, and let us work our magic. No stress, no mess—just pure joy wrapped in a video that’ll have everyone laughing, crying, or maybe even both. Make this year’s birthday one to remember with a gift they’ll never forget!",
       image: professional.person,
     },
     videoSection: {
       title: "Explore Top Videos",
-      videos: [
-        {
-          url: "/videos/tutorial1.mp4",
-          title: "How to Design a Website",
-          description: "Learn the basics of web design.",
-        },
-        {
-          url: "/videos/tutorial2.mp4",
-          title: "CSS Flexbox Layout",
-          description: "Master the art of flexible layouts.",
-        },
-        {
-          url: "/videos/tutorial3.mp4",
-          title: "HTML Basics",
-          description: "A beginner's guide to HTML.",
-        },
-        {
-          url: "/videos/tutorial4.mp4",
-          title: "JavaScript for Web Designers",
-          description: "Learn JavaScript to enhance your web designs.",
-        },
-      ],
+      // videos: [
+      //   {
+      //     url: "/videos/tutorial1.mp4",
+      //     title: "How to Design a Website",
+      //     description: "Learn the basics of web design.",
+      //   },
+      //   {
+      //     url: "/videos/tutorial2.mp4",
+      //     title: "CSS Flexbox Layout",
+      //     description: "Master the art of flexible layouts.",
+      //   },
+      //   {
+      //     url: "/videos/tutorial3.mp4",
+      //     title: "HTML Basics",
+      //     description: "A beginner's guide to HTML.",
+      //   },
+      //   {
+      //     url: "/videos/tutorial4.mp4",
+      //     title: "JavaScript for Web Designers",
+      //     description: "Learn JavaScript to enhance your web designs.",
+      //   },
+      // ],
     },
   },
   {
     title: "Convocation",
-    subtitle: "Boost your website's visibility and ranking on search engines.",
+    subtitle: "Wish Them Success and Joy on Their Big Day!",
     textSection: {
       title: "What We Offer",
-      text: "Our team provides comprehensive SEO services to improve your website's ranking on Google and other search engines, increasing traffic and enhancing online presence.",
+      text: "Graduation caps, tassels, and speeches are great, but what about a gift that stands out? At Wishings, we craft personalized convocation videos that capture the pride, joy, and maybe a few happy tears of this milestone moment. Whether it’s for your bestie, your favorite overachieving cousin, or even yourself (why not?), our videos are the ultimate way to say, “You did it!” Just share your photos, messages, and details, and we’ll do the rest—no last-minute panic required. Celebrate the big day with a keepsake that’s as extraordinary as the graduate themselves!",
       image: professional.person,
     },
     videoSection: {
-      title: "SEO Tutorials",
-      videos: [
-        {
-          url: "/videos/seo-tutorial1.mp4",
-          title: "Introduction to SEO",
-          description:
-            "Learn the basics of Search Engine Optimization and why it's essential for your website.",
-        },
-        {
-          url: "/videos/seo-tutorial2.mp4",
-          title: "Keyword Research for SEO",
-          description:
-            "Discover how to choose the right keywords for your SEO strategy.",
-        },
-        {
-          url: "/videos/seo-tutorial3.mp4",
-          title: "On-Page SEO Techniques",
-          description:
-            "Optimize your website content for better search engine rankings.",
-        },
-        {
-          url: "/videos/seo-tutorial4.mp4",
-          title: "Link Building Strategies",
-          description:
-            "Learn how to build high-quality backlinks to improve your SEO.",
-        },
-      ],
+      title: "Explore Top Videos",
+     
     },
   },
   {
-    title: "Video Editing",
-    subtitle: "Boost your website's visibility and ranking on search engines.",
+    title: "Christmas",
+    subtitle: "Spread Holiday Cheer with Heartfelt Wishes!",
     textSection: {
       title: "What We Offer",
-      text: "Our team provides comprehensive SEO services to improve your website's ranking on Google and other search engines, increasing traffic and enhancing online presence.",
+      text: "Deck the halls and dazzle your loved ones with something truly special this Christmas! At Wishings, we create heartwarming personalized Christmas videos that sprinkle a little extra magic into the holiday season. Whether it’s a message for family far away, a surprise for your Secret Santa, or a cheerful greeting for your holiday crew, we’ve got the perfect touch of joy. Share your photos, festive messages, and a sprinkle of holiday spirit, and let us handle the rest. Make this Christmas unforgettable with a video that’s as warm and bright as the season itself!",
       image: professional.person,
     },
     videoSection: {
-      title: "SEO Tutorials",
-      videos: [
-        {
-          url: "/videos/seo-tutorial1.mp4",
-          title: "Introduction to SEO",
-          description:
-            "Learn the basics of Search Engine Optimization and why it's essential for your website.",
-        },
-        {
-          url: "/videos/seo-tutorial2.mp4",
-          title: "Keyword Research for SEO",
-          description:
-            "Discover how to choose the right keywords for your SEO strategy.",
-        },
-        {
-          url: "/videos/seo-tutorial3.mp4",
-          title: "On-Page SEO Techniques",
-          description:
-            "Optimize your website content for better search engine rankings.",
-        },
-        {
-          url: "/videos/seo-tutorial4.mp4",
-          title: "Link Building Strategies",
-          description:
-            "Learn how to build high-quality backlinks to improve your SEO.",
-        },
-      ],
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "New Year",
+    subtitle: "Send Warm Wishes for a Bright New Year!",
+    textSection: {
+      title: "What We Offer",
+      text: "Start the New Year with a bang—and a personalized video that says it all! At Wishings, we craft vibrant and memorable New Year videos that are perfect for ringing in fresh beginnings. Whether you want to cheer on your friends, thank your loved ones, or send wishes for a fantastic year ahead, we’ve got you covered. Share your favorite moments, heartfelt messages, and a dash of New Year’s sparkle, and we’ll create a video that’s as inspiring as your resolutions. Celebrate the countdown in style with a keepsake to kick off the year right!",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Wedding",
+    subtitle: "Send Heartfelt Wishes for Their Happily Ever After!",
+    textSection: {
+      title: "What We Offer",
+      text: "Say “I do” to memories that last a lifetime with our personalized wedding videos! At Wishings, we design heartfelt and elegant videos to celebrate the joy of your big day. Whether you’re surprising the newlyweds with a touching tribute or sharing your love story with friends and family, we’ll make it magical. Just send us your cherished photos, sweet messages, and a sprinkle of romance, and we’ll craft a video as beautiful as the love it celebrates. Make every moment unforgettable with a wedding video that’s forever in style!",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Wedding Proposal",
+    subtitle: "Helping You Wish for the Perfect 'Yes'!",
+    textSection: {
+      title: "What We Offer",
+      text: "Make your proposal as unforgettable as the love you share with a personalized wedding proposal video from Wishings! Whether you want to relive your most cherished moments, express your love in a unique way, or pop the big question with a creative twist, we’ve got your back. Share your favorite photos, heartfelt messages, and a vision for the perfect proposal, and we’ll craft a video that speaks straight to the heart. Let us help you set the stage for a “yes” they’ll never forget!",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Engagement",
+    subtitle: "Wish Them a Journey of Love and Commitment!",
+    textSection: {
+      title: "What We Offer",
+      text: "Celebrate love with Engagement! We create beautiful, personalized engagement videos to preserve your special moments forever. From the proposal to the journey of your love story, we create videos that capture every heartfelt moment. Our team ensures each video reflects the unique bond you share, making it a timeless treasure. Share your joy with family and friends or keep it as a personal keepsake for years to come. Let's help you celebrate such a beautiful milestone in style that will be remembered for an eternity!",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Valentine Day",
+    subtitle: "Wish Them a Lifetime of Love and Happiness!",
+    textSection: {
+      title: "What We Offer",
+      text: "Make this Valentine’s Day as unforgettable as your love story with a personalized video from Wishings! Whether you want to celebrate your most cherished moments, surprise your special someone with a heartfelt message, or express your love in a creative and unique way, we’re here to make it magical. Share your favorite photos, sweet memories, and a vision for the perfect Valentine’s Day surprise, and we’ll craft a video that speaks straight to the heart. Let us help you create a love story moment they’ll treasure forever! ",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Thanksgiving",
+    subtitle: "Wish Them a Day Filled with Gratitude and Blessings!",
+    textSection: {
+      title: "What We Offer",
+      text: "Spread the joy of gratitude with our Thanksgiving videos! Personalized creations to celebrate the season and share heartfelt thanks. Whether you're sending wishes to family or expressing appreciation to friends, our videos capture the warmth of the holiday. Let us help you convey your love and gratitude in a special way that lasts forever. In all your custom messages and added creative touches, a video on Thanksgiving will be well remembered this season. Give thanks for togetherness, joy, and thankfulness in this meaningful expression of celebration",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Family memories",
+    subtitle: "Wish Them Cherished Memories That Last a Lifetime!",
+    textSection: {
+      title: "What We Offer",
+      text: "Spread the joy of gratitude with our family memorie videos! Personalized creations to celebrate the season and share heartfelt thanks. Whether you're sending wishes to family or expressing appreciation to friends, our videos capture the warmth of the holiday. Let us help you convey your love and gratitude in a special way that lasts forever. In all your custom messages and added creative touches, a video on family memorie will be well remembered this season. Give thanks for togetherness, joy, and thankfulness in this meaningful expression of celebration.",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Anniversary",
+    subtitle: "Wish Them Many More Years of Happiness and Togetherness!",
+    textSection: {
+      title: "What We Offer",
+      text: "Personalized anniversary video with your love. Beautiful, pre-made videos are created to remind you of this special day. It might be the first or your golden anniversary, but our videos can always capture the essence of your love story, packed with meaningful moments. Share those memories, laughter, and milestones through a video that is uniquely yours. We make sure that the video we deliver to you shows the depth of your bond, a heartfelt keepsake to be treasured for life. Share your love with family and friends or keep it as a personal reminder of your enduring love.",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
+    },
+  },
+  {
+    title: "Death Memories",
+    subtitle: "Honor Their Memory with Love and Respect.",
+    textSection: {
+      title: "What We Offer",
+      text: "A loving tribute video to honor a dear one. We create a personalized video that celebrates the life, legacy, and special moments shared. It could be a memorial, anniversary, or just a way to keep their memory alive, and we craft a story that captures their spirit. Our team makes sure each video reflects the love and joy they brought into your life, making it a meaningful keepsake to treasure forever. Share it with family and friends or hold it close as a reminder of their lasting impact on your heart. Let us help you preserve their memory in a way that speaks from the heart.",
+      image: professional.person,
+    },
+    videoSection: {
+      title: "Explore Top Videos",
+     
     },
   },
 ];
