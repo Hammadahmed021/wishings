@@ -1,13 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TextImageSection from "../components/About/TextImageSection";
 import GetInTouch from "../components/ServicePage/GetInTouch";
 import { servicesData } from "../utils/localDb";
+import { getCategoryWithVideos } from "../utils/Api";
 
 const ServicePage = () => {
   const { serviceName } = useParams();
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [allCategory, setAllCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const location = useLocation();
+
+  const getCategory = async () => {
+    const { status, data } = await getCategoryWithVideos();
+    if (status === 200) {
+      setSelectedCategory(data?.categories[0] ?? []);
+      setAllCategory(data?.categories ?? []);
+    }
+  };
+
+  function formatLastWord(path) {
+    // Split the string by '/' and get the last segment
+    const parts = path.split("/");
+    const lastWord = parts.pop(); // Get the last part
+
+    // Replace hyphens with spaces and capitalize each word
+    return lastWord
+      .replace(/-/g, " ") // Replace hyphens with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize the first letter of each word
+  }
+
+  useEffect(() => {
+    getCategory();
+  }, []);
+
+  console.log(
+    "jklsdbvklsdbklvbsdklvbsdklvsd",
+    formatLastWord(location.pathname),
+    allCategory
+      .filter((res) => res.name == formatLastWord(location.pathname))[0]
+      ?.videos.map((res) => res.thumbnail)
+  );
 
   useEffect(() => {
     const fetchServiceData = async () => {
@@ -45,8 +81,9 @@ const ServicePage = () => {
     <>
       <div className="xl:container xl:mx-auto">
         <section className=" text-black  py-16 text-center">
-          <h2 className="text-h2 text-center pt-3 font-roboto">{serviceData.title}</h2>
-
+          <h2 className="text-h2 text-center pt-3 font-roboto">
+            {serviceData.title}
+          </h2>
         </section>
 
         {/* <section className="flex flex-col md:flex-row items-center justify-between py-12 px-6">
@@ -85,21 +122,24 @@ const ServicePage = () => {
             {serviceData.videoSection.title}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 gap-y-14">
-            {serviceData.videoSection.videos.map((video, index) => (
-              <div key={index} className="rounded-lg">
-                <video
-                  src={video.url}
-                  controls
-                  className="w-full h-[400px] rounded-lg mb-4"
-                />
-                <h3 className="text-large font-semibold">{video.title}</h3>
-                <p className="text-medium text-gray-600 mt-2">{video.description}</p>
-              </div>
-            ))}
+            {allCategory
+              .filter((res) => res.name == formatLastWord(location.pathname))[0]
+              ?.videos?.map((video, index) => (
+                <div key={index} className="rounded-lg">
+                  <video
+                    src={video.video_path}
+                    controls
+                    className="w-full h-[400px] rounded-lg mb-4"
+                  />
+                  <h3 className="text-large font-semibold">{video.alt}</h3>
+                  <p className="text-medium text-gray-600 mt-2">
+                    {video.description}
+                  </p>
+                </div>
+              ))}
           </div>
         </section>
-        <section>
-        </section>
+        <section></section>
       </div>
       <div className="mb-8">
         <GetInTouch />

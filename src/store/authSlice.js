@@ -8,8 +8,12 @@ import {
   updateProfile,
   signInAnonymously,
   getAuth,
+  signInWithPopup,
+  signInWithRedirect,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../service/firebase";
+// import { GoogleAuthProvider } from "firebase/auth/web-extension";
 
 const initialState = {
   status: false,
@@ -58,6 +62,51 @@ export const signupUser = createAsyncThunk(
         ...response,
       };
     } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const googleUser = createAsyncThunk(
+  "auth/google",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const userCredential = GoogleAuthProvider.credentialFromResult(result);
+      // const userCredential = {};
+      const user = userCredential.user;
+      console.log(result.user, "usersgdsfgdsfgdsfgdfg >>>");
+
+      const token = await result.user.getIdToken();
+      console.log(token, "token >>>>");
+
+      if (user) {
+        updateProfile(user, {
+          displayName: result.user.firebase_user?.displayName,
+        });
+      }
+
+      //const response = await ApiLogin({ token });
+      const signupData = {
+        fname: result.user.firebase_user?.displayName,
+        token,
+      };
+
+      const response = await Signup(signupData);
+      console.log(response, "getting response auth slice");
+
+      localStorage.setItem("wishToken", response?.user?.token);
+
+      return {
+        uid: response?.user.uid,
+        email: response?.user?.email,
+        displayName: response?.user.displayName,
+        token,
+        ...response,
+      };
+    } catch (error) {
+      console.log("kajdscgisdbvlkbsdlvbsdlkvblksdbv", error);
       return rejectWithValue(error.message);
     }
   }
@@ -192,6 +241,11 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(googleUser.fulfilled, (state, action) => {
+               state.status = true;
+               state.userData = action.payload;
+               state.loading = false;
       });
   },
 });
