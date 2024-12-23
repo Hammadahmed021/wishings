@@ -100,4 +100,7 @@ export default {
     require("tailwind-scrollbar"),
     require("tailwind-scrollbar")({ nocompatible: true }), // Optional: dark mode support
   ],
+  variants: {
+    scrollbar: ['rounded'], // Optional for rounded scrollbars
+  },
 };
