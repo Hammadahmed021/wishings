@@ -231,42 +231,45 @@ export default function Signup() {
               )}
             </div>
 
-            <Button
-              type="submit"
-              className={`w-full ${
-                isSigning ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-              disabled={isSigning}
-            >
-              {isSigning ? "Registering user..." : "Sign up"}
-            </Button>
+            <div className="flex items-center gap-4 mt-4 md:mt-8">
+              <Button
+                type="submit"
+                className={`w-full ${
+                  isSigning ? "opacity-70 cursor-not-allowed" : ""
+                }`}
+                disabled={isSigning}
+              >
+                {isSigning ? "Registering user..." : "Sign up"}
+              </Button>
+              <span>Or</span>
+              <button
+                color="blue"
+                onClick={async () => {
+                  setIsSigning(true);
+                  setShowError(""); // Clear any previous error message
+                  try {
+                    const response = await dispatch(googleUser()).unwrap();
+                    console.log("Signup response:", response);
+                    // Navigate to home or another page
+                    // navigate("/");
+                  } catch (error) {
+                    console.error("API Signup failed:", error);
+                    // Check the specific error code and display the appropriate error message
+                    if ((error = "auth/email-already-in-use")) {
+                      setShowError("User already exists with this email.");
+                    }
+                  } finally {
+                    setIsSigning(false);
+                  }
+                }}
+                className="px-6  py-3  text-background text-small font-roboto bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end  rounded-full shadow-none transition-shadow duration-300 hover:shadow-md hover:shadow-gray-400"
+              >
+                Signup with Google
+              </button>
+            </div>
           </div>
         </div>
       </form>
-      <button
-        color="blue"
-        onClick={async () => {
-          setIsSigning(true);
-          setShowError(""); // Clear any previous error message
-          try {
-            const response = await dispatch(googleUser()).unwrap();
-            console.log("Signup response:", response);
-            // Navigate to home or another page
-            // navigate("/");
-          } catch (error) {
-            console.error("API Signup failed:", error);
-            // Check the specific error code and display the appropriate error message
-            if ((error = "auth/email-already-in-use")) {
-              setShowError("User already exists with this email.");
-            }
-          } finally {
-            setIsSigning(false);
-          }
-        }}
-        className="w-60 h-12"
-      >
-        Login with Google
-      </button>
     </div>
   );
 }
