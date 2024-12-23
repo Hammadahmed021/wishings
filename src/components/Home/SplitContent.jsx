@@ -5,7 +5,7 @@ import test from "../../assets/test.jpg";
 
 const SplitContent = () => {
   return (
-    <section className="mt-10 mb-20 md:mt-20 md:mb-12 lg:mb-16 xl:mb-0">
+    <section className="my-10">
       <div className="flex flex-col-reverse md:flex-row xl:container xl:mx-auto p-6 gap-10 md:gap-20">
         <div className="flex basis-1/2 xl:basis-7/12 flex-col gap-6 md:gap-4 lg:gap-8 xl:gap-10">
           <h2 className="text-h2 font-roboto">
