@@ -66,7 +66,7 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
             onClick={() =>
               onVideoClick({ ...video, categoryName: selectedCategory?.name })
             }
-            className=" px-4 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full"
+            className=" px-6 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full"
           >
             Use Template
           </button>
@@ -82,7 +82,7 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
         <button
           onClick={handleLoadMore}
           disabled={isLoading}
-          className={`px-4 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full ${
+          className={`px-8 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full ${
             isLoading
               ? "bg-gray-400 cursor-not-allowed"
               : "hover:bg-primary-dark"
@@ -97,13 +97,13 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
 
 const CategoryButtons = ({ onSelectCategory, selectedCategory, allCategory }) => {
   return (
-    <div className="overflow-x-auto whitespace-nowrap flex md:justify-center space-x-4 mb-6">
+    <div className="w-full overflow-x-auto whitespace-nowrap flex mb-6 pb-3 scrollbar-track-transparent scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-primary">
       {allCategory.map((category, index) => (
         <button
           key={index}
-          className={`px-4 py-1 text-small mb-2 ${
+          className={`py-2 px-3 xl:px-5 text-small ${
             selectedCategory?.id === category?.id
-              ? "text-primary border border-primary rounded-full"
+              ? "text-primary font-medium border border-primary rounded-full"
               : "text-black font-medium"
           }`}
           onClick={() => onSelectCategory(category, index)}
@@ -114,6 +114,8 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory, allCategory }) =>
     </div>
   );
 };
+
+
 
 const TemplateSlider = () => {
   const [allCategory, setAllCategory] = useState([]);
@@ -142,8 +144,8 @@ const TemplateSlider = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 md:mt-20">
-      <h3 className="text-h3 text-center pt-3 font-roboto pb-8 xl:pb-12">
+    <section className="xl:container xl:mx-auto px-3 md:mt-16">
+      <h3 className="text-h3 text-center font-roboto pb-8 xl:pb-12">
         Start Fast with <span className="text-primary">1000+</span> Templates
       </h3>
       <CategoryButtons
@@ -160,7 +162,7 @@ const TemplateSlider = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
