@@ -6,24 +6,16 @@ export const navLinks = [
   {
     title: "Home",
     path: "/",
-    links: []
+    links: [],
   },
   {
     title: "About Us",
     path: "/about",
-    links: []
-  },
-  {
-    title: "Other Services",
-    path: "/other/web-design-services",
-    links: [
-      { name: "Web Design", url: "/service/web-design-services" },
-      { name: "SEO Services", url: "/service/seo-services" },
-    ],
+    links: [],
   },
   {
     title: "Services",
-    path: "/service/birthday",
+    path: "/services",
     links: [
       { name: "Birthday", url: "/service/birthday" },
       { name: "Convocation", url: "/service/convocation" },
@@ -40,14 +32,24 @@ export const navLinks = [
     ],
   },
   {
+    title: "Other Services",
+    path: "/other",
+    links: [
+      { name: "Video Editing", url: "/other/video-editing" },
+      { name: "2D Animation", url: "/other/2d-animation" },
+      { name: "3D Animation", url: "/other/3d-animation" },
+    ],
+  },
+
+  {
     title: "Blogs",
     path: "/blogs",
-    links: []
+    links: [],
   },
   {
     title: "Contact",
     path: "/contact",
-    links: []
+    links: [],
   },
 ];
 
@@ -133,8 +135,7 @@ export const offers = [
     id: 12,
     icon: icon.fastforward,
     title: "Wedding Proposal",
-    description:
-      `Create the ultimate “yes” moment with a personalized wedding proposal video. Let us help you plan a magical and unforgettable way to pop the question!`,
+    description: `Create the ultimate “yes” moment with a personalized wedding proposal video. Let us help you plan a magical and unforgettable way to pop the question!`,
   },
   // {
   //   id: 13,
@@ -251,7 +252,8 @@ export const blogPosts = [
     title: `New Study: Instagram Reels Outperform TikTok & Facebook Videos.`,
     author: `John Doe`,
     date: `25 January 2024`,
-    description: "Short description of blog 6", content: "Full content of blog 6.",
+    description: "Short description of blog 6",
+    content: "Full content of blog 6.",
     image: blogImages.blog1,
   },
   {
@@ -260,7 +262,8 @@ export const blogPosts = [
     title: `Creative Ways That Non-ProfitsCan Increase Donations Via Social Media During the Holidays.`,
     author: `Jane Smith`,
     date: `12 February 2024`,
-    description: "Short description of blog 6", content: "Full content of blog 6.",
+    description: "Short description of blog 6",
+    content: "Full content of blog 6.",
     image: blogImages.blog2,
   },
   {
@@ -269,18 +272,20 @@ export const blogPosts = [
     title: `Top SEO Trends for 2024: What You Need to Know.`,
     author: `Alex Johnson`,
     date: `10 March 2024`,
-    description: "Short description of blog 6", content: "Full content of blog 6.",
+    description: "Short description of blog 6",
+    content: "Full content of blog 6.",
     image: blogImages.blog3,
   },
   {
-    id: 4, category: `Marketing`, title: `Social Media Strategies`,
+    id: 4,
+    category: `Marketing`,
+    title: `Social Media Strategies`,
     author: `Emily Davis`,
     date: `20 March 2024`,
     description: "Effective social media strategies for small businesses.",
     content: "Full content of blog 4.",
     image: blogImages.blog3,
   },
-
 ];
 
 export const footerLinks = [
@@ -316,21 +321,18 @@ export const footerLinks = [
     id: 3,
     title: "OTHER SERVICES",
     links: [
-      { name: "Blog", url: "#" },
-      { name: "Case Studies", url: "#" },
-      { name: "Compare", url: "#" },
-      { name: "Category", url: "#" },
-      { name: "Templates", url: "#" },
-      { name: "Stock Video", url: "#" },
+      { name: "Video Editing", url: "#" },
+      { name: "2D Animation", url: "#" },
+      { name: "3D Animation", url: "#" },
     ],
   },
   {
     id: 4,
     title: "SUPPORT",
     links: [
-      { name: "Support", url: "#" },
       { name: "Privacy Policy", url: "#" },
-      { name: "Terms of use", url: "#" },
+      { name: "Terms and Conditions", url: "#" },
+      { name: "Refund Policy", url: "#" },
     ],
   },
 ];
@@ -439,8 +441,7 @@ export const servicesData = [
     textSection: {
       title: "What We Offer",
       text: "Our team creates beautiful, responsive websites tailored to your business needs. Our team creates beautiful, responsive websites tailored to your business needs.",
-      image: "/src/assets/images/aboutImages/person.jpg",
-
+      image: professional.person,
     },
     videoSection: {
       title: "Explore Top Videos",
@@ -474,8 +475,45 @@ export const servicesData = [
     textSection: {
       title: "What We Offer",
       text: "Our team provides comprehensive SEO services to improve your website's ranking on Google and other search engines, increasing traffic and enhancing online presence.",
-      image: "/src/assets/images/aboutImages/person.jpg",
-
+      image: professional.person,
+    },
+    videoSection: {
+      title: "SEO Tutorials",
+      videos: [
+        {
+          url: "/videos/seo-tutorial1.mp4",
+          title: "Introduction to SEO",
+          description:
+            "Learn the basics of Search Engine Optimization and why it's essential for your website.",
+        },
+        {
+          url: "/videos/seo-tutorial2.mp4",
+          title: "Keyword Research for SEO",
+          description:
+            "Discover how to choose the right keywords for your SEO strategy.",
+        },
+        {
+          url: "/videos/seo-tutorial3.mp4",
+          title: "On-Page SEO Techniques",
+          description:
+            "Optimize your website content for better search engine rankings.",
+        },
+        {
+          url: "/videos/seo-tutorial4.mp4",
+          title: "Link Building Strategies",
+          description:
+            "Learn how to build high-quality backlinks to improve your SEO.",
+        },
+      ],
+    },
+  },
+  {
+    title: "Video Editing",
+    subtitle: "Boost your website's visibility and ranking on search engines.",
+    textSection: {
+      title: "What We Offer",
+      text: "Our team provides comprehensive SEO services to improve your website's ranking on Google and other search engines, increasing traffic and enhancing online presence.",
+      image: professional.person,
     },
     videoSection: {
       title: "SEO Tutorials",
@@ -508,7 +546,3 @@ export const servicesData = [
     },
   },
 ];
-
-
-
-
