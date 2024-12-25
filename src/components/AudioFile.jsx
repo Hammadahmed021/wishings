@@ -9,7 +9,9 @@ const AudioFilesView = ({
 }) => {
   console.log(
     "lsvklsdklvsdklvbksdlbvkldsvbkldsbvlksdbvklsdbvds",
-    audioFiles[catId]?.music
+    audioFiles.filter((res) => Object.is(res == catId) ? res : [])[0],
+    audioFiles,
+    catId
   );
 
   //   const handleSelect = (file) => {
@@ -32,41 +34,45 @@ const AudioFilesView = ({
       </div>
 
       <ul className="space-y-4">
-        {audioFiles[catId]?.music?.map((file) => (
-          <li
-            key={file.id}
-            className={`flex items-center gap-4 p-4 border bg-gray-200 rounded-lg transition-all ${
-              selectedFiles.some((selectedFile) => selectedFile.id === file.id)
-                ? "border-primary bg-blue-100"
-                : "border-gray-200 bg-white hover:shadow-sm"
-            }`}
-          >
-            {/* Checkbox */}
-            <input
-              type="checkbox"
-              checked={selectedFiles.some(
-                (selectedFile) => selectedFile.id === file.id
-              )}
-              onChange={() => handleSelect(file)}
-              className="form-checkbox w-5 h-5 text-primary focus:ring-primary"
-            />
-
-            {/* File Title */}
-            <span className="flex-1 font-medium text-text truncate font-poppins capitalize">
-              {file.title ?? file?.name}
-            </span>
-
-            {/* Audio Player */}
-            <audio
-              controls
-              src={file?.music_path ?? file?.url}
-              className="bg-transparent w-1/2 focus:outline-none"
-              controlsList="nodownload"
+        {audioFiles
+          .filter((res) => (Object.is(res == catId) ? res : []))[0][catId]
+          ?.music?.map((file) => (
+            <li
+              key={file.id}
+              className={`flex items-center gap-4 p-4 border bg-gray-200 rounded-lg transition-all ${
+                selectedFiles.some(
+                  (selectedFile) => selectedFile.id === file.id
+                )
+                  ? "border-primary bg-blue-100"
+                  : "border-gray-200 bg-white hover:shadow-sm"
+              }`}
             >
-              Your browser does not support the audio element.
-            </audio>
-          </li>
-        ))}
+              {/* Checkbox */}
+              <input
+                type="checkbox"
+                checked={selectedFiles.some(
+                  (selectedFile) => selectedFile.id === file.id
+                )}
+                onChange={() => handleSelect(file)}
+                className="form-checkbox w-5 h-5 text-primary focus:ring-primary"
+              />
+
+              {/* File Title */}
+              <span className="flex-1 font-medium text-text truncate font-poppins capitalize">
+                {file.title ?? file?.name}
+              </span>
+
+              {/* Audio Player */}
+              <audio
+                controls
+                src={file?.music_path ?? file?.url}
+                className="bg-transparent w-1/2 focus:outline-none"
+                controlsList="nodownload"
+              >
+                Your browser does not support the audio element.
+              </audio>
+            </li>
+          ))}
         <h2 className="text-xl font-bold mb-4">Uploaded audios</h2>
 
         {uploadedAudio?.map((file) => (
