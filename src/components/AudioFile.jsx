@@ -9,8 +9,7 @@ const AudioFilesView = ({
 }) => {
   console.log(
     "lsvklsdklvsdklvbksdlbvkldsvbkldsbvlksdbvklsdbvds",
-    audioFiles.filter((res) => Object.is(res == catId) ? res : [])[0],
-    audioFiles,
+    audioFiles.filter((res) => res.id == catId)?.music?.map((res) => res),
     catId
   );
 
@@ -35,7 +34,7 @@ const AudioFilesView = ({
 
       <ul className="space-y-4">
         {audioFiles
-          .filter((res) => (Object.is(res == catId) ? res : []))[0][catId]
+          .filter((res) => res.id == catId)[0]
           ?.music?.map((file) => (
             <li
               key={file.id}
@@ -115,4 +114,4 @@ const AudioFilesView = ({
   );
 };
 
-export default AudioFilesView
+export default AudioFilesView;
