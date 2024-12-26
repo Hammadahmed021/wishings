@@ -1,5 +1,5 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import SummaryView from "../components/SummaryView"
+import { useLocation, useNavigate } from "react-router-dom";
+import SummaryView from "../components/SummaryView";
 import {
   PaymentElement,
   Elements,
@@ -11,11 +11,16 @@ import { placeOrderApi } from "../utils/Api";
 import { useState } from "react";
 
 const SummaryPage = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [isPaymentModal,setIsPaymentModal] = useState(false);
-  const [guestEmail,setGuestEmail]=useState(null)
-  const {state}= location
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isPaymentModal, setIsPaymentModal] = useState(false);
+  const [guestEmail, setGuestEmail] = useState(null);
+  const { state } = location;
+  function hasMp3Extension(name) {
+    // Check if the name ends with ".mp3" (case-insensitive)
+    return name.trim().toLowerCase().endsWith(".mp3");
+  }
+
   return (
     <Elements stripe={stripePromise}>
       <SummaryView
@@ -34,8 +39,9 @@ const SummaryPage = () => {
         titles={state?.titles ?? []}
         tags={state?.tags ?? []}
         allData={state}
-        showPaymentModal={(e) =>{ setIsPaymentModal(true)
-          setGuestEmail(e)
+        showPaymentModal={(e) => {
+          setIsPaymentModal(true);
+          setGuestEmail(e);
         }}
       />
       {isPaymentModal && (
@@ -49,10 +55,10 @@ const SummaryPage = () => {
             </button>
             <h2 className="text-2xl font-semibold mb-4">Confirm Payment</h2>
             <CheckoutForm
-              amount={{price:state.calculatePrice}}
+              amount={{ price: state.calculatePrice }}
               handlePayment={async (e) => {
-console.log("lsdbvklbdsklvblksdbklvbsdkbvlskd", state);
-const ifGuestEmail = guestEmail ? {guestEmail}:{}
+                console.log("lsdbvklbdsklvblksdbklvbsdkbvlskd", state);
+                const ifGuestEmail = guestEmail ? { guestEmail } : {};
                 const response = await placeOrderApi({
                   category_id: state.categoryId,
                   videos: state.videos,
@@ -60,24 +66,27 @@ const ifGuestEmail = guestEmail ? {guestEmail}:{}
                   script: state.pdfFile, // Ensure this is a File object if it's a file
                   amount: state.calculatePrice,
                   payment_id: e,
-                  music_id: state.selectedFile.music_path
-                    ? state?.selectedFile?.id
-                    : null,
-                  musics: state?.selectedFile[0]?.music_path
-                    ? null
-                    : state?.selectedFile,
+                  music_id: state.selectedFile.map(
+                    (res) =>
+                      !hasMp3Extension(res?.name ?? res?.title) && res?.id
+                  ),
+                  // music_id: state.selectedFile.music_path
+                  //   ? state?.selectedFile?.id
+                  //   : null,
+                  musics: state.selectedFile.map(
+                    (res) => hasMp3Extension(res?.name ?? res?.title) && res
+                  ),
                   category_video_id: state?.state.id,
                   titles: state.titles,
                   taglines: state.tags,
                   instruction: state.instructions,
                   video_proportion: state.proportion,
-                  ...ifGuestEmail
+                  ...ifGuestEmail,
                 });
                 if (response.status == 200) {
                   setIsPaymentModal(false);
                   alert("Order Created successfully");
-navigate("/thankyou", { replace: true });
-
+                  navigate("/thankyou", { replace: true });
                 } else alert("error on creating order");
               }}
               // buttonDis={totalPrice}
@@ -119,6 +128,6 @@ navigate("/thankyou", { replace: true });
       )}*/}
     </Elements>
   );
-}
+};
 
-export default SummaryPage
+export default SummaryPage;
