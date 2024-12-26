@@ -42,7 +42,7 @@ const OrderDetail = () => {
 
           <p className="text-gray-600 mb-4">
             <span className="font-semibold">Music:</span>{" "}
-            {orderDetail?.music_uploaded?.map((res) => (
+            {[...orderDetail?.music_uploaded,...orderDetail?.music]?.map((res) => (
               <li key={res.id}>{res?.title ?? res?.file}</li>
             )) || "N/A"}
           </p>
