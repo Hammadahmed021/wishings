@@ -16,7 +16,7 @@ const BlogSingle = () => {
 
             <div className="p-6 container mx-auto">
                 <h1 className="text-2xl font-bold mb-4">{blog.title}</h1>
-                <img src={blog.image} alt={blog.title} className="w-full h-64 object-cover mb-4" />
+                <img src={blog.image} alt={blog.title} className="w-full h-64 object-cover mb-4" />````
                 <p className="text-sm text-gray-500 mb-2">{blog.category} | {blog.date} | By {blog.author}</p>
                 <p className="text-gray-700">{blog.content}</p>
                 <Link to="/blogs" className="text-blue-500 hover:underline mt-4 inline-block">

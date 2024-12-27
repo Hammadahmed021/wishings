@@ -30,11 +30,11 @@ const OptionPicker = ({ options, onSelectionChange }) => {
       <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-100 border rounded-lg pb-4 relative">
       <button
                   onClick={handleReset}
-                  className="px-4 py-2 text-sm font-medium text-white bg-red-500 border rounded-lg hover:bg-red-600 block w-full"
+                  class="block w-full px-4 py-2 rounded-lg shadow-sm text-white focus:outline-none transition duration-300 bg-primary hover:bg-secondary"
                 >
                   Reset filter
                 </button>
-        <ul className="gap-4 flex items-center flex-wrap justify-between p-4">
+        <ul className="gap-3 flex items-center flex-wrap   p-4">
           {options.map((option) => {
             const isSelected = selectedOptions.some(
               (item) => item.id === option.id
@@ -47,8 +47,8 @@ const OptionPicker = ({ options, onSelectionChange }) => {
                   key={option.id}
                   className={`px-2 py-1 border rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-between transform hover:scale-102 ${
                     isSelected
-                      ? "bg-blue-500 text-white border-blue-500 shadow-lg"
-                      : "bg-gray-50 border-gray-300 hover:bg-blue-100 hover:border-blue-400"
+                      ? "bg-secondary text-white border-accent shadow-lg"
+                      : "bg-gray-50 border-gray-300 hover:bg-accent hover:border-secondary"
                   }`}
                   onClick={() => handleOptionClick(option)}
                 >

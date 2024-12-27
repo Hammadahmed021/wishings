@@ -3,7 +3,11 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
-import { getAudioApi, getCategoryWithVideos } from "../utils/Api";
+import {
+  getAudioApi,
+  getCategoryWithVideos,
+  getMusicByCategory,
+} from "../utils/Api";
 import AudioFilesView from "../components/AudioFile";
 import ImagesView from "../components/ImageView";
 import VideoView from "../components/VideoView";
@@ -23,15 +27,14 @@ const TemplatePage = () => {
 
   const { state } = useLocation();
 
-  const getCategory = async () => {
-    const { status, data } = await getCategoryWithVideos();
+  const getMusic = async () => {
+    const { status, data } = await getMusicByCategory();
     console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data);
     if (status == 200) {
-      setSelectedOption(data?.categories);
-      const filterOnlyMisuc = data?.categories?.map(({ id, music }) => ({
-        [id]: {
-          music,
-        },
+      setSelectedOption(data?.music_categories);
+      const filterOnlyMisuc = data?.music_categories?.map(({ id, music }) => ({
+        music,
+        id,
       }));
       console.log("jjsbdvklsbdvklbsdklvsd", filterOnlyMisuc);
       setAudioFiles(filterOnlyMisuc);
@@ -39,7 +42,7 @@ const TemplatePage = () => {
   };
 
   useEffect(() => {
-    getCategory();
+    getMusic();
   }, []);
 
   const [selectedOption, setSelectedOption] = useState([]);
@@ -49,6 +52,7 @@ const TemplatePage = () => {
   });
 
   const handleOptionClick = (option) => {
+    setSelectedFiles([]);
     setOnSelect(option);
   };
 
@@ -65,15 +69,15 @@ const TemplatePage = () => {
 
   // Audio funtions
 
-  const getAudio = async () => {
-    const { status, data } = await getAudioApi();
-    if (status == 200) setAudioFiles(data?.music ?? []);
-    console.log("kjsabjkbdkjbvskbdlkvbs", status, data);
-  };
+  // const getAudio = async () => {
+  //   const { status, data } = await getAudioApi();
+  //   if (status == 200) setAudioFiles(data?.music ?? []);
+  //   console.log("kjsabjkbdkjbvskbdlkvbs", status, data);
+  // };
 
-  useEffect(() => {
-    getAudio();
-  }, []);
+  // useEffect(() => {
+  //   getAudio();
+  // }, []);
 
   const [audioFiles, setAudioFiles] = useState([]);
   const [uploadedAudio, setUploadedAudio] = useState([]);
@@ -505,7 +509,7 @@ const TemplatePage = () => {
       {/* <h1 className="text-5xl font-poppins mb-8">
         Template ID: {id}</h1> */}
       {/* Display template content */}
-      <CategorySelect catName={onSelect} />
+      <CategorySelect catName={state?.categoryName} />
 
       <ScriptView
         MAX_WORDS={MAX_WORDS}

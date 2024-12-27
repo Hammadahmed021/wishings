@@ -230,3 +230,16 @@ export const getOrderDetailApi = async (id) => {
     throw error;
   }
 };
+
+export const getMusicByCategory = async () => {
+  const token = localStorage.getItem("wishToken");
+  console.log(token, "token");
+
+  try {
+    const response = await axiosInstance.get(`/category/music`);
+    return response;
+  } catch (error) {
+    console.error("API Login request failed:", error.response);
+    throw error;
+  }
+};
