@@ -66,14 +66,13 @@ const SummaryPage = () => {
                   script: state.pdfFile, // Ensure this is a File object if it's a file
                   amount: state.calculatePrice,
                   payment_id: e,
-                  music_id: state.selectedFile.map(
-                    (res) =>
-                      !hasMp3Extension(res?.name ?? res?.title) && res?.id
+                  music_id: state.selectedFile.map((res) =>
+                    !hasMp3Extension(res?.name ?? res?.title) ? res?.id : null
                   ),
                   // music_id: state.selectedFile.music_path
                   //   ? state?.selectedFile?.id
                   //   : null,
-                  musics: state.selectedFile.map(
+                  musics: state.selectedFile.filter(
                     (res) => hasMp3Extension(res?.name ?? res?.title) && res
                   ),
                   category_video_id: state?.state.id,
@@ -86,7 +85,7 @@ const SummaryPage = () => {
                 if (response.status == 200) {
                   setIsPaymentModal(false);
                   alert("Order Created successfully");
-                  navigate("/thankyou", { replace: true });
+                  // navigate("/thankyou", { replace: true });
                 } else alert("error on creating order");
               }}
               // buttonDis={totalPrice}
