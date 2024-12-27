@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import VideoDisplay from "./VideoShowComp";
 
-const VideoProportionSelector = ({proportion,handleSelection}) => {
-  
-
+const VideoProportionSelector = ({ proportion, handleSelection, catVideo }) => {
   return (
     <div className="flex flex-col items-center justify-start mb-16">
       <div className="p-6 bg-white rounded-lg border w-full ">
         <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
-
           Select Video Proportion
         </h2>
         <div className="flex justify-start gap-4">
@@ -33,12 +30,9 @@ const VideoProportionSelector = ({proportion,handleSelection}) => {
           </p>
         )}
         <span className="block mt-4">
-
-      <VideoDisplay videoSrc="https://www.w3schools.com/html/mov_bbb.mp4" videoType={proportion} />
-      </span>
-
+          <VideoDisplay videoSrc={catVideo.video_path} videoType={proportion} />
+        </span>
       </div>
-
     </div>
   );
 };

@@ -138,15 +138,15 @@ export const placeOrderApi = async (paymentData) => {
     // Append key-value pairs to FormData
     for (const key in paymentData) {
       if (paymentData.hasOwnProperty(key)) {
-        if (Array.isArray(paymentData[key])) {
-          // Handle array data
+        if (Array.isArray(paymentData[key]) && key !== "musics") {
+          // Handle array data (excluding musics)
           paymentData[key].forEach((item, index) => {
-            const imageFile = item?.id
+            const fileToAppend = item?.file
               ? new File([item?.file], item?.file?.name, {
-                  type: getFileExtension(item?.file?.name),
+                  type: item?.file?.type,
                 })
-              : {};
-            formData.append(`${key}[${index}]`, item?.id ? imageFile : item); // Append each item of the array
+              : item;
+            formData.append(`${key}[${index}]`, fileToAppend);
           });
         } else if (
           typeof paymentData[key] === "object" &&
@@ -154,7 +154,7 @@ export const placeOrderApi = async (paymentData) => {
           !(paymentData[key] instanceof File)
         ) {
           // Handle nested object (excluding File objects)
-          formData.append(key, paymentData[key]);
+          formData.append(key, JSON.stringify(paymentData[key]));
         } else if (paymentData[key] instanceof File) {
           // Handle files (like scripts, images, etc.)
           formData.append(key, paymentData[key]);
@@ -165,17 +165,14 @@ export const placeOrderApi = async (paymentData) => {
       }
     }
 
-    // Handle the 'music' field
-    if (paymentData.music) {
-      const { music_path, file, name, url } = paymentData.music;
-      if (music_path || url) {
-        const musicFile = new File([url ?? music_path], name ?? file, {
-          type: "mp3",
+    // Handle the 'musics' field for multiple audio files
+    if (Array.isArray(paymentData.musics)) {
+      paymentData.musics.forEach((music, index) => {
+        const musicFile = new File([music.url], music.name, {
+          type: "audio/mp3",
         });
-        formData.append("music", musicFile);
-      } else {
-        console.error("Invalid music file data provided.");
-      }
+        formData.append(`musics[${index}]`, musicFile);
+      });
     }
 
     // Append user ID from local storage
@@ -227,6 +224,19 @@ export const getOrderDetailApi = async (id) => {
 
   try {
     const response = await axiosInstance.get(`/order/read/${id}`);
+    return response;
+  } catch (error) {
+    console.error("API Login request failed:", error.response);
+    throw error;
+  }
+};
+
+export const getMusicByCategory = async () => {
+  const token = localStorage.getItem("wishToken");
+  console.log(token, "token");
+
+  try {
+    const response = await axiosInstance.get(`/category/music`);
     return response;
   } catch (error) {
     console.error("API Login request failed:", error.response);

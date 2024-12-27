@@ -3,7 +3,11 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import audio1 from "../assets/Audio/audio1.mp3";
 import audio2 from "../assets/Audio/audio2.mp3";
 import audio3 from "../assets/Audio/audio3.mp3";
-import { getAudioApi } from "../utils/Api";
+import {
+  getAudioApi,
+  getCategoryWithVideos,
+  getMusicByCategory,
+} from "../utils/Api";
 import AudioFilesView from "../components/AudioFile";
 import ImagesView from "../components/ImageView";
 import VideoView from "../components/VideoView";
@@ -14,6 +18,7 @@ import VideoTagsInput from "../components/TagsFroVideo";
 import VideoInstructionsInput from "../components/VideoInstructionInput";
 import VideoProportionSelector from "../components/VideoProportionSelect";
 import VideoDisplay from "../components/VideoShowComp";
+import OptionPicker from "../components/OptionPicker";
 
 //import
 
@@ -21,6 +26,35 @@ const TemplatePage = () => {
   const { id } = useParams();
 
   const { state } = useLocation();
+
+  const getMusic = async () => {
+    const { status, data } = await getMusicByCategory();
+    console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data);
+    if (status == 200) {
+      setSelectedOption(data?.music_categories);
+      const filterOnlyMisuc = data?.music_categories?.map(({ id, music }) => ({
+        music,
+        id,
+      }));
+      console.log("jjsbdvklsbdvklbsdklvsd", filterOnlyMisuc);
+      setAudioFiles(filterOnlyMisuc);
+    }
+  };
+
+  useEffect(() => {
+    getMusic();
+  }, []);
+
+  const [selectedOption, setSelectedOption] = useState([]);
+  const [onSelect, setOnSelect] = useState({
+    id: state?.category_id,
+    name: state?.categoryName,
+  });
+
+  const handleOptionClick = (option) => {
+    setSelectedFiles([]);
+    setOnSelect(option);
+  };
 
   console.log("statestatestatestatestatestate", state);
 
@@ -35,37 +69,65 @@ const TemplatePage = () => {
 
   // Audio funtions
 
-  const getAudio = async () => {
-    const { status, data } = await getAudioApi();
-    if (status == 200) setAudioFiles(data?.music ?? []);
-    console.log("kjsabjkbdkjbvskbdlkvbs", status, data);
-  };
+  // const getAudio = async () => {
+  //   const { status, data } = await getAudioApi();
+  //   if (status == 200) setAudioFiles(data?.music ?? []);
+  //   console.log("kjsabjkbdkjbvskbdlkvbs", status, data);
+  // };
 
-  useEffect(() => {
-    getAudio();
-  }, []);
+  // useEffect(() => {
+  //   getAudio();
+  // }, []);
 
   const [audioFiles, setAudioFiles] = useState([]);
+  const [uploadedAudio, setUploadedAudio] = useState([]);
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFiles] = useState([]);
 
   // Handle audio file upload
   const handleUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const newAudio = {
-        id: audioFiles.length + 1,
-        name: file.name,
-        url: URL.createObjectURL(file),
-      };
-      setAudioFiles([...audioFiles, newAudio]);
-    }
+    const files = Array.from(event.target.files);
+    const newAudioFiles = files.map((file, index) => ({
+      id: Date.now() + index, // Use unique id for each file
+      name: file.name,
+      url: URL.createObjectURL(file),
+    }));
+    newAudioFiles.map((res) => handleSelect(res));
+    setUploadedAudio((prevFiles) => [...prevFiles, ...newAudioFiles]);
   };
 
-  // Handle selection of a single audio file
+  // Handle selection of multiple audio files
   const handleSelect = (file) => {
-    setSelectedFile(file.id === selectedFile?.id ? null : file); // Toggle selection
+    setSelectedFiles((prevSelected) => {
+      const isSelected = prevSelected.some(
+        (selectedFile) => selectedFile.id === file.id
+      );
+      if (isSelected) {
+        return prevSelected.filter(
+          (selectedFile) => selectedFile.id !== file.id
+        );
+      }
+      return [...prevSelected, file];
+    });
   };
+
+  //// Handle audio file upload
+  //const handleUpload = (event) => {
+  //  const file = event.target.files[0];
+  //  if (file) {
+  //    const newAudio = {
+  //      id: audioFiles.length + 1,
+  //      name: file.name,
+  //      url: URL.createObjectURL(file),
+  //    };
+  //    setAudioFiles([...audioFiles, newAudio]);
+  //  }
+  //};
+
+  //// Handle selection of a single audio file
+  //const handleSelect = (file) => {
+  //  setSelectedFile(file.id === selectedFile?.id ? null : file); // Toggle selection
+  //};
 
   const [images, setImages] = useState([]);
   const MAX_IMAGES = 25;
@@ -156,11 +218,14 @@ const TemplatePage = () => {
     "Engagement",
   ];
 
-  function CategorySelect() {
+  function CategorySelect({ catName }) {
     return (
       <div className="flex flex-col ">
-        <h2 htmlFor="category" className="text-gray-800 font-medium font-poppins text-3xl">
-          Category Name: {state?.categoryName}
+        <h2
+          htmlFor="category"
+          className="text-gray-800 font-medium font-poppins text-3xl"
+        >
+          Category Name: {onSelect?.name}
         </h2>
         {/*<select
           id="category"
@@ -218,7 +283,7 @@ const TemplatePage = () => {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
   };
 
-  // 
+  //
   //  All scrips function
 
   const [pdfFile, setPdfFile] = useState(null); // Store uploaded PDF file
@@ -262,10 +327,9 @@ const TemplatePage = () => {
   // Calculate the word count of the script text
   const wordCount = scriptText.trim().split(/\s+/).filter(Boolean).length;
 
+  // hadle title
 
-  // hadle title 
-
-  const [titles, setTitles] = useState([]);// Array to store multiple titles
+  const [titles, setTitles] = useState([]); // Array to store multiple titles
   const [currentTitle, setCurrentTitle] = useState("");
 
   // Handle input change for a specific title
@@ -278,11 +342,11 @@ const TemplatePage = () => {
 
   // Add a new title
   const addTitle = () => {
-       //e.preventDefault();
-       if (currentTitle.trim() && !titles.includes(currentTitle)) {
-        setTitles([...titles, currentTitle.trim()]);
-      }
-      setCurrentTitle("");
+    //e.preventDefault();
+    if (currentTitle.trim() && !titles.includes(currentTitle)) {
+      setTitles([...titles, currentTitle.trim()]);
+    }
+    setCurrentTitle("");
     // setTitles([...titles, ""]);
   };
 
@@ -335,10 +399,7 @@ const TemplatePage = () => {
 
   // Summary Function
 
-
-
   // Time wheel function
-
 
   const timeOptions = Array.from({ length: 20 }, (_, i) => (i + 1) * 30); // 30s to 600s intervals
   const [selectedTime, setSelectedTime] = useState(30); // Default time
@@ -348,7 +409,7 @@ const TemplatePage = () => {
 
   // Calculate price based on the selected time
   const calculatePrice = (time) => {
-    const timeDifference = (time / 30) - 1;
+    const timeDifference = time / 30 - 1;
     const newPrice = basePrice + timeDifference * additionalCostPerInterval;
     setPriceState(newPrice);
   };
@@ -359,7 +420,7 @@ const TemplatePage = () => {
         <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
           Time Selection Wheel
         </h2>
-  
+
         {/* Time Wheel */}
         <div className="flex overflow-x-auto gap-4 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-gray-200">
           {timeOptions.map((time) => (
@@ -371,28 +432,35 @@ const TemplatePage = () => {
               }}
               className={`font-thin px-3 py-2 text-sm flex items-center justify-center rounded-lg border shadow-md transition-all duration-200 ${
                 selectedTime === time
-                  ? 'bg-secondary text-white border-secondary'
-                  : 'bg-gray-100 text-black border-gray-300 hover:bg-primary hover:text-white hover:shadow-lg'
+                  ? "bg-secondary text-white border-secondary"
+                  : "bg-gray-100 text-black border-gray-300 hover:bg-primary hover:text-white hover:shadow-lg"
               }`}
             >
-              <span className="text-base sm:text-sm font-medium">{time} sec</span>
+              <span className="text-base sm:text-sm font-medium">
+                {time} sec
+              </span>
             </button>
           ))}
         </div>
-  
+
         {/* Selected Time and Price */}
         <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4">
           <h3 className="text-xl sm:text-lg font-normal text-black">
-            Selected Time: <span className="text-primary font-semibold">{selectedTime} sec</span>
+            Selected Time:{" "}
+            <span className="text-primary font-semibold">
+              {selectedTime} sec
+            </span>
           </h3>
           <h3 className="text-xl sm:text-lg font-normal text-black">
-            Price: <span className="text-primary font-semibold">${priceState.toFixed(2)}</span>
+            Price:{" "}
+            <span className="text-primary font-semibold">
+              ${priceState.toFixed(2)}
+            </span>
           </h3>
         </div>
       </div>
     );
   };
-  
 
   // add tags for my video
 
@@ -415,8 +483,7 @@ const TemplatePage = () => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
-
-  // add instruction for my video 
+  // add instruction for my video
 
   const [instructions, setInstructions] = useState("");
 
@@ -424,7 +491,7 @@ const TemplatePage = () => {
     setInstructions(e.target.value);
   };
 
-  // proportions selection 
+  // proportions selection
 
   const [proportion, setProportion] = useState("Portrait");
 
@@ -433,8 +500,8 @@ const TemplatePage = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   // Fetch or display data using the template id
   return (
@@ -442,7 +509,14 @@ const TemplatePage = () => {
       {/* <h1 className="text-5xl font-poppins mb-8">
         Template ID: {id}</h1> */}
       {/* Display template content */}
-      <CategorySelect />
+      <CategorySelect catName={state?.categoryName} />
+
+      <OptionPicker
+        options={selectedOption}
+        onSelect={handleOptionClick}
+        selectedVal={onSelect}
+      />
+
       <ScriptView
         MAX_WORDS={MAX_WORDS}
         clearScriptText={clearScriptText}
@@ -468,19 +542,22 @@ const TemplatePage = () => {
         titles={titles}
         handleTitleChange={(e) => handleTitleChange(e)}
         addTitle={(e) => addTitle(e)}
-        removeTitle={e => removeTitle(e)}
+        removeTitle={(e) => removeTitle(e)}
         currentTitle={currentTitle}
       />
       <VideoProportionSelector
         proportion={proportion}
         handleSelection={(e) => handleSelection(e)}
+        catVideo={state}
       />
-     
+
       <AudioFilesView
         audioFiles={audioFiles}
         handleSelect={(e) => handleSelect(e)}
         handleUpload={(e) => handleUpload(e)}
-        selectedFile={selectedFile}
+        selectedFiles={selectedFile}
+        uploadedAudio={uploadedAudio}
+        catId={onSelect?.id}
       />
       <ImagesView
         MAX_IMAGES={MAX_IMAGES}
