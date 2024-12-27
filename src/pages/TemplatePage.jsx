@@ -27,14 +27,15 @@ const TemplatePage = () => {
 
   const { state } = useLocation();
 
-  const getMusic = async () => {
-    const { status, data } = await getMusicByCategory();
+  const getCategory = async () => {
+    const { status, data } = await getCategoryWithVideos();
     console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data);
     if (status == 200) {
-      setSelectedOption(data?.music_categories);
-      const filterOnlyMisuc = data?.music_categories?.map(({ id, music }) => ({
-        music,
-        id,
+      setSelectedOption(data?.categories);
+      const filterOnlyMisuc = data?.categories?.map(({ id, music }) => ({
+        [id]: {
+          music,
+        },
       }));
       console.log("jjsbdvklsbdvklbsdklvsd", filterOnlyMisuc);
       setAudioFiles(filterOnlyMisuc);
@@ -42,7 +43,7 @@ const TemplatePage = () => {
   };
 
   useEffect(() => {
-    getMusic();
+    getCategory();
   }, []);
 
   const [selectedOption, setSelectedOption] = useState([]);
@@ -52,7 +53,6 @@ const TemplatePage = () => {
   });
 
   const handleOptionClick = (option) => {
-    setSelectedFiles([]);
     setOnSelect(option);
   };
 
@@ -511,12 +511,6 @@ const TemplatePage = () => {
       {/* Display template content */}
       <CategorySelect catName={state?.categoryName} />
 
-      <OptionPicker
-        options={selectedOption}
-        onSelect={handleOptionClick}
-        selectedVal={onSelect}
-      />
-
       <ScriptView
         MAX_WORDS={MAX_WORDS}
         clearScriptText={clearScriptText}
@@ -549,6 +543,12 @@ const TemplatePage = () => {
         proportion={proportion}
         handleSelection={(e) => handleSelection(e)}
         catVideo={state}
+      />
+
+      <OptionPicker
+        options={selectedOption}
+        onSelect={handleOptionClick}
+        selectedVal={onSelect}
       />
 
       <AudioFilesView

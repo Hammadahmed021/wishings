@@ -6,12 +6,12 @@ export const navLinks = [
   {
     title: "Home",
     path: "/",
-    links: []
+    links: [],
   },
   {
     title: "About Us",
     path: "/about",
-    links: []
+    links: [],
   },
   {
     title: "Services",
@@ -44,12 +44,12 @@ export const navLinks = [
   {
     title: "Blogs",
     path: "/blogs",
-    links: []
+    links: [],
   },
   {
     title: "Contact",
     path: "/contact",
-    links: []
+    links: [],
   },
 ];
 
@@ -135,8 +135,7 @@ export const offers = [
     id: 12,
     icon: icon.fastforward,
     title: "Wedding Proposal",
-    description:
-      `Create the ultimate “yes” moment with a personalized wedding proposal video. Let us help you plan a magical and unforgettable way to pop the question!`,
+    description: `Create the ultimate “yes” moment with a personalized wedding proposal video. Let us help you plan a magical and unforgettable way to pop the question!`,
   },
   // {
   //   id: 13,
@@ -253,7 +252,8 @@ export const blogPosts = [
     title: `New Study: Instagram Reels Outperform TikTok & Facebook Videos.`,
     author: `John Doe`,
     date: `25 January 2024`,
-    description: "Short description of blog 6", content: "Full content of blog 6.",
+    description: "Short description of blog 6",
+    content: "Full content of blog 6.",
     image: blogImages.blog1,
   },
   {
@@ -262,7 +262,8 @@ export const blogPosts = [
     title: `Creative Ways That Non-ProfitsCan Increase Donations Via Social Media During the Holidays.`,
     author: `Jane Smith`,
     date: `12 February 2024`,
-    description: "Short description of blog 6", content: "Full content of blog 6.",
+    description: "Short description of blog 6",
+    content: "Full content of blog 6.",
     image: blogImages.blog2,
   },
   {
@@ -271,18 +272,20 @@ export const blogPosts = [
     title: `Top SEO Trends for 2024: What You Need to Know.`,
     author: `Alex Johnson`,
     date: `10 March 2024`,
-    description: "Short description of blog 6", content: "Full content of blog 6.",
+    description: "Short description of blog 6",
+    content: "Full content of blog 6.",
     image: blogImages.blog3,
   },
   {
-    id: 4, category: `Marketing`, title: `Social Media Strategies`,
+    id: 4,
+    category: `Marketing`,
+    title: `Social Media Strategies`,
     author: `Emily Davis`,
     date: `20 March 2024`,
     description: "Effective social media strategies for small businesses.",
     content: "Full content of blog 4.",
     image: blogImages.blog3,
   },
-
 ];
 
 export const footerLinks = [
@@ -439,7 +442,6 @@ export const servicesData = [
       title: "What We Offer",
       text: "Our team creates beautiful, responsive websites tailored to your business needs. Our team creates beautiful, responsive websites tailored to your business needs.",
       image: professional.person,
-
     },
     videoSection: {
       title: "Explore Top Videos",
@@ -544,7 +546,3 @@ export const servicesData = [
     },
   },
 ];
-
-
-
-

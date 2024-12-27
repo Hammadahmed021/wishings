@@ -68,7 +68,7 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
             }
             className=" px-4 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full"
           >
-            View Template
+            Use Template
           </button>
           </div>
           </div>
@@ -101,7 +101,7 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory, allCategory }) =>
       {allCategory.map((category, index) => (
         <button
           key={index}
-          className={`px-4 py-2 text-small ${
+          className={`px-4 py-1 text-small mb-2 ${
             selectedCategory?.id === category?.id
               ? "text-primary border border-primary rounded-full"
               : "text-black font-medium"
@@ -144,7 +144,7 @@ const TemplateSlider = () => {
   return (
     <div className="container mx-auto px-4 -mt-8 md:mt-20 lg:-mt-1 2xl:-mt-24">
       <h3 className="text-h3 text-center pt-3 font-roboto pb-8 xl:pb-12">
-        Start Fast with <span className="text-primary">6000+</span> Templates
+        Start Fast with <span className="text-primary">1000+</span> Templates
       </h3>
       <CategoryButtons
         onSelectCategory={(cat, i) => handleCategoryChange(cat, i)}

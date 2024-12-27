@@ -74,6 +74,12 @@ const AudioFilesView = ({
           ))}
         <h2 className="text-xl font-bold mb-4">Uploaded audios</h2>
 
+           
+        {uploadedAudio?.length > 0 && (
+          <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8 mt-8">
+            Uploaded Audios
+          </h2>
+        )}
         {uploadedAudio?.map((file) => (
           <li
             key={file.id}
