@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa"
 
 const OptionPicker = ({ options, onSelectionChange }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -27,14 +28,15 @@ const OptionPicker = ({ options, onSelectionChange }) => {
       <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-6 ">
         Select Audio Categories
       </h2>
-      <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-100 border rounded-lg pb-4 relative">
       <button
-                  onClick={handleReset}
-                  className="px-4 py-2 text-sm font-medium text-white bg-red-500 border rounded-lg hover:bg-red-600 block w-full"
-                >
-                  Reset filter
-                </button>
-        <ul className="gap-4 flex items-center flex-wrap justify-between p-4">
+        onClick={handleReset}
+        className="mb-4 px-4 py-1 text-sm font-normal text-white bg-red-500 border rounded-lg hover:bg-red-600"
+      >
+        Reset filter
+      </button>
+      <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-100 border rounded-lg pb-4 relative">
+
+        <ul className="gap-2 flex items-center flex-wrap justify-start p-2">
           {options.map((option) => {
             const isSelected = selectedOptions.some(
               (item) => item.id === option.id
@@ -42,32 +44,18 @@ const OptionPicker = ({ options, onSelectionChange }) => {
 
             return (
               <>
-               
+
                 <li
                   key={option.id}
-                  className={`px-2 py-1 border rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-between transform hover:scale-102 ${
-                    isSelected
-                      ? "bg-blue-500 text-white border-blue-500 shadow-lg"
-                      : "bg-gray-50 border-gray-300 hover:bg-blue-100 hover:border-blue-400"
-                  }`}
+                  className={`px-2 py-1 gap-1 border rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-between transform hover:scale-102 ${isSelected
+                    ? "bg-primary text-white border-primary shadow-lg"
+                    : "bg-white border-gray-300 hover:bg-primary hover:text-white  hover:border-primary"
+                    }`}
                   onClick={() => handleOptionClick(option)}
                 >
                   <span className="text-sm font-normal">{option?.name}</span>
                   {isSelected && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                    <FaCheckCircle size={14} />
                   )}
                 </li>
               </>
@@ -81,11 +69,11 @@ const OptionPicker = ({ options, onSelectionChange }) => {
             <h3 className="text-lg font-medium text-black mb-2">
               Selected Categories:
             </h3>
-            <ul className="flex items-center justify-between gap-2">
+            <ul className="flex items-center justify-start gap-2">
               {selectedOptions.map((option) => (
                 <li
                   key={option.id}
-                  className="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded"
+                  className="text-sm font-normal text-gray-800 bg-gray-100 px-2 py-1 rounded"
                 >
                   {option.name}
                 </li>

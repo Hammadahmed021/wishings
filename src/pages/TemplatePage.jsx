@@ -27,15 +27,14 @@ const TemplatePage = () => {
 
   const { state } = useLocation();
 
-  const getCategory = async () => {
-    const { status, data } = await getCategoryWithVideos();
+  const getMusic = async () => {
+    const { status, data } = await getMusicByCategory();
     console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data);
     if (status == 200) {
-      setSelectedOption(data?.categories);
-      const filterOnlyMisuc = data?.categories?.map(({ id, music }) => ({
-        [id]: {
-          music,
-        },
+      setSelectedOption(data?.music_categories);
+      const filterOnlyMisuc = data?.music_categories?.map(({ id, music }) => ({
+        music,
+        id,
       }));
       console.log("jjsbdvklsbdvklbsdklvsd", filterOnlyMisuc);
       setAudioFiles(filterOnlyMisuc);
@@ -43,7 +42,7 @@ const TemplatePage = () => {
   };
 
   useEffect(() => {
-    getCategory();
+    getMusic();
   }, []);
 
   const [selectedOption, setSelectedOption] = useState([]);
@@ -53,6 +52,7 @@ const TemplatePage = () => {
   });
 
   const handleOptionClick = (option) => {
+    setSelectedFiles([]);
     setOnSelect(option);
   };
 
@@ -430,11 +430,10 @@ const TemplatePage = () => {
                 setSelectedTime(time);
                 calculatePrice(time);
               }}
-              className={`font-thin px-3 py-2 text-sm flex items-center justify-center rounded-lg border shadow-md transition-all duration-200 ${
-                selectedTime === time
+              className={`font-thin px-3 py-2 text-sm flex items-center justify-center rounded-lg border shadow-md transition-all duration-200 ${selectedTime === time
                   ? "bg-secondary text-white border-secondary"
                   : "bg-gray-100 text-black border-gray-300 hover:bg-primary hover:text-white hover:shadow-lg"
-              }`}
+                }`}
             >
               <span className="text-base sm:text-sm font-medium">
                 {time} sec
@@ -511,6 +510,8 @@ const TemplatePage = () => {
       {/* Display template content */}
       <CategorySelect catName={state?.categoryName} />
 
+
+
       <ScriptView
         MAX_WORDS={MAX_WORDS}
         clearScriptText={clearScriptText}
@@ -544,13 +545,11 @@ const TemplatePage = () => {
         handleSelection={(e) => handleSelection(e)}
         catVideo={state}
       />
-
       <OptionPicker
         options={selectedOption}
         onSelect={handleOptionClick}
         selectedVal={onSelect}
       />
-
       <AudioFilesView
         audioFiles={audioFiles}
         handleSelect={(e) => handleSelect(e)}
