@@ -29,9 +29,13 @@ const TemplatePage = () => {
 
   const getMusic = async () => {
     const { status, data } = await getMusicByCategory();
-    console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data);
+    console.log("lsdbvklsbdvklsbdlvkbsdklvblsdsdfdbvksdblvsdblkv", data);
     if (status == 200) {
       setSelectedOption(data?.music_categories);
+      setOnSelect({
+        id: data?.music_categories[0]?.id,
+        name: data?.music_categories[0]?.name,
+      });
       const filterOnlyMisuc = data?.music_categories?.map(({ id, music }) => ({
         music,
         id,
@@ -46,10 +50,7 @@ const TemplatePage = () => {
   }, []);
 
   const [selectedOption, setSelectedOption] = useState([]);
-  const [onSelect, setOnSelect] = useState({
-    id: state?.category_id,
-    name: state?.categoryName,
-  });
+  const [onSelect, setOnSelect] = useState();
 
   const handleOptionClick = (option) => {
     setSelectedFiles([]);
@@ -225,7 +226,7 @@ const TemplatePage = () => {
           htmlFor="category"
           className="text-gray-800 font-medium font-poppins text-3xl"
         >
-          Category Name: {onSelect?.name}
+          Category Name: {state?.categoryName}
         </h2>
         {/*<select
           id="category"

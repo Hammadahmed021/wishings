@@ -66,7 +66,7 @@ const SummaryPage = () => {
                   script: state.pdfFile, // Ensure this is a File object if it's a file
                   amount: state.calculatePrice,
                   payment_id: e,
-                  music_id: state.selectedFile.map((res) =>
+                  music_ids: state.selectedFile.map((res) =>
                     !hasMp3Extension(res?.name ?? res?.title) ? res?.id : null
                   ),
                   // music_id: state.selectedFile.music_path
