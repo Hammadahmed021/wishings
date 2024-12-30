@@ -106,7 +106,6 @@ const Header = () => {
     fetchCurrentUserData();
   }, []);
 
-
   const blogs = [
     {
       title: "How to Improve Your Website",
@@ -247,8 +246,9 @@ const Header = () => {
                   {section.title}
                   {section.links.length > 0 && (
                     <MdExpandMore
-                      className={`w-5 h-5 ml-1 transition-transform duration-300 ${activeDropdown === index ? "rotate-180" : "rotate-0"
-                        }`}
+                      className={`w-5 h-5 ml-1 transition-transform duration-300 ${
+                        activeDropdown === index ? "rotate-180" : "rotate-0"
+                      }`}
                     />
                   )}
                 </NavLink>
@@ -256,10 +256,11 @@ const Header = () => {
                 {/* Dropdown for Blog */}
                 {section.title === "Blog" ? (
                   <div
-                    className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${activeDropdown === index
-                      ? "opacity-100 visible"
-                      : "opacity-0 invisible"
-                      }`}
+                    className={`absolute left-[-450px] w-auto p-4 top-20 z-20 text-left border-slate-500 bg-white shadow-lg rounded-xl transform transition-all duration-300 ease-in-out ${
+                      activeDropdown === index
+                        ? "opacity-100 visible"
+                        : "opacity-0 invisible"
+                    }`}
                     onMouseEnter={() => handleMouseEnter(index)}
                   >
                     <h3 className="text-small font-semibold mb-4">
@@ -289,13 +290,15 @@ const Header = () => {
                   // Default Dropdown for Services
                   section.links.length > 0 && (
                     <div
-                      className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${activeDropdown === index
-                        ? "opacity-100 visible"
-                        : "opacity-0 invisible"
-                        }`}
+                      className={`absolute left-0 w-48 p-2 top-20 z-20 text-left border-slate-500 bg-white shadow-md rounded-xl transform transition-all duration-300 ease-in-out ${
+                        activeDropdown === index
+                          ? "opacity-100 visible"
+                          : "opacity-0 invisible"
+                      }`}
                       onMouseEnter={() => handleMouseEnter(index)}
                     >
-                      <span className={`flex flex-col font-roboto overflow-y-auto 
+                      <span
+                        className={`flex flex-col font-roboto overflow-y-auto 
                  min-h-16 max-h-[18rem]
               [&::-webkit-scrollbar]:w-1 
               [&::-webkit-scrollbar-track]:rounded-full 
@@ -303,8 +306,8 @@ const Header = () => {
               [&::-webkit-scrollbar-thumb]:bg-primary 
               [&::-webkit-scrollbar-thumb]:rounded-full 
               dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
-              dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}>
-
+              dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}
+                      >
                         {section.links.map((link, subIndex) => (
                           <NavLink
                             key={subIndex}
@@ -315,7 +318,6 @@ const Header = () => {
                           </NavLink>
                         ))}
                       </span>
-
                     </div>
                   )
                 )}
@@ -392,8 +394,9 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`lg:hidden ${isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50 dark:bg-slate-600 dark:border-slate-600`}
+        className={`lg:hidden ${
+          isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        } transition-all duration-500 ease-in-out overflow-hidden py-6 px-6 absolute left-0 right-0 top-auto sm:w-1/2 sm:left-1/2 rounded-lg md:rounded-xl border bg-white z-50 dark:bg-slate-600 dark:border-slate-600`}
       >
         {/* Nav Links */}
         <nav className="flex flex-col gap-0 ">
@@ -412,16 +415,18 @@ const Header = () => {
                 </NavLink>
                 <MdExpandMore
                   onClick={() => toggleDropdown(index)}
-                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${activeDropdown === index ? "rotate-180" : "rotate-0"
-                    }`}
+                  className={`w-5 h-5 ml-1 transition-transform duration-300 ${
+                    activeDropdown === index ? "rotate-180" : "rotate-0"
+                  }`}
                 />
               </div>
               {/* Dropdown Menu */}
               <div
-                className={`${activeDropdown === index
-                  ? "max-h-40 opacity-100"
-                  : "max-h-0 opacity-0"
-                  } overflow-hidden transition-all duration-300 ease-in-out`}
+                className={`${
+                  activeDropdown === index
+                    ? "max-h-40 opacity-100"
+                    : "max-h-0 opacity-0"
+                } overflow-hidden transition-all duration-300 ease-in-out`}
               >
                 {section.links.map((link, subIndex) => (
                   <a

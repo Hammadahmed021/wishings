@@ -32,10 +32,12 @@ const TemplatePage = () => {
     console.log("lsdbvklsbdvklsbdlvkbsdklvblsdsdfdbvksdblvsdblkv", data);
     if (status == 200) {
       setSelectedOption(data?.music_categories);
-      setOnSelect({
-        id: data?.music_categories[0]?.id,
-        name: data?.music_categories[0]?.name,
-      });
+      setOnSelect([
+        {
+          id: data?.music_categories[0]?.id,
+          name: data?.music_categories[0]?.name,
+        },
+      ]);
       const filterOnlyMisuc = data?.music_categories?.map(({ id, music }) => ({
         music,
         id,
@@ -50,11 +52,27 @@ const TemplatePage = () => {
   }, []);
 
   const [selectedOption, setSelectedOption] = useState([]);
-  const [onSelect, setOnSelect] = useState();
+  const [onSelect, setOnSelect] = useState([]);
 
   const handleOptionClick = (option) => {
     setSelectedFiles([]);
-    setOnSelect(option);
+    if (Boolean(onSelect.find((res) => res?.id == option.id))) {
+      setOnSelect((prev) => prev.filter((res) => res?.id != option?.id));
+    } else {
+      setOnSelect((prev) => [...prev, option]);
+    }
+  };
+
+  const onSelectionChange = (option) => {
+    if (Boolean(onSelect.find((res) => res?.id == option.id))) {
+      setOnSelect((prev) => prev.filter((res) => res?.id != option?.id));
+    } else {
+      setOnSelect((prev) => [...prev, option]);
+    }
+    // setOnSelect({
+    //   id: option?.id,
+    //   name: option?.name,
+    // });
   };
 
   console.log("statestatestatestatestatestate", state);
@@ -431,10 +449,11 @@ const TemplatePage = () => {
                 setSelectedTime(time);
                 calculatePrice(time);
               }}
-              className={`font-thin px-3 py-2 text-sm flex items-center justify-center rounded-lg border shadow-md transition-all duration-200 ${selectedTime === time
+              className={`font-thin px-3 py-2 text-sm flex items-center justify-center rounded-lg border shadow-md transition-all duration-200 ${
+                selectedTime === time
                   ? "bg-secondary text-white border-secondary"
                   : "bg-gray-100 text-black border-gray-300 hover:bg-primary hover:text-white hover:shadow-lg"
-                }`}
+              }`}
             >
               <span className="text-base sm:text-sm font-medium">
                 {time} sec
@@ -511,8 +530,6 @@ const TemplatePage = () => {
       {/* Display template content */}
       <CategorySelect catName={state?.categoryName} />
 
-
-
       <ScriptView
         MAX_WORDS={MAX_WORDS}
         clearScriptText={clearScriptText}
@@ -550,6 +567,7 @@ const TemplatePage = () => {
         options={selectedOption}
         onSelect={handleOptionClick}
         selectedVal={onSelect}
+        onSelectionChange={(option) => onSelectionChange(option)}
       />
       <AudioFilesView
         audioFiles={audioFiles}
@@ -557,7 +575,7 @@ const TemplatePage = () => {
         handleUpload={(e) => handleUpload(e)}
         selectedFiles={selectedFile}
         uploadedAudio={uploadedAudio}
-        catId={onSelect?.id}
+        catId={onSelect}
       />
       <ImagesView
         MAX_IMAGES={MAX_IMAGES}

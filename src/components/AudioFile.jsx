@@ -8,7 +8,17 @@ const AudioFilesView = ({
   catId,
   uploadedAudio,
 }) => {
-  const categoryAudioFiles = audioFiles.filter((res) => res.id === catId)[0]?.music || [];
+  const matchIDBetweenTwoArry = (data, ids) => {
+    const idList = ids.map((item) => item.id);
+    return data.filter((item) => idList.includes(item.id));
+  };
+
+  const categoryAudioFiles = matchIDBetweenTwoArry(audioFiles, catId)
+    ?.map((res) => res?.music)
+    .flat();
+
+  // const categoryAudioFiles =
+  //   audioFiles.filter((res) => res.id === catId)[0]?.music || [];
 
   const itemsPerPage = 6; // Number of items per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +47,6 @@ const AudioFilesView = ({
     <div className="mb-16">
       {/* Title */}
       <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mb-8">
-
         Audio Files
       </h2>
 
@@ -57,27 +66,35 @@ const AudioFilesView = ({
         {currentItems.map((file) => (
           <div
             key={file.id}
-            className={`relative flex flex-col items-center p-6 rounded-xl shadow-lg bg-gradient-to-r from-gray-200/60 to-gray-300/40 backdrop-blur-lg border border-white/20 transition-all hover:scale-105 hover:shadow-2xl ${selectedFiles.some((selectedFile) => selectedFile.id === file.id)
-              ? "ring-2 ring-blue-400"
-              : ""
-              }`}
+            className={`relative flex flex-col items-center p-6 rounded-xl shadow-lg bg-gradient-to-r from-gray-200/60 to-gray-300/40 backdrop-blur-lg border border-white/20 transition-all hover:scale-105 hover:shadow-2xl ${
+              selectedFiles.some((selectedFile) => selectedFile.id === file.id)
+                ? "ring-2 ring-blue-400"
+                : ""
+            }`}
           >
             {/* Checkbox */}
             <input
               id={`checkbox-${file.id}`}
               type="checkbox"
-              checked={selectedFiles.some((selectedFile) => selectedFile.id === file.id)}
+              checked={selectedFiles.some(
+                (selectedFile) => selectedFile.id === file.id
+              )}
               onChange={() => handleSelect(file)}
               className="hidden"
             />
             <label
               htmlFor={`checkbox-${file.id}`}
-              className={`absolute top-4 right-4 flex items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-all border-2 ${selectedFiles.some((selectedFile) => selectedFile.id === file.id)
-                ? "bg-blue-500 border-blue-500 text-white"
-                : "bg-white border-gray-300 text-gray-400"
-                } hover:border-blue-400`}
+              className={`absolute top-4 right-4 flex items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-all border-2 ${
+                selectedFiles.some(
+                  (selectedFile) => selectedFile.id === file.id
+                )
+                  ? "bg-blue-500 border-blue-500 text-white"
+                  : "bg-white border-gray-300 text-gray-400"
+              } hover:border-blue-400`}
             >
-              {selectedFiles.some((selectedFile) => selectedFile.id === file.id) && (
+              {selectedFiles.some(
+                (selectedFile) => selectedFile.id === file.id
+              ) && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -92,7 +109,6 @@ const AudioFilesView = ({
                 </svg>
               )}
             </label>
-
 
             {/* File Title */}
             <h3 className="text-lg font-semibold text-gray-800 truncate mb-4 text-center">
@@ -117,23 +133,28 @@ const AudioFilesView = ({
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className={`px-4 py-1 rounded-lg font-medium transition-all ${currentPage === 1
-            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
-            }`}
+          className={`px-4 py-1 rounded-lg font-medium transition-all ${
+            currentPage === 1
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
         >
           Previous
         </button>
         <span className="text-gray-700 font-medium">
-          Page {currentPage} of {Math.ceil(categoryAudioFiles.length / itemsPerPage)}
+          Page {currentPage} of{" "}
+          {Math.ceil(categoryAudioFiles.length / itemsPerPage)}
         </span>
         <button
           onClick={handleNextPage}
-          disabled={currentPage === Math.ceil(categoryAudioFiles.length / itemsPerPage)}
-          className={`px-4 py-1 rounded-lg font-medium transition-all ${currentPage === Math.ceil(categoryAudioFiles.length / itemsPerPage)
-            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
-            }`}
+          disabled={
+            currentPage === Math.ceil(categoryAudioFiles.length / itemsPerPage)
+          }
+          className={`px-4 py-1 rounded-lg font-medium transition-all ${
+            currentPage === Math.ceil(categoryAudioFiles.length / itemsPerPage)
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
         >
           Next
         </button>
@@ -143,35 +164,44 @@ const AudioFilesView = ({
       {uploadedAudio?.length > 0 && (
         <>
           <h2 className="text-5xl sm:text-2xl font-medium font-poppins text-black mt-12 mb-8">
-
             Uploaded Audios
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {uploadedAudio.map((file) => (
               <div
                 key={file.id}
-                className={`relative flex flex-col items-center p-6 rounded-xl shadow-lg bg-gradient-to-r from-gray-200/60 to-gray-300/40 backdrop-blur-lg border border-white/20 transition-all hover:scale-105 hover:shadow-2xl ${selectedFiles.some((selectedFile) => selectedFile.id === file.id)
-                  ? "ring-2 ring-blue-400"
-                  : ""
-                  }`}
+                className={`relative flex flex-col items-center p-6 rounded-xl shadow-lg bg-gradient-to-r from-gray-200/60 to-gray-300/40 backdrop-blur-lg border border-white/20 transition-all hover:scale-105 hover:shadow-2xl ${
+                  selectedFiles.some(
+                    (selectedFile) => selectedFile.id === file.id
+                  )
+                    ? "ring-2 ring-blue-400"
+                    : ""
+                }`}
               >
                 {/* Checkbox */}
 
                 <input
                   id={`checkbox-${file.id}`}
                   type="checkbox"
-                  checked={selectedFiles.some((selectedFile) => selectedFile.id === file.id)}
+                  checked={selectedFiles.some(
+                    (selectedFile) => selectedFile.id === file.id
+                  )}
                   onChange={() => handleSelect(file)}
                   className="hidden"
                 />
                 <label
                   htmlFor={`checkbox-${file.id}`}
-                  className={`absolute top-4 right-4 flex items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-all border-2 ${selectedFiles.some((selectedFile) => selectedFile.id === file.id)
+                  className={`absolute top-4 right-4 flex items-center justify-center w-6 h-6 rounded-full cursor-pointer transition-all border-2 ${
+                    selectedFiles.some(
+                      (selectedFile) => selectedFile.id === file.id
+                    )
                       ? "bg-blue-500 border-blue-500 text-white"
                       : "bg-white border-gray-300 text-gray-400"
-                    } hover:border-blue-400`}
+                  } hover:border-blue-400`}
                 >
-                  {selectedFiles.some((selectedFile) => selectedFile.id === file.id) && (
+                  {selectedFiles.some(
+                    (selectedFile) => selectedFile.id === file.id
+                  ) && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -186,7 +216,6 @@ const AudioFilesView = ({
                     </svg>
                   )}
                 </label>
-
 
                 {/* File Title */}
                 <h3 className="text-lg font-semibold text-gray-800 truncate mb-4 text-center">

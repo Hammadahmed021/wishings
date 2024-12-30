@@ -64,7 +64,10 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
                 {/* View Template Button */}
                 <button
                   onClick={() =>
-                    onVideoClick({ ...video, categoryName: selectedCategory?.name })
+                    onVideoClick({
+                      ...video,
+                      categoryName: selectedCategory?.name,
+                    })
                   }
                   className=" px-4 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full"
                 >
@@ -72,20 +75,18 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
                 </button>
               </div>
             </div>
-
-
           </div>
-
         ))}
       </div>
       <div className="flex justify-center mt-12">
         <button
           onClick={handleLoadMore}
           disabled={isLoading}
-          className={`px-4 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full ${isLoading
+          className={`px-4 py-2 bg-gradient-to-b from-btn-gradient-start from-45% to-btn-gradient-end text-white rounded-full ${
+            isLoading
               ? "bg-gray-400 cursor-not-allowed"
               : "hover:bg-primary-dark"
-            }`}
+          }`}
         >
           {isLoading ? "Loading..." : "Load More"}
         </button>
@@ -94,7 +95,11 @@ const VideoSlider = ({ videos, onVideoClick, selectedCategory }) => {
   );
 };
 
-const CategoryButtons = ({ onSelectCategory, selectedCategory, allCategory }) => {
+const CategoryButtons = ({
+  onSelectCategory,
+  selectedCategory,
+  allCategory,
+}) => {
   const scrollContainerRef = useRef(null);
 
   // Scroll the container to the left
@@ -129,10 +134,11 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory, allCategory }) =>
         {allCategory.map((category, index) => (
           <button
             key={index}
-            className={`px-4 py-1 text-base font-normal ${selectedCategory?.id === category?.id
+            className={`px-4 py-1 text-base font-normal ${
+              selectedCategory?.id === category?.id
                 ? "text-primary border border-primary rounded-lg"
                 : "text-black"
-              }`}
+            }`}
             onClick={() => onSelectCategory(category, index)}
           >
             {category?.name}
@@ -146,7 +152,6 @@ const CategoryButtons = ({ onSelectCategory, selectedCategory, allCategory }) =>
         className="duration-200 transition-all absolute top-0 right-0 z-10 p-2 bg-gray-100 rounded-full shadow-md hover:bg-gray-300 focus:outline-none"
       >
         <FaArrowRight size={18} />
-
       </button>
     </div>
   );
@@ -158,8 +163,8 @@ const TemplateSlider = () => {
   const navigate = useNavigate();
 
   const getCategory = async () => {
-    const { status, data } = await getCategoryWithVideos()
-    console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data)
+    const { status, data } = await getCategoryWithVideos();
+    console.log("lsdbvklsbdvklsbdlvkbsdklvblsdbvksdblvsdblkv", data);
     if (status == 200) {
       setSelectedCategory(data?.categories[0] ?? []);
       setAllCategory(data?.categories ?? []);

@@ -138,7 +138,12 @@ export const placeOrderApi = async (paymentData) => {
     // Append key-value pairs to FormData
     for (const key in paymentData) {
       if (paymentData.hasOwnProperty(key)) {
-        if (Array.isArray(paymentData[key]) && key !== "musics") {
+        if (
+          Array.isArray(paymentData[key]) &&
+          key !== "musics" &&
+          key !== "music_ids"
+        ) {
+          console.log("Array.isArray(paymentData[key]) && key !==", key);
           // Handle array data (excluding musics)
           paymentData[key].forEach((item, index) => {
             const fileToAppend = item?.file
@@ -151,16 +156,31 @@ export const placeOrderApi = async (paymentData) => {
         } else if (
           typeof paymentData[key] === "object" &&
           paymentData[key] !== null &&
-          !(paymentData[key] instanceof File)
+          !(paymentData[key] instanceof File) &&
+          key !== "musics" &&
+          key !== "music_ids"
         ) {
+          console.log("typeof paymentData[key] === object &&", key);
+
           // Handle nested object (excluding File objects)
           formData.append(key, JSON.stringify(paymentData[key]));
         } else if (paymentData[key] instanceof File) {
+          console.log("paymentData[key] instanceof File", key);
           // Handle files (like scripts, images, etc.)
           formData.append(key, paymentData[key]);
         } else {
-          // Append regular key-value pair (like strings or numbers)
-          formData.append(key, paymentData[key]);
+          if (key == "music_ids") {
+            console.log("key == music_ids", key);
+            paymentData[key].forEach((item, index) => {
+              if (item != null)
+                formData.append(`${key}[${index}]`, parseInt(item, 10));
+            });
+          } else {
+            console.log("else", key);
+
+            // Append regular key-value pair (like strings or numbers)
+            formData.append(key, paymentData[key]);
+          }
         }
       }
     }
@@ -174,9 +194,6 @@ export const placeOrderApi = async (paymentData) => {
         formData.append(`musics[${index}]`, musicFile);
       });
     }
-
-    // Append user ID from local storage
-    formData.append("user_id", JSON.parse(userData)?.id ?? 1);
 
     console.log(
       "FormData before API call:",
