@@ -74,7 +74,7 @@ const CheckoutForm = ({ amount, handlePayment, buttonDis }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <CardElement className="shadow-md p-2 rounded-md" />
+      <CardElement className="shadow-md p-2 rounded-md mb-4" />
       <Button
         children={processing ? "Processing..." : "Confirm Payment"}
         className={`w-full mt-6 ${

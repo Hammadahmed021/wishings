@@ -171,10 +171,15 @@ export const placeOrderApi = async (paymentData) => {
         } else {
           if (key == "music_ids") {
             console.log("key == music_ids", key);
-            paymentData[key].forEach((item, index) => {
-              if (item != null)
-                formData.append(`${key}[${index}]`, parseInt(item, 10));
-            });
+            // paymentData[key].forEach((item, index) => {
+            // if (item != null)
+            formData.append(
+              `music_ids`,
+              JSON.stringify(
+                paymentData["music_ids"].filter((res) => res != null)
+              )
+            );
+            // });
           } else {
             console.log("else", key);
 
